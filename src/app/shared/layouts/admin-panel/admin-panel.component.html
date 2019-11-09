@@ -1,0 +1,15 @@
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="waves-effect waves-orange right">Выйти</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li class="bold" *ngFor="let link of links" routerLinkActive="active">
+          <a [routerLink]=[link.url] class="waves-effect waves-orange">
+              {{link.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<div class="admin-panel">
+    <router-outlet></router-outlet>
+</div>

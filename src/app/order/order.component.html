@@ -1,0 +1,30 @@
+<table class="striped" *ngIf="orders.lenght !== 0; else empty" >
+  <thead>
+    <tr>
+        <th>№</th>
+        <th>Статус</th>
+        <th>Дата</th>
+        <th>Пользователь</th>
+        <th>Заказ</th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders" routerLink="/admin/order/{{order.number}}" >
+      <td>{{order.number}}</td>
+      <td>{{order.status}}</td>
+      <td>{{order.date}}</td>
+      <td>{{order.name}}</td>
+      <td>{{order.cost}} грн</td>
+      <td>
+        <button type="button" (click)="remove(order)" ><i class="material-icons">delete</i></button>
+        </td>
+    </tr>
+  </tbody>
+
+</table>
+<ng-template #empty>
+  <div class="center">
+    На данный момент список заказов пустой
+  </div>
+</ng-template>
