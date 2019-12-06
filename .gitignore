@@ -44,3 +44,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#Uploads
+uploads/*
+
+#package-lock.json
+package-lock.json
+client/package-lock.json
