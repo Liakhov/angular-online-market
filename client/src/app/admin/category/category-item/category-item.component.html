@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="name">
+      <label for="name">Название</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+    <div class="category-img">
+      <img src="{{imagePreview}}" *ngIf="imagePreview" alt="">
+    </div>
+    <div class="file-field btn">
+      <span>Выбрать изображение</span>
+      <input type="file" (change)="onFileUpload($event)" #inputImage>
+    </div>
+  </div>
+  <div class="input-field">
+    <label for="descr" [ngClass]="{'active': form.get('description').value != null}">Описание</label>
+    <textarea id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched " formControlName="description" #textarea></textarea>
+  </div>
+
+  <button type="submit" class="btn" [disabled]="form.invalid || form.disabled">{{isNew ? 'Добавить': 'Сохранить'}}</button>
+  <button type="button" class="btn red" [disabled]="form.invalid || form.disabled" *ngIf="!isNew" (click)="remove()">Удалить</button>
+</form>
+
+<div *ngIf="(products$ | async)?.length > 0">
+  <h5>Список товаров в категории "{{form.value.name}}"</h5>
+  <table class="striped">
+    <thead>
+    <tr>
+      <th>Название</th>
+      <th>Количество</th>
+      <th>Цена</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of products$ | async" routerLink="/admin/product/{{item._id}}" >
+      <td>{{item.name}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.cost}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

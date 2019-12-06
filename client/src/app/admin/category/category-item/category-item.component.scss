@@ -1,0 +1,21 @@
+form{
+  margin: 15px 0 30px;
+}
+.form-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.name{
+  width: 35%;
+}
+.file-field {
+  max-width: 35%;
+}
+.red{
+  margin-left: 15px;
+}
+img{
+  max-width: 150px;
+}

@@ -1,0 +1,15 @@
+<nav>
+    <div class="nav-wrapper">
+      <a routerLink="/" class="waves-effect right">Выйти</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li class="bold" *ngFor="let link of links" class="hide-on-med-and-down" routerLinkActive="active">
+          <a [routerLink]=[link.url]>
+              {{link.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<div class="admin-panel">
+    <router-outlet></router-outlet>
+</div>

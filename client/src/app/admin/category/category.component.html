@@ -1,0 +1,23 @@
+<div class="row">
+  <input type="text" [(ngModel)]="search">
+  <button class="waves-effect btn red" routerLink="/admin/category/new">Добавить</button>
+</div>
+<table class="striped" *ngIf="(cat$ | async)?.length != 0; else empty">
+  <thead>
+    <tr>
+      <th>Название категории</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cat$ | async | filter: search">
+      <td>
+        <a routerLink="/admin/category/{{item._id}}">{{item.name}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #empty>
+  <div class="center">
+    На данный момент список категорий пустой
+  </div>
+</ng-template>

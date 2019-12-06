@@ -1,0 +1,29 @@
+<div class="row">
+  <input type="text" [(ngModel)]="search" *ngIf="( product$ | async )?.length != 0">
+  <button class="waves-effect btn red" routerLink="/admin/product/new">Добавить</button>
+</div>
+<table class="striped" *ngIf="( product$ | async )?.length != 0;else empty">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Категория</th>
+      <th>Количество</th>
+      <th>Цена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of product$| async | filter: search" routerLink="/admin/product/{{item._id}}" >
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td>{{item.quantity}}</td>
+      <td>{{item.cost}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #empty>
+  <div class="center">
+    На данный момент список товаров пустой
+  </div>
+</ng-template>
+

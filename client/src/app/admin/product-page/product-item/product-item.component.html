@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-header">
+    <h5>{{isNew ? 'Добавить новый товар' : 'Изменить'}} {{position ? position.name : '' }} </h5>
+    <div>
+      <button type="button" class="btn red remove-btn" (click)="remove()" *ngIf="!isNew">Удалить</button>
+      <button type="submit" class="btn" [disabled]="form.invalid || form.disabled">{{isNew ? 'Добавить' : 'Сохранить'}}</button>
+    </div>
+  </div>
+  <div class="form-body">
+
+    <div class="name">
+      <label for="name">Название</label>
+      <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div class="category">
+     <div class="input-field">
+       <select id="category" formControlName="category" #selectCat>
+         <option value="" disabled selected>Выберите категорию</option>
+         <option *ngFor="let cat of category" [value]="cat._id" >{{cat.name}}</option>
+       </select>
+       <label for="category">Категория</label>
+     </div>
+   </div>
+    <div class="cost">
+      <label for="for-cost">Цена</label>
+      <input id="for-cost" type="number" formControlName="cost">
+    </div>
+    <div class="quantity">
+      <label for="for-quantity">Количество</label>
+      <input id="for-quantity" type="number" formControlName="quantity">
+    </div>
+  </div>
+  <div class="form-body">
+    <div class="description">
+      <div class="input-field">
+        <label for="descr" [ngClass]="{'active': form.get('description').value != null}">Описание</label>
+        <textarea id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched" formControlName="description"></textarea>
+      </div>
+    </div>
+    <div class="thumbnail">
+
+    </div>
+  </div>
+</form>

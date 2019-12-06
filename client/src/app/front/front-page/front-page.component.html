@@ -1,0 +1,15 @@
+<div class="categories">
+  <h4>Категории</h4>
+  <div class="row">
+      <div class="col s3" *ngFor="let cat of categories | async">
+            <div class="card">
+              <a href="{{cat._id}}">
+                <div class="card-content">
+                  <img src="{{cat.image}}" alt="" *ngIf="cat.image">
+                  <span class="card-title activator grey-text text-darken-4">{{cat.name}}</span>
+                </div>
+              </a>
+            </div>
+      </div>
+  </div>
+</div>
