@@ -1,1 +1,71 @@
-<app-front-page></app-front-page>
+<div class="page-container">
+  <header>
+      <div class="container">
+        <div class="logo">
+          <img src="/assets/img/logo.svg" alt="Bicycle shop">
+        </div>
+        <div [className]="showMenu ? 'header-menu active': 'header-menu'">
+          <a routerLink="/">Главная</a>
+          <a routerLink="/shop">Магазин</a>
+          <a routerLink="/about">О нас</a>
+          <a routerLink="/contact">Контакты</a>
+        </div>
+        <button type="button" class="shoping-cart">
+          <img src="/assets/img/shopping-cart.svg" alt="shoping cart">
+        </button>
+        <button type="button" class="btn-menu" (click)="dropdown()">
+          <img src="/assets/img/menu-button.svg" alt="menu">
+        </button>
+      </div>
+  </header>
+
+  <main>
+    <app-front-page></app-front-page>
+  </main>
+
+  <footer>
+      <div class="row footer">
+        <div class="col l3 m6 s12">
+          <h5>Категории</h5>
+          <ul>
+            <li><a href="#!">Link 1</a></li>
+            <li><a href="#!">Link 2</a></li>
+            <li><a href="#!">Link 3</a></li>
+            <li><a href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 m6 s12">
+          <h5>Страницы</h5>
+            <ul>
+              <li><a href="#!">Link 1</a></li>
+              <li><a href="#!">Link 2</a></li>
+              <li><a href="#!">Link 3</a></li>
+              <li><a href="#!">Link 4</a></li>
+            </ul>
+        </div>
+        <div class="col l3 m6 s12">
+          <h5>Cоц сети</h5>
+          <div class="social">
+            <a href="#">
+              <img src="/assets/img/instagram.svg" alt="">
+            </a>
+            <a href="#">
+              <img src="/assets/img/facebook.svg" alt="">
+            </a>
+            <a href="">
+              <img src="/assets/img/twitter.svg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col l3 m6 s12">
+          <h5>Подписаться</h5>
+          <input type="text" placeholder="email@example.com" class="subscribe_input">
+          <button class="btn waves-effect waves-light subscribe_btn" type="submit" name="action">Subscribe
+          </button>
+        </div>
+      </div>
+    <div class="footer-copyright">
+        © Copyright 2019 All rights reserved | Powered by Yurii Liakhov.
+    </div>
+  </footer>
+</div>

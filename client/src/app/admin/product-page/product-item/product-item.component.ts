@@ -15,6 +15,7 @@ import {Product} from 'src/app/shared/interface';
 export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef
+  @ViewChild('descr', {static: true}) descrTextArea: ElementRef
   form: FormGroup
   isNew: boolean
   position
@@ -52,7 +53,9 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
             description: data.description
           })
           this.position = data
-          $('#descr').trigger('autoresize');
+
+          MaterialService.resizeTextArea(this.descrTextArea);
+
         })
     }
 

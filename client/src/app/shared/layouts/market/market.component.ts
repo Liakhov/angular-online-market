@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-market',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
 
+  showMenu: boolean = false
+
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  dropdown(){
+    this.showMenu = !this.showMenu;
   }
 
 }

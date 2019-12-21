@@ -29,12 +29,12 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/materialize-css/dist/css/materialize.min.css"
+              "node_modules/materialize-css/dist/css/materialize.min.css"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/materialize-css/dist/js/materialize.min.js",
-              "./node_modules/hammerjs/hammer.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/hammerjs/hammer.js",
+              "node_modules/materialize-css/dist/js/materialize.min.js"
             ]
           },
           "configurations": {

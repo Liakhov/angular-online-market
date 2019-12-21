@@ -23,7 +23,17 @@ export class MaterialService {
     M.updateTextFields();
   }
 
+  static resizeTextArea(ref: ElementRef): any{
+    return M.textareaAutoResize(ref.nativeElement)
+  }
+
   static initSelect(ref: ElementRef): MaterialInstance{
     return M.FormSelect.init(ref.nativeElement)
   }
+
+  static initSlider(ref: ElementRef): MaterialInstance{
+    return M.Carousel.init(ref.nativeElement)
+  }
+
+
 }

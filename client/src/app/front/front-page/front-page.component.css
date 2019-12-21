@@ -1,9 +1,34 @@
+.carousel{
+  height: calc(100vh - 50px);
+}
 .categories{
   text-align: center;
+  margin: 100px 5%;
+}
+.categories h4{
+  margin-bottom: 30px;
 }
 .card-content img{
   height: 100px;
   width: auto;
+}
+.prod{
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.prod-title{
+  color: #294057;
+  font-weight: bold;
+  text-align: left;
+}
+.prod-title:hover{
+  color: #B99867;
+}
+.prod-price{
+  text-align: left;
+  color: #666;
 }
 
 

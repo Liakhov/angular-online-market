@@ -35,7 +35,7 @@
     <div class="description">
       <div class="input-field">
         <label for="descr" [ngClass]="{'active': form.get('description').value != null}">Описание</label>
-        <textarea id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched" formControlName="description"></textarea>
+        <textarea #descr id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched" formControlName="description"></textarea>
       </div>
     </div>
     <div class="thumbnail">

@@ -57,7 +57,7 @@ export class CategoryItemComponent implements OnInit {
               description: category.description
             })
 
-            $('#descr').trigger('autoresize');
+            MaterialService.resizeTextArea(this.textarea)
 
             if(category.image){
               this.imagePreview = category.image
