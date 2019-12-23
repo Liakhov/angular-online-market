@@ -10,14 +10,26 @@ form{
 .name{
   width: 35%;
 }
-.file-field {
-  max-width: 35%;
-}
 .red{
   margin-left: 15px;
 }
-img{
-  max-width: 150px;
+.category-thumbnail{
+  border: 2px dashed rgba(50,58,70,.3);
+  border-radius: 6px;
+}
+.category-img{
+  padding: 30px;
+  box-sizing: border-box;
+}
+.input-file-field{
+  margin: 2rem 0;
+  text-align: center;
+  img {
+    width: 36px;
+  }
+  h5{
+    margin-top: 10px;
+  }
 }
 @media (max-width: 600px){
   .form-row{
