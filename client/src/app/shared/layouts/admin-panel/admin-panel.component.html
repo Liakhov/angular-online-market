@@ -1,15 +1,21 @@
 <nav>
-    <div class="nav-wrapper">
-      <a routerLink="/" class="waves-effect right">Выйти</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li class="bold" *ngFor="let link of links" class="hide-on-med-and-down" routerLinkActive="active">
-          <a [routerLink]=[link.url]>
-              {{link.name}}
-          </a>
-        </li>
-      </ul>
+  <div class="nav-wrapper">
+    <a routerLink="/" class="waves-effect right">Выйти</a>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+<div>
+  <ul id="slide-out" class="sidenav sidenav-fixed">
+    <div class="logo">
+      <img src="/assets/img/logo.svg" alt="Bicycle shop">
     </div>
-  </nav>
-<div class="admin-panel">
+    <li class="bold" *ngFor="let link of links" class="hide-on-med-and-down" routerLinkActive="active">
+      <a [routerLink]=[link.url]>
+        {{link.name}}
+      </a>
+    </li>
+  </ul>
+  <div class="admin-panel">
     <router-outlet></router-outlet>
+  </div>
 </div>

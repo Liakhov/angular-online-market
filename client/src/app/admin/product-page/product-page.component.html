@@ -1,8 +1,9 @@
-<div class="row">
+<div class="row row-top">
   <input type="text" [(ngModel)]="search" *ngIf="( product$ | async )?.length != 0">
-  <button class="waves-effect btn red" routerLink="/admin/product/new">Добавить</button>
+
+  <button class="waves-effect btn" routerLink="/admin/product/new">Добавить</button>
 </div>
-<table class="striped" *ngIf="( product$ | async )?.length != 0;else empty">
+<table class="products striped" *ngIf="( product$ | async )?.length != 0;else empty">
   <thead>
     <tr>
       <th>Название</th>
@@ -11,7 +12,7 @@
       <th>Цена</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-list">
     <tr *ngFor="let item of product$| async | filter: search" routerLink="/admin/product/{{item._id}}" >
       <td>{{item.name}}</td>
       <td>{{item.category}}</td>

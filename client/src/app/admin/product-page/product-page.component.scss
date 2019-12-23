@@ -1,0 +1,45 @@
+.center{
+  margin: 50px auto;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+  input{
+    width: 35%;
+  }
+  button{
+    margin-left: auto;
+  }
+}
+.striped{
+  margin-bottom: 30px;
+}
+
+@media (max-width: 600px){
+  .products{
+    tr td:nth-of-type(2),
+    tr th:nth-of-type(2),
+    tr td:nth-of-type(3),
+    tr th:nth-of-type(3),
+    tr td:nth-of-type(4),
+    tr th:nth-of-type(4){
+      display: none;
+    }
+  }
+}
+@media (max-width: 480px){
+  .row-top{
+    flex-direction: column;
+  }
+  .row-top input{
+    width: 100%;
+  }
+  .row-top button{
+    margin-top: 10px;
+  }
+}
+

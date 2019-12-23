@@ -14,7 +14,7 @@
   </div>
   <div class="input-field">
     <label for="descr" [ngClass]="{'active': form.get('description').value != null}">Описание</label>
-    <textarea id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched " formControlName="description" #textarea></textarea>
+    <textarea id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched" formControlName="description" #textarea></textarea>
   </div>
 
   <button type="submit" class="btn" [disabled]="form.invalid || form.disabled">{{isNew ? 'Добавить': 'Сохранить'}}</button>

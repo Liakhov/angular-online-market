@@ -13,7 +13,7 @@ form{
   margin-top: 10px;
   margin-bottom: 10px;
   .name{
-    width: 30%;
+    width: 50%;
     margin-right: 2%;
   }
   .category{
@@ -44,5 +44,35 @@ h5{
 .remove-btn{
   margin-right: 15px;
 }
-
+@media (max-width: 600px){
+  .form-header{
+    flex-direction: column;
+  }
+  .form-body{
+    flex-wrap: wrap;
+    .name{
+      width: 100%;
+    }
+    .description{
+      width: 100%;
+    }
+    .category{
+      margin-left: 0;
+    }
+  }
+}
+@media (max-width: 480px){
+  .form-body{
+    .category{
+      width: 100%;
+    }
+    .cost{
+      width: 40%;
+      margin: 0;
+    }
+    .quantity{
+      width: 40%;
+    }
+  }
+}
 

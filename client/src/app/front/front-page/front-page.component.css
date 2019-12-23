@@ -1,6 +1,3 @@
-.carousel{
-  height: calc(100vh - 50px);
-}
 .categories{
   text-align: center;
   margin: 100px 5%;
@@ -29,6 +26,11 @@
 .prod-price{
   text-align: left;
   color: #666;
+}
+@media (min-width: 1024px){
+  .carousel{
+    height: calc(100vh - 50px);
+  }
 }
 
 

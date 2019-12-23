@@ -2,8 +2,27 @@ nav{
   background: #294057;
 }
 .admin-panel{
-  padding: 0 4rem;
+  padding: 0 4rem 0 260px;
 }
 .nav-wrapper > a{
   margin-right: 25px;
+}
+.logo{
+  text-align: center;
+  background: rgba(50,50,50,0.06);
+}
+.logo img{
+  height: 58px;
+}
+.sidenav{
+  width: 240px;
+  background: rgba(50,50,50,0.06);
+}
+.sidenav a{
+  font-weight: normal;
+}
+@media (max-width: 992px) {
+  .admin-panel{
+    padding: 0 1.75rem;
+  }
 }

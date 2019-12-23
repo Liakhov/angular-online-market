@@ -35,5 +35,8 @@ export class MaterialService {
     return M.Carousel.init(ref.nativeElement)
   }
 
+  static initSidenav(ref: ElementRef){
+    return M.Sidenav.init(ref.nativeElement)
+  }
 
 }

@@ -2,3 +2,9 @@ img{
   max-width: 100%;
   height: auto;
 }
+.table-list tr{
+  cursor: pointer;
+}
+tr:focus{
+  outline: none;
+}

@@ -19,3 +19,15 @@ table{
 a{
   color: black;
 }
+@media (max-width: 480px){
+  .row-top{
+    flex-direction: column;
+  }
+  .row-top input{
+    width: 100%;
+  }
+  .row-top button{
+    margin-top: 10px;
+  }
+}
+
