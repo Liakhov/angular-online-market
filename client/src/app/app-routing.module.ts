@@ -11,6 +11,7 @@ import { ProductPageComponent } from './admin/product-page/product-page.componen
 import { OrderItemComponent } from './admin/order/order-item/order-item.component';
 import {ProductItemComponent} from "./admin/product-page/product-item/product-item.component";
 import {CategoryItemComponent} from './admin/category/category-item/category-item.component';
+import {MailComponent} from './admin/mail/mail.component';
 
 const routes: Routes = [
     { path: '', 
@@ -32,6 +33,7 @@ const routes: Routes = [
           {path: 'product', component: ProductPageComponent},
           {path: 'product/:id', component: ProductItemComponent},
           {path: 'product/new', component: ProductItemComponent},
+          {path: 'mail', component: MailComponent}
         ]
     }
 

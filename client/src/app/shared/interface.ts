@@ -27,3 +27,8 @@ export interface OrderPosition {
 export interface Message {
   message: string
 }
+export interface Mail {
+  email: string
+  date?: Date
+  _id?: string
+}

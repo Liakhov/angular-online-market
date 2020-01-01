@@ -102,11 +102,12 @@ footer a{
     width: 100%;
     flex-direction: column;
     margin: 0;
-    top: 41px;
+    top: 40px;
     z-index: 999;
     left: 0;
     right: 0;
     background: #f9fafa;
+    padding-bottom: 5px;
   }
   .header-menu a{
     font-size: 12px;

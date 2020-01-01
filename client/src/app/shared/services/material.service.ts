@@ -39,4 +39,8 @@ export class MaterialService {
     return M.Sidenav.init(ref.nativeElement)
   }
 
+  static initDatePicker(ref: ElementRef){
+    return M.Datepicker.init(ref.nativeElement)
+  }
+
 }

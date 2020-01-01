@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const positionRoutes = require('./routes/position');
 const categoryRoutes = require('./routes/category');
+const mailRoutes = require('./routes/mail');
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.use('/uploads', express.static('uploads'));
 
 app.use('/api/position', positionRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/mail', mailRoutes);
 
 module.exports = app;

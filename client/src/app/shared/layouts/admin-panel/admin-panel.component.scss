@@ -22,7 +22,22 @@ nav{
   font-weight: normal;
 }
 @media (max-width: 992px) {
+  .sidenav{
+    width: 200px;
+    background: #294057;
+    a {
+      font-size: 12px;
+      font-weight: 300;
+      height: 38px;
+      line-height: 38px;
+      color: white;
+    }
+  }
   .admin-panel{
     padding: 0 1.75rem;
   }
+  .nav-wrapper > a{
+    font-size: 12px;
+  }
+
 }

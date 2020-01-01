@@ -16,7 +16,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { ProductItemComponent } from './admin/product-page/product-item/product-item.component';
 import {FilterPipe} from "./shared/filter.pipe";
 import { CategoryItemComponent } from './admin/category/category-item/category-item.component';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
+import { MailComponent} from './admin/mail/mail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import * as $ from 'jquery';
     OrderItemComponent,
     ProductItemComponent,
     FilterPipe,
-    CategoryItemComponent
+    CategoryItemComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,

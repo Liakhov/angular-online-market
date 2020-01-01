@@ -7,8 +7,8 @@
         <div [className]="showMenu ? 'header-menu active': 'header-menu'">
           <a routerLink="/">Главная</a>
           <a routerLink="/shop">Магазин</a>
-          <a routerLink="/about">О нас</a>
           <a routerLink="/contact">Контакты</a>
+          <a routerLink="/about">О нас</a>
         </div>
         <button type="button" class="shoping-cart">
           <img src="/assets/img/shopping-cart.svg" alt="shoping cart">
@@ -59,9 +59,10 @@
         </div>
         <div class="col l3 m6 s12">
           <h5>Подписаться</h5>
-          <input type="text" placeholder="email@example.com" class="subscribe_input">
-          <button class="btn waves-effect waves-light subscribe_btn" type="submit" name="action">Subscribe
-          </button>
+          <form [formGroup]="form" (submit)="sendMail()">
+            <input type="text" placeholder="email@example.com" class="subscribe_input" formControlName="email">
+            <button [disabled]="form.invalid" class="btn waves-effect waves-light subscribe_btn" type="submit" name="action">Subscribe</button>
+          </form>
         </div>
       </div>
     <div class="footer-copyright">
