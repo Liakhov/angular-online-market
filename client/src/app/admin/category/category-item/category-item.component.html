@@ -11,21 +11,15 @@
         </div>
       </div>
       <div class="col m5 s12">
-        <div class="category-thumbnail">
+        <div class="category-thumbnail file-field">
+            <img src="{{imagePreview}}" *ngIf="imagePreview; else inputImageField" alt="">
 
-          <div class="category-thumbnail_field file-field">
-            <div class="category-img" *ngIf="imagePreview; else inputImageField">
-              <img src="{{imagePreview}}" *ngIf="imagePreview" alt="">
-            </div>
             <ng-template #inputImageField>
-              <div class="input-file-field">
-                <img src="assets/img/cloud-computing.svg" alt="">
-                <h5>Click to upload</h5>
-              </div>
+                <img src="assets/img/cloud-computing.svg" class="category-thumbnail_default" alt="">
             </ng-template>
 
-            <input type="file" (change)="onFileUpload($event)" #inputImage>
-          </div>
+            <input id="file-input" type="file" (change)="onFileUpload($event)" #inputImage>
+            <label for="file-input">Выберите файл</label>
 
         </div>
       </div>
