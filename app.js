@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const positionRoutes = require('./routes/position');
 const categoryRoutes = require('./routes/category');
@@ -32,5 +33,13 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/position', positionRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/mail', mailRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/dist/angular-online-market'))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'dist', 'angular-online-market' ,'index.html'))
+    })
+}
 
 module.exports = app;
