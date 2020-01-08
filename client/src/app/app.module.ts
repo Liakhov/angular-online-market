@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+
+import { cartReducer } from './shared/store/reducers/cart.reducer';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,8 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { ProductItemComponent } from './admin/product-page/product-item/product-item.component';
 import {FilterPipe} from "./shared/filter.pipe";
 import { CategoryItemComponent } from './admin/category/category-item/category-item.component';
-// import * as $ from 'jquery';
 import { MailComponent} from './admin/mail/mail.component';
+import { CartComponent } from './front/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +36,18 @@ import { MailComponent} from './admin/mail/mail.component';
     ProductItemComponent,
     FilterPipe,
     CategoryItemComponent,
-    MailComponent
+    MailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      cart: cartReducer
+    })
   ],
   bootstrap: [
     AppComponent

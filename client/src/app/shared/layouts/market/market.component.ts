@@ -1,21 +1,26 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Mail} from '../../interface';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store'
 import {MailService} from "../../services/mail.service";
 import {MaterialService} from "../../services/material.service";
 
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
-  styleUrls: ['./market.component.css']
+  styleUrls: ['./market.component.scss']
 })
 export class MarketComponent implements OnInit, OnDestroy {
 
   showMenu: boolean = false
   form: FormGroup
   subscibeMail$
+  cart$: Observable<[]>;
 
-  constructor(private mailService: MailService) { }
+  constructor(private mailService: MailService, private store: Store<{ cart: [] }>) {
+    this.cart$ = store.pipe(select('cart'));
+  }
 
   ngOnInit() {
       this.form = new FormGroup({

@@ -7,7 +7,7 @@
 <div class="categories">
   <h4>Категории</h4>
   <div class="row">
-      <div class="col l3 m6 s12" *ngFor="let cat of categories | async">
+      <div class="col l3 m6 s12" *ngFor="let cat of categories$ | async">
           <div class="card">
             <a href="{{cat._id}}">
               <div class="card-content">
@@ -23,13 +23,22 @@
 <div class="categories">
   <h4>Популярные товары</h4>
   <div class="row">
-    <div class="col l3 m6 s12" *ngFor="let cat of [1, 2, 3 ,5 ]">
+    <div class="col l3 m6 s12" *ngFor="let itemProd of products$ | async ">
        <div class="prod">
          <a href="#">
            <img src="https://picsum.photos/270/334" alt="">
          </a>
-         <a href="#" class="prod-title">Title</a>
-         <div class="prod-price">$54.79</div>
+         <div class="prod_bottom">
+           <div class="prod_info">
+             <a href="#" class="prod-title">{{itemProd.name}}</a>
+             <div class="prod-price">${{itemProd.cost}}</div>
+           </div>
+           <div>
+             <button class="btn waves-effect waves-light" (click)="add(itemProd)" type="button">
+               <i class="material-icons">shopping_cart</i>
+             </button>
+           </div>
+         </div>
        </div>
     </div>
   </div>

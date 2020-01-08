@@ -27,6 +27,15 @@
   text-align: left;
   color: #666;
 }
+.prod_bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+.prod_info{
+  text-align: left;
+}
 @media (min-width: 1024px){
   .carousel{
     height: calc(100vh - 50px);

@@ -12,13 +12,15 @@ import { OrderItemComponent } from './admin/order/order-item/order-item.componen
 import {ProductItemComponent} from "./admin/product-page/product-item/product-item.component";
 import {CategoryItemComponent} from './admin/category/category-item/category-item.component';
 import {MailComponent} from './admin/mail/mail.component';
+import {CartComponent} from "./front/cart/cart.component";
 
 const routes: Routes = [
     { path: '', 
       component: MarketComponent, 
       children: [
-              {path: '', component: FrontPageComponent, pathMatch: 'full'}
-          ]
+        {path: 'cart', component: CartComponent},
+        {path: '', component: FrontPageComponent, pathMatch: 'full'}
+      ]
     },
     {path: 'admin', 
      component: AdminPanelComponent, 

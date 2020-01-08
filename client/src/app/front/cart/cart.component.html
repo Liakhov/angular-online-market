@@ -1,0 +1,6 @@
+Cart: {{ (cart$ | async)?.length }} item(s)
+<br>
+<ul class="uk-list">
+  <li *ngFor="let item of cart$ | async">{{ item }}</li>
+</ul>
+

@@ -1,8 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Category} from "../../shared/interface";
+import {Category, Product} from "../../shared/interface";
 import {CategoryService} from "../../shared/services/category.service";
 import {Observable} from "rxjs";
 import {MaterialInstance, MaterialService} from "../../shared/services/material.service";
+import {Store, select} from '@ngrx/store';
+import {Add} from '../../shared/store/actions/cart.action';
+import {ProductService} from "../../shared/services/product.service";
 
 @Component({
   selector: 'app-front-page',
@@ -12,14 +15,22 @@ import {MaterialInstance, MaterialService} from "../../shared/services/material.
 
 export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
-  categories: Observable<Category[]>
+  cart$: Observable<[]>;
+  categories$: Observable<Category[]>
+  products$: Observable<Product[]>
   @ViewChild('slider', {static: false}) sliderBlock: ElementRef
   slider: MaterialInstance
 
-  constructor(private categoriesService: CategoryService) { }
+  constructor(private store: Store<{ cart: [] }>, private categoriesService: CategoryService, private productService: ProductService) {
+    this.cart$ = store.pipe(select('cart'));
+  }
 
   ngOnInit() {
-    this.categories = this.categoriesService.fetch()
+
+    this.categories$ = this.categoriesService.fetch()
+
+    this.products$ = this.productService.fetch()
+
   }
 
   ngAfterViewInit(){
@@ -30,6 +41,11 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
     if(this.slider){
       this.slider.destroy()
     }
+  }
+
+  add(product){
+
+    this.store.dispatch(Add(product._id))
   }
 
 

@@ -59,9 +59,15 @@ footer a{
   height: 23px;
 }
 .shoping-cart{
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   margin-left: auto;
+  span{
+    padding-right: 5px;
+  }
+  color: #294057;
 }
 .shoping-cart img{
   height: 23px;
