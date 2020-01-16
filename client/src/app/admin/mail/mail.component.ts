@@ -36,11 +36,8 @@ export class MailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if(this.mailsSub) this.mailsSub.unsubscribe()
-
     if(this.removeSub) this.removeSub.unsubscribe()
-
     if(this.updateDateSub) this.updateDateSub.unsubscribe()
-
     if(this.modal) this.modal.destroy()
   }
 
@@ -52,26 +49,29 @@ export class MailComponent implements OnInit, OnDestroy {
       email: item.email
     })
   }
+
   update(){
     this.updateDateSub = this.mailService.update(this.itemMail._id, {
       email: this.form.value.email
     }).subscribe(date => {
       MaterialService.toast('Изменения сохранены')
     })
-
     this.ngOnInit()
   }
+
   close(): void{
     this.modal.close()
   }
+
   remove(): void{
     let result = confirm('Вы уверены что хотите удалить данную подписку?')
     if(result){
-      this.mailService.remove(this.itemMail._id).subscribe(data => {
+      this.removeSub = this.mailService.remove(this.itemMail._id).subscribe(data => {
         MaterialService.toast(data.message)
       })
       this.modal.close()
     }
     this.ngOnInit()
   }
+
 }

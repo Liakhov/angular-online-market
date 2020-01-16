@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MarketComponent } from './shared/layouts/market/market.component';
-import { FrontPageComponent } from './front/front-page/front-page.component';
+import { MainComponent } from './shared/layouts/main/main.component';
+import { FrontPageComponent } from './main/front-page/front-page.component';
 import { AdminPanelComponent } from './shared/layouts/admin-panel/admin-panel.component';
 import { ReviewPageComponent } from './admin/review-page/review-page.component';
 import { OrderComponent } from './admin/order/order.component';
@@ -12,16 +12,29 @@ import { OrderItemComponent } from './admin/order/order-item/order-item.componen
 import {ProductItemComponent} from "./admin/product-page/product-item/product-item.component";
 import {CategoryItemComponent} from './admin/category/category-item/category-item.component';
 import {MailComponent} from './admin/mail/mail.component';
+import {CartComponent} from "./main/cart/cart.component";
+import {ProductComponent} from "./main/product/product.component";
+import {ShopComponent} from "./main/shop/shop.component";
+import {ContactComponent} from "./main/contact/contact.component";
+import {CheckoutComponent} from "./main/checkout/checkout.component";
+import {MessageComponent} from "./admin/message/message.component";
+import {CategoriesComponent} from "./main/categories/categories.component";
 
 const routes: Routes = [
-    { path: '', 
-      component: MarketComponent, 
+    { path: '',
+      component: MainComponent,
       children: [
-              {path: '', component: FrontPageComponent, pathMatch: 'full'}
-          ]
+        {path: '', component: FrontPageComponent, pathMatch: 'full'},
+        {path: 'shop', component: ShopComponent},
+        {path: 'shop/:id', component: ProductComponent},
+        {path: 'contact', component: ContactComponent},
+        {path: 'cart', component: CartComponent},
+        {path: 'checkout', component: CheckoutComponent},
+        {path: 'category/:id', component: CategoriesComponent}
+      ]
     },
-    {path: 'admin', 
-     component: AdminPanelComponent, 
+    {path: 'admin',
+     component: AdminPanelComponent,
      children: [
           {path: '', redirectTo: 'review', pathMatch: 'full'},
           {path: 'review', component: ReviewPageComponent},
@@ -33,7 +46,8 @@ const routes: Routes = [
           {path: 'product', component: ProductPageComponent},
           {path: 'product/:id', component: ProductItemComponent},
           {path: 'product/new', component: ProductItemComponent},
-          {path: 'mail', component: MailComponent}
+          {path: 'mail', component: MailComponent},
+          {path: 'message', component: MessageComponent}
         ]
     }
 

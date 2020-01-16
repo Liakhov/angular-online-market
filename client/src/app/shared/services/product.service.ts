@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {Message, Product} from "../interface";
-import {HttpClient} from "@angular/common/http";
+import {Message, Product, ToastMessage} from "../interface";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -11,8 +11,12 @@ export class ProductService {
 
   constructor(private http: HttpClient){ }
 
-  fetch(): Observable<Product[]>{
-    return this.http.get<Product[]>('/api/position')
+  fetch(params: any = {}): Observable<Product[]>{
+    return this.http.get<Product[]>('/api/position', {
+      params: new HttpParams({
+        fromObject: params
+      })
+    })
   }
 
   getByID(id: string): Observable<Product>{
@@ -27,7 +31,7 @@ export class ProductService {
     return this.http.patch<Product>(`/api/position/${id}`, product)
   }
 
-  remove(id: string): Observable<Message>{
-    return this.http.delete<Message>(`/api/position/${id}`)
+  remove(id: string): Observable<ToastMessage>{
+    return this.http.delete<ToastMessage>(`/api/position/${id}`)
   }
 }

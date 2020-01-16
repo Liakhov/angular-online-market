@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-header">
     <h5>{{isNew ? 'Добавить новый товар' : 'Изменить'}} {{position ? position.name : '' }} </h5>
-    <div>
+    <div class="flex">
       <button type="button" class="btn red remove-btn" (click)="remove()" *ngIf="!isNew">Удалить</button>
       <button type="submit" class="btn" [disabled]="form.invalid || form.disabled">{{isNew ? 'Добавить' : 'Сохранить'}}</button>
     </div>

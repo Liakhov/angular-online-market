@@ -27,7 +27,6 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
   }
 
-
   remove(order: Order){
     const idx = this.orders.findIndex( item => item.number === order.number )
     this.orders.splice(idx, 1)

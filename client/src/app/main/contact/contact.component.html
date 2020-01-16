@@ -1,0 +1,44 @@
+<div class="wrapper">
+  <div class="row content">
+    <div class="col l6 m6 s12">
+      <div class="title">Напишите нам</div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+        <div class="row">
+          <div class="col l6 m12 s12">
+            <label for="name">Имя</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+            >
+          </div>
+          <div class="col l6 m12 s12">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
+            >
+          </div>
+        </div>
+
+        <div class="input-field">
+          <label for="message">Сообщение</label>
+          <textarea id="message" type="text" class="materialize-textarea" formControlName="message"></textarea>
+        </div>
+
+        <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+      </form>
+    </div>
+    <div class="col l6 m6 s12 contact">
+      <div class="title">Контакты</div>
+      <p>Время работы: Пн-Вс | 10:00 - 19:00</p>
+
+      <p>Телефон: +38-050-777-77-77</p>
+
+      <p>Email: info@onlineshop.com</p>
+    </div>
+  </div>
+</div>

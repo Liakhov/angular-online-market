@@ -1,0 +1,20 @@
+.form{
+  margin-top: 1em;
+}
+.contact{
+  padding-left: 50px;
+  @media(max-width: 768px){
+    margin-top: 30px;
+    padding-left: 0.75em;
+  }
+}
+.title{
+  margin-bottom: 30px;
+}
+.input-field{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+button{
+  margin-bottom: 50px;
+}

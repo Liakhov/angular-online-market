@@ -6,6 +6,7 @@ import {switchMap} from "rxjs/operators";
 import {MaterialInstance, MaterialService} from "../../../shared/services/material.service";
 import {CategoryService} from "../../../shared/services/category.service";
 import {Product} from 'src/app/shared/interface';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-product-item',
@@ -22,11 +23,12 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   id: string
   select: MaterialInstance
   category
+  submitSub: Subscription
+  removeSub: Subscription
 
   constructor(private router: Router, private ProductService: ProductService, private activeRouter: ActivatedRoute, private categoryService: CategoryService) { }
 
   ngOnInit() {
-
     this.categoryService.fetch().subscribe(data => {
       this.category = data
     })
@@ -41,8 +43,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
                 this.isNew = false
                 this.id = params.id;
                 return this.ProductService.getByID(params['id'])
-            }
-          )
+            })
         )
         .subscribe(data => {
           this.form.patchValue({
@@ -53,9 +54,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
             description: data.description
           })
           this.position = data
-
           MaterialService.resizeTextArea(this.descrTextArea);
-
         })
     }
 
@@ -78,10 +77,16 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     if(this.select){
       this.select.destroy()
     }
+    if(this.submitSub){
+      this.submitSub.unsubscribe()
+    }
+    if(this.removeSub){
+      this.removeSub.unsubscribe()
+    }
   }
 
   remove(){
-    this.ProductService.remove(this.id).subscribe(
+    this.removeSub = this.ProductService.remove(this.id).subscribe(
       response => MaterialService.toast(response.message),
       error => MaterialService.toast(error.message),
       () => this.router.navigate(['/admin/product'])
@@ -110,7 +115,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
         obs$ = this.ProductService.update(this.id, product)
       }
 
-      obs$.subscribe(() => {
+      this.submitSub = obs$.subscribe(() => {
         if(this.isNew){
           MaterialService.toast('Новый товар добавлен')
           this.router.navigate([`/admin/product`])

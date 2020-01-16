@@ -1,10 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 img{
   max-width: 100%;
   height: auto;
+}
+.wrapper{
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.flex{
+  display: flex;
+}
+.wrapper-row{
+  display: flex;
+  flex-direction: row;
+}
+.j-c-space-between{
+  justify-content: space-between;
+}
+.content{
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+.title{
+  font-size: 22px;
 }
 .table-list tr{
   cursor: pointer;
 }
 tr:focus{
   outline: none;
+}
+.categories{
+  text-align: center;
+  margin: 100px 5%;
+}
+.categories h4{
+  margin-bottom: 30px;
 }

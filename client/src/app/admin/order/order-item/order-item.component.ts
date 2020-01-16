@@ -6,13 +6,8 @@ import {Order} from '../../../shared/interface'
   templateUrl: './order-item.component.html',
   styleUrls: ['./order-item.component.css']
 })
-export class OrderItemComponent implements OnInit {
-
+export class OrderItemComponent {
 
   constructor() { }
-
-  ngOnInit() {
-    
-  }
 
 }

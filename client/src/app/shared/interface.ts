@@ -4,12 +4,15 @@ export interface Product {
   cost: number
   quantity: number
   category?: string
+  categoryName?: string
+  image?: string
   description?: string
 }
 export interface Category {
   _id?: string
   image: string
   name: string
+  categoryName?: string
   quantity: number
 }
 export interface Order {
@@ -24,7 +27,14 @@ export interface OrderPosition {
   _id?: string
 }
 
+export interface ToastMessage {
+  message: string
+}
+
 export interface Message {
+  _id?: string
+  name: string
+  email: string
   message: string
 }
 export interface Mail {

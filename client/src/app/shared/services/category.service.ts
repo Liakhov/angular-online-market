@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Category, Message, Product} from "../interface";
+import {Category, Product, ToastMessage} from "../interface";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
@@ -48,8 +48,8 @@ export class CategoryService {
     return this.http.post<Category>('/api/category', category)
   }
 
-  remove(id: string):Observable<Message>{
-    return this.http.delete<Message>(`/api/category/${id}`)
+  remove(id: string): Observable<ToastMessage>{
+    return this.http.delete<ToastMessage>(`/api/category/${id}`)
   }
 
   getAllFromCategory(id: string): Observable<Product[]>{

@@ -1,10 +1,10 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../../../shared/services/category.service";
 import {Category, Product} from "../../../shared/interface";
 import {switchMap} from "rxjs/operators";
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {MaterialService} from "../../../shared/services/material.service";
 
 @Component({
@@ -12,7 +12,7 @@ import {MaterialService} from "../../../shared/services/material.service";
   templateUrl: './category-item.component.html',
   styleUrls: ['./category-item.component.scss']
 })
-export class CategoryItemComponent implements OnInit {
+export class CategoryItemComponent implements OnInit, OnDestroy {
 
   @ViewChild('inputImage', {static: false}) inputImage: ElementRef
   @ViewChild('textarea', {static: false}) textarea: ElementRef
@@ -22,6 +22,8 @@ export class CategoryItemComponent implements OnInit {
   image: File
   imagePreview
   products$: Observable<Product[]>
+  oSub: Subscription
+  removeSub: Subscription
   catId: string
 
   constructor(private router: Router, private CategoryService: CategoryService, private activeRouter: ActivatedRoute) { }
@@ -69,8 +71,12 @@ export class CategoryItemComponent implements OnInit {
           console.log(error)
         })
     }
-
       this.products$ = this.CategoryService.getAllFromCategory(this.catId)
+  }
+
+  ngOnDestroy(): void {
+    if(this.oSub) this.oSub.unsubscribe()
+    if(this.removeSub) this.removeSub.unsubscribe()
   }
 
   onFileUpload(event){
@@ -94,7 +100,7 @@ export class CategoryItemComponent implements OnInit {
         obs$ = this.CategoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image)
       }
 
-      obs$.subscribe(data => {
+      this.oSub = obs$.subscribe(data => {
 
         if(this.isNew){
           MaterialService.toast(data.message)
@@ -106,7 +112,7 @@ export class CategoryItemComponent implements OnInit {
   }
 
   remove(){
-    this.CategoryService.remove(this.category._id).subscribe(data => {
+    this.removeSub = this.CategoryService.remove(this.category._id).subscribe(data => {
       MaterialService.toast(data.message)
       this.router.navigate(['/admin/category/'])
     })

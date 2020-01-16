@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="mails?.length > 0; else empty">
   <thead>
     <tr>
       <th>Email</th>
@@ -35,3 +35,10 @@
     <button class="modal-close waves-effect btn waves-green" (click)="update()">Сохранить</button>
   </div>
 </div>
+
+
+<ng-template #empty>
+  <div class="content center">
+      На данный момент нет подписок
+  </div>
+</ng-template>

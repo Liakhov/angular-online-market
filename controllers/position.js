@@ -1,4 +1,5 @@
 const Position = require('../models/Position');
+const Category = require('../models/Category');
 const errorHandler = require('../utils/errorHandler');
 
 
@@ -12,8 +13,17 @@ module.exports.getById = async function (req, res) {
 };
 module.exports.getAll = async function (req, res) {
     try{
-        const position = await Position.find();
-        res.status(200).json(position)
+        const positions = await Position.find().skip(+req.query.offset).limit(+req.query.limit)
+        const categories = await Category.find({}, {name: 1})
+
+        let result = positions.map(function (item) {
+            let categoryForItemPositin = categories.find( element => {
+                return element._id.toString() === item.category.toString()
+            })
+            if(categoryForItemPositin) item.categoryName = categoryForItemPositin.name
+            return item
+        })
+        res.status(200).json(result)
     }catch (e) {
         errorHandler(res, e)
     }

@@ -14,6 +14,9 @@ const positionSchema = new Schema({
         ref: 'category',
         type: Schema.Types.ObjectID
     },
+    categoryName: {
+      type: String
+    },
     quantity: {
         type: Number
     },

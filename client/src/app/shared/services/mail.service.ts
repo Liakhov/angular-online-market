@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Mail, Message} from '../interface';
+import {Mail, Message, ToastMessage} from '../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class MailService {
     return this.http.patch<Mail>(`/api/mail/${id}`, mail)
   }
 
-  remove(id: string): Observable<Message>{
-      return this.http.delete<Message>(`/api/mail/${id}`)
+  remove(id: string): Observable<ToastMessage>{
+      return this.http.delete<ToastMessage>(`/api/mail/${id}`)
   }
 }
