@@ -37,12 +37,12 @@
           </a>
         </div>
       </div>
-      <div class="header-menu">
+      <div class="menu">
         <button type="button" class="btn-menu" (click)="dropdown()">
           <img src="/assets/img/menu-button.svg" alt="menu">
         </button>
-        <div class="wrapper">
-          <div [className]="showMenu ? 'header-menu active': 'header-menu'">
+        <div [className]="showMenu ? 'menu-block active' : 'wrapper menu-block'">
+          <div class="header-menu">
             <a routerLink="/">Главная</a>
             <a routerLink="/shop">Магазин</a>
             <a routerLink="/contact">Контакты</a>

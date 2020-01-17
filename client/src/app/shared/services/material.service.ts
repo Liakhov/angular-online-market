@@ -32,7 +32,7 @@ export class MaterialService {
   }
 
   static initSlider(ref: ElementRef): MaterialInstance{
-    return M.Carousel.init(ref.nativeElement)
+    return M.Carousel.init(ref.nativeElement, {fullWidth: true})
   }
 
   static initSidenav(ref: ElementRef){

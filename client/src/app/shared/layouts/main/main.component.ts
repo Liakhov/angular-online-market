@@ -14,7 +14,7 @@ import {CategoryService} from "../../services/category.service";
 })
 export class MainComponent implements OnInit, OnDestroy {
 
-  showMenu: boolean = false
+  showMenu: Boolean = false
   form: FormGroup
   subscibeMail$
   cart$: Observable<[]>

@@ -8,7 +8,7 @@ import {ProductService} from "../../shared/services/product.service";
 @Component({
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
-  styleUrls: ['./front-page.component.css'],
+  styleUrls: ['./front-page.component.scss'],
   host: {
     '(window:resize)': 'onResize()'
   }
@@ -32,7 +32,6 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
     this.products$ = this.productService.fetch({
       limit: this.limit
     })
-
   }
 
   ngAfterViewInit(){
