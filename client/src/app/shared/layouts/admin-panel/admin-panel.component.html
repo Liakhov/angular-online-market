@@ -1,14 +1,13 @@
-<nav>
-  <div class="nav-wrapper">
-    <a routerLink="/" class="waves-effect right">Выйти</a>
-    <a href="#" data-target="slide-out" class="sidenav-trigger" (click)="openSidenav($event);" ><i class="material-icons">menu</i></a>
-  </div>
-</nav>
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a routerLink="/" class="waves-effect right">Выйти</a>
+      <a href="#" data-target="slide-out" class="sidenav-trigger" (click)="openSidenav($event);" ><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>
 <div>
   <ul class="sidenav sidenav-fixed" #sidenav>
-    <div class="logo">
-      <img src="/assets/img/logo.png" alt="Bicycle shop">
-    </div>
     <li class="bold" *ngFor="let link of links" routerLinkActive="active">
       <a [routerLink]=[link.url]>
         {{link.name}}

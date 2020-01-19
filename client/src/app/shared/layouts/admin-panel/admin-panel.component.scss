@@ -16,6 +16,7 @@ nav{
 }
 .sidenav{
   width: 240px;
+  padding-top: 63px;
   background: rgba(50,50,50,0.06);
 }
 .sidenav a{
@@ -24,6 +25,7 @@ nav{
 @media (max-width: 992px) {
   .sidenav{
     width: 200px;
+    padding-top: 15px;
     background: #294057;
     a {
       font-size: 12px;
