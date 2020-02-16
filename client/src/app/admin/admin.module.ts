@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {AdminPanelComponent} from "../shared/layouts/admin-panel/admin-panel.component";
+
+import { AdminLayoutComponent } from "./containers/admin-layout/admin-layout.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminPanelComponent,
+    component: AdminLayoutComponent,
     children: [
       {path: '', redirectTo: 'review', pathMatch: 'full'},
-      {path: 'review', loadChildren: './review-page/review-page.module#ReviewPageModule'},
-      {path: 'order', loadChildren: './order/order.module#OrderModule'},
-      {path: 'category', loadChildren: './category/category.module#CategoryModule'},
-      {path: 'product', loadChildren: './product-page/product-page.module#ProductPageModule'},
-      {path: 'mail', loadChildren: './mail/mail.module#MailModule'},
-      {path: 'message', loadChildren: './message/message.module#MessageModule'}
+      {path: 'review', loadChildren: './components/review-page/review-page.module#ReviewPageModule'},
+      {path: 'order', loadChildren: './components/order/order.module#OrderModule'},
+      {path: 'category', loadChildren: './components/category/category.module#CategoryModule'},
+      {path: 'product', loadChildren: './components/product-page/product-page.module#ProductPageModule'},
+      {path: 'mail', loadChildren: './components/mail/mail.module#MailModule'},
+      {path: 'message', loadChildren: './components/message/message.module#MessageModule'}
     ]
   }
 ]
 
 @NgModule({
   declarations: [
-    AdminPanelComponent
+    AdminLayoutComponent
   ],
   imports: [
     CommonModule,

@@ -1,30 +1,36 @@
-import {ActionModel} from '../models/action.model'
-import {ActionTypes} from '../actions/cart.action'
+import { Action } from "@ngrx/store";
 
-export const products = []
+import { initialAppState } from '../state/app.state';
+import { CartAction } from '../actions/cart.action';
 
-export function cartReducer(state = products, action: ActionModel) {
+
+export class ActionModel implements Action {
+  type: string;
+  payload: any;
+}
+
+export function cartReducer(
+  state = initialAppState.cart,
+  action: ActionModel
+) {
   switch (action.type) {
 
-    case ActionTypes.Add:
+    case CartAction.Add:
     {
       state.push(action.payload)
-      console.log(state)
       return state
     }
 
-    case ActionTypes.Remove:
+    case CartAction.Remove:
     {
         const index = state.indexOf(action.payload)
         state.splice(index, 1)
-        console.log(state)
         return state
     }
 
-    case ActionTypes.Clear:
+    case CartAction.Clear:
     {
-      state = []
-      console.log(state)
+      state.length = 0;
       return state
     }
 

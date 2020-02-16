@@ -17,9 +17,7 @@ module.exports.getAll = async function (req, res) {
         const categories = await Category.find({}, {name: 1})
 
         let result = positions.map(function (item) {
-            let categoryForItemPositin = categories.find( element => {
-                return element._id.toString() === item.category.toString()
-            })
+            let categoryForItemPositin = categories.find( element =>  element._id.toString() === item.category.toString())
             if(categoryForItemPositin) item.categoryName = categoryForItemPositin.name
             return item
         })

@@ -43,3 +43,23 @@ tr:focus{
 .categories h4{
   margin-bottom: 30px;
 }
+
+// Upload image
+.thumbnail{
+  padding: 2rem 0;
+  border: 2px dashed rgba(50,58,70,.3);
+  border-radius: 6px;
+  text-align: center;
+  img{
+    max-width: 290px;
+  }
+  label{
+    display: block;
+  }
+}
+input[type=file]:focus + label {
+  outline: -webkit-focus-ring-color auto 5px;
+}
+.thumbnail_default{
+  width: 36px;
+}

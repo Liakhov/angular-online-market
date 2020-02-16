@@ -1,0 +1,19 @@
+<div class="wrapper" *ngIf="product">
+  <h4>{{product.name}}</h4>
+  <div class="row">
+    <div class="col s6"></div>
+    <div class="col s6">
+      <div class="product-trade">
+        <div class="product-price">
+            {{product.cost}} $
+        </div>
+        <div class="product-to-cart">
+          <button class="btn waves-effect waves-light cart" type="button" (click)="addToCart(product)">
+            <i class="material-icons left">shopping_cart</i>
+            КУпить
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

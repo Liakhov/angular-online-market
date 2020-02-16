@@ -1,0 +1,29 @@
+form{
+  margin: 15px 0 30px;
+}
+.form-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.name{
+  width: 100%;
+}
+.red{
+  margin-left: 15px;
+}
+.category-img{
+  padding: 30px;
+  box-sizing: border-box;
+}
+@media (max-width: 600px){
+  .form-row{
+    flex-direction: column;
+  }
+  .name{
+    width: 100%;
+  }
+  .category-img{
+    width: 100%;
+  }
+}
