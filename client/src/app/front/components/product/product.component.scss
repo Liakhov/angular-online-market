@@ -6,3 +6,33 @@
   font-size: 36px;
   margin-right: 30px;
 }
+.balance{
+  margin: 0.5rem 0 1rem;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  span{
+    display: flex;
+    align-items: center;
+    width: max-content;
+    padding: 5px 10px;
+  }
+  .material-icons{
+    font-size: 16px;
+    line-height: 16px;
+    margin-right: 5px;
+  }
+  .balance-green{
+    background-color: #f4faf6;
+    color: #00a046;
+  }
+  .balance-orange{
+    color: #ff5c00;
+    background: #fff7f2;
+  }
+  .balance-grey{
+    background-color: #f5f5f5;
+    color: #797878;
+  }
+}
+

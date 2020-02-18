@@ -61,8 +61,8 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
-      cost: new FormControl(null, [Validators.required, Validators.min(1)]),
-      quantity: new FormControl(null, [Validators.required, Validators.min(1)]),
+      cost: new FormControl(null, [Validators.required, Validators.min(0)]),
+      quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
       category: new FormControl(null),
       description: new FormControl(null)
     })
