@@ -42,3 +42,8 @@ export interface Mail {
   date?: Date
   _id?: string
 }
+export interface MaterialInstance {
+  open?(): void
+  close?(): void
+  destroy?(): void
+}

@@ -3,10 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import { MailService} from "../../../shared/services/mail.service";
-import { MaterialService } from "../../../shared/services/material.service";
-import { CategoryService } from "../../../shared/services/category.service";
-import { Category, Mail } from '../../../shared/interface';
+import * as services from '../../../shared/services/index';
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-front-layout',
@@ -19,9 +17,9 @@ export class FrontLayoutComponent implements OnInit, OnDestroy {
   form: FormGroup
   subscibeMail$
   cart$: Observable<[]>
-  categories$: Observable<Category[]>
+  categories$: Observable<models.Category[]>
 
-  constructor(private mailService: MailService, private store: Store<{ cart: [] }>, private categoriesService: CategoryService) {
+  constructor(private mailService: services.MailService, private store: Store<{ cart: [] }>, private categoriesService: services.CategoryService) {
     this.cart$ = store.pipe(select('cart'));
   }
 
@@ -33,28 +31,28 @@ export class FrontLayoutComponent implements OnInit, OnDestroy {
     this.categories$ = this.categoriesService.fetch()
   }
 
-  ngOnDestroy(){
+  ngOnDestroy(): void{
     if(this.subscibeMail$){
       this.subscibeMail$.unsubscribe()
     }
   }
 
-  dropdown(){
+  dropdown(): void{
     this.showMenu = !this.showMenu;
   }
 
-  sendMail(){
-    const email: Mail = {
+  sendMail(): void{
+    const email: models.Mail = {
       email: this.form.value.email
     }
 
     this.subscibeMail$ = this.mailService.create(email).subscribe(data => {
-      MaterialService.toast(data.message)
+      services.MaterialService.toast(data.message)
     })
     this.form.reset()
   }
 
-  cartQuantity(cart){
+  cartQuantity(cart): number{
     return cart.reduce((sum, item) => {
       return sum + item.quantity;
     }, 0)

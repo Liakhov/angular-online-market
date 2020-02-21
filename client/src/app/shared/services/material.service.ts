@@ -1,13 +1,8 @@
-import {ElementRef} from "@angular/core";
+import { ElementRef } from "@angular/core";
 
+import { MaterialInstance } from "../interface";
 
 declare var M: any
-
-export interface MaterialInstance {
-  open?(): void
-  close?(): void
-  destroy?(): void
-}
 
 export class MaterialService {
 
@@ -17,10 +12,6 @@ export class MaterialService {
 
   static initModal(ref: ElementRef): MaterialInstance{
      return M.Modal.init(ref.nativeElement)
-  }
-
-  static updateInput(){
-    M.updateTextFields();
   }
 
   static resizeTextArea(ref: ElementRef): any{
@@ -37,10 +28,6 @@ export class MaterialService {
 
   static initSidenav(ref: ElementRef){
     return M.Sidenav.init(ref.nativeElement)
-  }
-
-  static initDatePicker(ref: ElementRef){
-    return M.Datepicker.init(ref.nativeElement)
   }
 
 }

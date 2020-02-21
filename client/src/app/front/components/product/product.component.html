@@ -1,8 +1,8 @@
-<div class="wrapper" *ngIf="product">
+<div class="wrapper product" *ngIf="product">
   <h4>{{product.name}}</h4>
-  <div class="row">
-    <div class="col s6"></div>
-    <div class="col s6">
+  <div class="product-row">
+    <div></div>
+    <div>
       <div class="balance">
         <span class="balance-green" *ngIf="product.quantity > 10">
           <i class="material-icons">check_circle</i>
@@ -29,8 +29,20 @@
             [disabled]="product.quantity === 0"
           >
             <i class="material-icons left">shopping_cart</i>
-            КУпить
+            Купить
           </button>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block_header">Оплата</div>
+        <div class="info-block_body">Наличными</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block_header">Гарантия</div>
+        <div class="info-block_body">
+          14 дней
+          <br>
+          Продавец гарантирует упаковку заказанного товара, которая обеспечит целостность и сохранность его товарного вида
         </div>
       </div>
     </div>

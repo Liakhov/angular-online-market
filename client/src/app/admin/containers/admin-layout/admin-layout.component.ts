@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MaterialInstance, MaterialService} from "../../../shared/services/material.service";
+
+import {MaterialService} from "../../../shared/services/material.service";
+import {MaterialInstance} from "../../../shared/interface";
 
 @Component({
   selector: 'app-admin-layout',

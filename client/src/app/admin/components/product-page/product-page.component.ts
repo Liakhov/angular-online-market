@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
+import {Observable} from "rxjs";
+
 import {ProductService} from "../../../shared/services/product.service";
 import {Category, Product} from "../../../shared/interface";
-import {Observable} from "rxjs";
 import {CategoryService} from "../../../shared/services/category.service";
 
 @Component({

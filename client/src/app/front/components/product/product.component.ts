@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
-import { ProductService } from "../../../shared/services/product.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from "rxjs";
+
+import { ProductService } from "../../../shared/services/product.service";
 import { Product } from "../../../shared/interface";
 
 @Component({
@@ -21,7 +22,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.id = this.activeRoute.snapshot.params['id']
+    this.id = this.activeRoute.snapshot.params['id'];
 
     this.productSub = this.productService.getByID(this.id).subscribe(data => {
       this.product = data
@@ -29,7 +30,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.productSub) this.productSub.unsubscribe()
+    if(this.productSub) {
+      this.productSub.unsubscribe()
+    }
   }
 
   addToCart(product){

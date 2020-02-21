@@ -1,7 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Category, Product, ToastMessage} from "../interface";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+
+import * as models from '../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,15 @@ export class CategoryService {
 
   }
 
-  fetch(): Observable<Category[]>{
-    return this.http.get<Category[]>('/api/category')
+  fetch(): Observable<models.Category[]>{
+    return this.http.get<models.Category[]>('/api/category')
   }
 
-  getByID(id: string): Observable<Category>{
-    return this.http.get<Category>(`/api/category/${id}`)
+  getByID(id: string): Observable<models.Category>{
+    return this.http.get<models.Category>(`/api/category/${id}`)
   }
 
-  update(id: string, name: string, description?: string, image?: File): Observable<Category>{
+  update(id: string, name: string, description?: string, image?: File): Observable<models.Category>{
 
     const category = new FormData()
     category.append('name', name)
@@ -31,10 +32,10 @@ export class CategoryService {
       category.append('description', description)
     }
 
-    return this.http.patch<Category>(`/api/category/${id}`, category)
+    return this.http.patch<models.Category>(`/api/category/${id}`, category)
   }
 
-  create(name: string, description?: string, image?: File): Observable<Category>{
+  create(name: string, description?: string, image?: File): Observable<models.Category>{
 
     const category = new FormData()
     category.append('name', name)
@@ -45,15 +46,15 @@ export class CategoryService {
     if(description){
       category.append('description', description)
     }
-    return this.http.post<Category>('/api/category', category)
+    return this.http.post<models.Category>('/api/category', category)
   }
 
-  remove(id: string): Observable<ToastMessage>{
-    return this.http.delete<ToastMessage>(`/api/category/${id}`)
+  remove(id: string): Observable<models.ToastMessage>{
+    return this.http.delete<models.ToastMessage>(`/api/category/${id}`)
   }
 
-  getAllFromCategory(id: string): Observable<Product[]>{
-    return this.http.get<Product[]>(`/api/position/allpositions/${id}`)
+  getAllFromCategory(id: string): Observable<models.Product[]>{
+    return this.http.get<models.Product[]>(`/api/position/allpositions/${id}`)
   }
 
 }

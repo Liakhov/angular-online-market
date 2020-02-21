@@ -1,9 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Category, Product} from "../../../shared/interface";
-import {CategoryService} from "../../../shared/services/category.service";
 import {Observable} from "rxjs";
-import {MaterialInstance, MaterialService} from "../../../shared/services/material.service";
+
+import {Category, MaterialInstance, Product} from "../../../shared/interface";
+import {MaterialService} from "../../../shared/services/material.service";
+import {CategoryService} from "../../../shared/services/category.service";
 import {ProductService} from "../../../shared/services/product.service";
+
 
 @Component({
   selector: 'app-front-page',

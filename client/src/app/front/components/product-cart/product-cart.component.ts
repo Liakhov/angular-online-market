@@ -1,9 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Store, select} from "@ngrx/store";
-import {Observable} from "rxjs";
+import { Component, Input } from '@angular/core';
+import { Store } from "@ngrx/store";
 
-import {Product} from "../../../shared/interface";
-import {ProductService} from "../../../shared/services/product.service";
+import { Product } from "../../../shared/interface";
+import { ProductService } from "../../../shared/services/product.service";
 
 @Component({
   selector: 'app-product-cart',

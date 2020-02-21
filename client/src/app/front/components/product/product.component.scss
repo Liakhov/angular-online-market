@@ -1,9 +1,21 @@
+.product{
+  padding-bottom: 100px;
+}
+.product-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  >div{
+    width: 50%;
+  }
+}
 .product-trade{
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 }
 .product-price{
-  font-size: 36px;
+  font-size: 2rem;
   margin-right: 30px;
 }
 .balance{
@@ -18,8 +30,8 @@
     padding: 5px 10px;
   }
   .material-icons{
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 1rem;
+    line-height: 1rem;
     margin-right: 5px;
   }
   .balance-green{
@@ -35,4 +47,11 @@
     color: #797878;
   }
 }
-
+@media screen and (max-width: 768px){
+  .product-row{
+    flex-direction: column;
+    >div{
+      width: 100%;
+    }
+  }
+}

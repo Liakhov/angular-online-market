@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductService} from "../../../../shared/services/product.service";
-import {switchMap} from "rxjs/operators";
-import {MaterialInstance, MaterialService} from "../../../../shared/services/material.service";
-import {CategoryService} from "../../../../shared/services/category.service";
-import {Product} from 'src/app/shared/interface';
 import {Subscription} from "rxjs";
+import {switchMap} from "rxjs/operators";
+
+import * as services from '../../../../shared/services/index';
+import * as models from '../../../../shared/interface';
 
 @Component({
   selector: 'app-product-item',
@@ -21,13 +20,18 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   isNew: boolean
   position
   id: string
-  select: MaterialInstance
+  select: models.MaterialInstance
   category
   submitSub: Subscription
   removeSub: Subscription
   imagePreview
 
-  constructor(private router: Router, private ProductService: ProductService, private activeRouter: ActivatedRoute, private categoryService: CategoryService) { }
+  constructor(
+    private router: Router,
+    private ProductService: services.ProductService,
+    private activeRouter: ActivatedRoute,
+    private categoryService: services.CategoryService
+  ) { }
 
   ngOnInit() {
     this.categoryService.fetch().subscribe(data => {
@@ -55,7 +59,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
             description: data.description
           })
           this.position = data
-          MaterialService.resizeTextArea(this.descrTextArea);
+          services.MaterialService.resizeTextArea(this.descrTextArea);
         })
     }
 
@@ -70,7 +74,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngAfterViewInit(){
     setTimeout(() => {
-      this.select = MaterialService.initSelect(this.selectCat)
+      this.select = services.MaterialService.initSelect(this.selectCat)
     },500)
   }
 
@@ -88,8 +92,8 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
   remove(){
     this.removeSub = this.ProductService.remove(this.id).subscribe(
-      response => MaterialService.toast(response.message),
-      error => MaterialService.toast(error.message),
+      response => services.MaterialService.toast(response.message),
+      error => services.MaterialService.toast(error.message),
       () => this.router.navigate(['/admin/product'])
     )
   }
@@ -101,7 +105,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   onSubmit(){
       let obs$
 
-      const product: Product = {
+      const product: models.Product = {
         cost: this.form.value.cost,
         name: this.form.value.name,
         quantity: this.form.value.quantity
@@ -122,10 +126,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
       this.submitSub = obs$.subscribe(() => {
         if(this.isNew){
-          MaterialService.toast('Новый товар добавлен')
+          services.MaterialService.toast('Новый товар добавлен')
           this.router.navigate([`/admin/product`])
         }else{
-          MaterialService.toast('Изменения сохранены')
+          services.MaterialService.toast('Изменения сохранены')
         }
       })
   }
