@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {FilterPipe} from "./filter.pipe";
+import { FilterPipe } from "./filter.pipe";
 
 
 @NgModule({

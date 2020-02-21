@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MessageService} from "../../../shared/services/message.service";
-import {Message} from "../../../shared/interface";
-import {MaterialService} from "../../../shared/services/material.service";
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+
+import { Message } from "../../../shared/interface";
+import { MessageService } from "../../../shared/services/message.service";
+import { MaterialService } from "../../../shared/services/material.service";
 
 @Component({
   selector: 'app-message',

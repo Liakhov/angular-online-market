@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core'
-import {Order} from '../../../../shared/interface'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-order-item',

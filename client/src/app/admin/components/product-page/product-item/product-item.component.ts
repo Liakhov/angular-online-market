@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router, Params} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {switchMap} from "rxjs/operators";
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { switchMap } from "rxjs/operators";
 
 import * as services from '../../../../shared/services/index';
 import * as models from '../../../../shared/interface';

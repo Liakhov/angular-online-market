@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Store } from "@ngrx/store";
 
 import { Product } from "../../../shared/interface";
 import { ProductService } from "../../../shared/services/product.service";
@@ -10,16 +9,9 @@ import { ProductService } from "../../../shared/services/product.service";
   styleUrls: ['./product-cart.component.scss']
 })
 export class ProductCartComponent {
-
   @Input() product: Product
-  // cart$: Observable<[]>
 
-  constructor(
-    private store: Store<{ cart: [] }>,
-    private productService: ProductService
-  ) {
-    // this.cart$ = store.pipe(select('cart'))
-  }
+  constructor(private productService: ProductService) { }
 
   addToCart(product){
     this.productService.addCart(product)

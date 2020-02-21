@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../../shared/services/product.service";
-import {Observable} from "rxjs";
-import {Product} from "../../../shared/interface";
+import { Observable } from "rxjs";
+
+import { ProductService } from "../../../shared/services/product.service";
+import { Product } from "../../../shared/interface";
 
 @Component({
   selector: 'app-shop',

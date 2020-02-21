@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MaterialService} from "../../../shared/services/material.service";
-import {MessageService} from "../../../shared/services/message.service";
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
+
+import { MaterialService } from "../../../shared/services/material.service";
+import { MessageService } from "../../../shared/services/message.service";
 
 @Component({
   selector: 'app-contact',

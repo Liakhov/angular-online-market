@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
 
-import {ProductService} from "../../../shared/services/product.service";
-import {Category, Product} from "../../../shared/interface";
-import {CategoryService} from "../../../shared/services/category.service";
+import { Category, Product } from "../../../shared/interface";
+import { ProductService } from "../../../shared/services/product.service";
+import { CategoryService } from "../../../shared/services/category.service";
 
 @Component({
   selector: "app-product-page",

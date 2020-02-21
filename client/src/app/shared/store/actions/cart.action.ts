@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import {Product} from "../../interface";
+import { Product } from "../../interface";
 
 export enum CartAction{
   Add = '[Cart Add] Add',

@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CategoryService} from "../../../../shared/services/category.service";
-import {Category, Product} from "../../../../shared/interface";
-import {switchMap} from "rxjs/operators";
-import {Observable, of, Subscription} from 'rxjs';
-import {MaterialService} from "../../../../shared/services/material.service";
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { switchMap } from "rxjs/operators";
+import { Observable, of, Subscription } from 'rxjs';
+
+import * as services from '../../../../shared/services/index';
+import * as models from '../../../../shared/interface';
 
 @Component({
   selector: 'app-category-item',
@@ -18,15 +18,15 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   @ViewChild('textarea', {static: false}) textarea: ElementRef
   isNew: boolean
   form: FormGroup
-  category: Category
+  category: models.Category
   image: File
   imagePreview
-  products$: Observable<Product[]>
+  products$: Observable<models.Product[]>
   oSub: Subscription
   removeSub: Subscription
   catId: string
 
-  constructor(private router: Router, private CategoryService: CategoryService, private activeRouter: ActivatedRoute) { }
+  constructor(private router: Router, private CategoryService: services.CategoryService, private activeRouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -59,7 +59,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
               description: category.description
             })
 
-            MaterialService.resizeTextArea(this.textarea)
+            services.MaterialService.resizeTextArea(this.textarea)
 
             if(category.image){
               this.imagePreview = category.image
@@ -103,17 +103,17 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
       this.oSub = obs$.subscribe(data => {
 
         if(this.isNew){
-          MaterialService.toast(data.message)
+          services.MaterialService.toast(data.message)
           this.router.navigate(['/admin/category/'])
         }else{
-          MaterialService.toast('Изменения сохранены')
+          services.MaterialService.toast('Изменения сохранены')
         }
       })
   }
 
   remove(){
     this.removeSub = this.CategoryService.remove(this.category._id).subscribe(data => {
-      MaterialService.toast(data.message)
+      services.MaterialService.toast(data.message)
       this.router.navigate(['/admin/category/'])
     })
   }

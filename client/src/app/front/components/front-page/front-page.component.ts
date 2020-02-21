@@ -1,11 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable } from "rxjs";
 
-import {Category, MaterialInstance, Product} from "../../../shared/interface";
-import {MaterialService} from "../../../shared/services/material.service";
-import {CategoryService} from "../../../shared/services/category.service";
-import {ProductService} from "../../../shared/services/product.service";
-
+import * as services from '../../../shared/services/index';
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-front-page',
@@ -18,17 +15,16 @@ import {ProductService} from "../../../shared/services/product.service";
 
 export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
-  categories$: Observable<Category[]>
-  products$: Observable<Product[]>
+  categories$: Observable<models.Category[]>
+  products$: Observable<models.Product[]>
   @ViewChild('slider', {static: false}) sliderBlock: ElementRef
-  slider: MaterialInstance
+  slider: models.MaterialInstance
   limit = 4
 
-  constructor(private categoriesService: CategoryService, private productService: ProductService) {
+  constructor(private categoriesService: services.CategoryService, private productService: services.ProductService) {
   }
 
   ngOnInit() {
-
     this.categories$ = this.categoriesService.fetch()
 
     this.products$ = this.productService.fetch({
@@ -37,7 +33,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngAfterViewInit(){
-    this.slider = MaterialService.initSlider(this.sliderBlock)
+    this.slider = services.MaterialService.initSlider(this.sliderBlock)
   }
 
   ngOnDestroy(): void {
@@ -47,7 +43,6 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   onResize(event: Event){
-    this.slider = MaterialService.initSlider(this.sliderBlock)
+    this.slider = services.MaterialService.initSlider(this.sliderBlock)
   }
-
 }

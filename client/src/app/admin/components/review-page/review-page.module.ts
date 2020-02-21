@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {ReviewPageComponent} from "./review-page.component";
+import { RouterModule, Routes } from "@angular/router";
+
+import { ReviewPageComponent } from "./review-page.component";
 
 const routes: Routes = [
   {path: '', component: ReviewPageComponent}

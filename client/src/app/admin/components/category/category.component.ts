@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 
-import { CategoryService } from '../../../shared/services/category.service';
 import { Category } from '../../../shared/interface';
+import { CategoryService } from '../../../shared/services/category.service';
 
 @Component({
   selector: 'app-category',
