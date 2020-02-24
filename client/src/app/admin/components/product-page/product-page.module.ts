@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {ProductPageComponent} from "./product-page.component";
-import {ProductItemComponent} from "./product-item/product-item.component";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {PipesModule} from "../../../shared/pipe.module";
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { AngularEditorModule } from "@kolkov/angular-editor";
+
+import { PipesModule } from "../../../shared/pipe.module";
+import { ProductItemComponent } from "./product-item/product-item.component";
+import { ProductPageComponent } from "./product-page.component";
 
 const routes: Routes = [
   {path: '', component: ProductPageComponent},
@@ -22,7 +25,9 @@ const routes: Routes = [
     FormsModule,
     PipesModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    AngularEditorModule
   ]
 })
 export class ProductPageModule { }

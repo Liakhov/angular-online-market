@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Product } from "../../interface";
+import { OrderPosition } from "../../interface";
 
 export enum CartAction{
   Add = '[Cart Add] Add',
@@ -11,14 +11,14 @@ export enum CartAction{
 export class Add implements Action{
   public readonly type = CartAction.Add
 
-  constructor(public payload: Product){}
+  constructor(public payload: OrderPosition){}
 }
 
 export class Remove implements Action{
 
   public readonly type = CartAction.Remove
 
-  constructor(public payload: Product){}
+  constructor(public payload: OrderPosition){}
 }
 
 export class Clear implements Action{

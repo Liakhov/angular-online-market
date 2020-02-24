@@ -32,12 +32,6 @@
             <input id="for-quantity" type="number" min="0" formControlName="quantity">
           </div>
         </div>
-        <div class="description">
-          <div class="input-field">
-            <label for="descr" [ngClass]="{'active': form.get('description').value != null}">Описание</label>
-            <textarea #descr id="descr" type="number" class="materialize-textarea ng-valid ng-dirty ng-touched" formControlName="description"></textarea>
-          </div>
-        </div>
       </div>
       <div class="col m5 s12">
         <div class="thumbnail file-field">
@@ -51,5 +45,8 @@
           <label for="file-input">Выберите файл</label>
         </div>
       </div>
+  </div>
+  <div class="description">
+    <angular-editor formControlName="description"></angular-editor>
   </div>
 </form>

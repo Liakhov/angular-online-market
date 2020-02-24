@@ -83,3 +83,18 @@ input[type=file]:focus + label {
     padding: 1rem;
   }
 }
+@media screen and (max-width: 768px){
+  .main{
+    h4{
+      font-size: 1.8rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px){
+  .main{
+    h4{
+      font-size: 1.4rem;
+    }
+  }
+}
