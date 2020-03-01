@@ -17,8 +17,7 @@ export function cartReducer(
 
     case CartAction.Add:
     {
-      const candidate = state.find( p => p.id === action.payload._id)
-
+      const candidate = state.find( p => p._id === action.payload._id)
       if(candidate){
         candidate.quantity += action.payload.quantity
       }else{

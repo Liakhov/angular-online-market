@@ -15,6 +15,7 @@ import * as models from '../../../../shared/interface';
 export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef
+  @ViewChild('inputImage', {static: false}) inputImage: ElementRef
   form: FormGroup
   isNew: boolean
   position
@@ -23,6 +24,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   category
   submitSub: Subscription
   removeSub: Subscription
+  image: File
   imagePreview
 
   constructor(
@@ -96,8 +98,17 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     )
   }
 
-  onFileUpload(event: Event){
-    console.log(event)
+  onFileUpload(event){
+    const target = event.target;
+    const file = target.file[0]
+    this.image = file
+
+    const reader = new FileReader()
+
+    reader.onload = () =>  this.imagePreview = reader.result
+
+    reader.readAsDataURL(file)
+
   }
 
   onSubmit(){

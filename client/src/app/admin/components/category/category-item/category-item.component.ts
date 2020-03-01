@@ -14,7 +14,6 @@ import * as models from '../../../../shared/interface';
 })
 export class CategoryItemComponent implements OnInit, OnDestroy {
 
-  @ViewChild('inputImage', {static: false}) inputImage: ElementRef
   @ViewChild('textarea', {static: false}) textarea: ElementRef
   isNew: boolean
   form: FormGroup

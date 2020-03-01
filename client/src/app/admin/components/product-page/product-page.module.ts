@@ -24,9 +24,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     PipesModule,
+    HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    HttpClientModule,
     AngularEditorModule
   ]
 })
