@@ -34,16 +34,8 @@
         </div>
       </div>
       <div class="col m5 s12">
-        <div class="thumbnail file-field">
-          <img src="{{imagePreview}}" *ngIf="imagePreview; else inputImageField" alt="">
-
-          <ng-template #inputImageField>
-            <img src="assets/img/cloud-computing.svg" class="thumbnail_default" alt="">
-          </ng-template>
-
-          <input id="file-input" type="file" (change)="onFileUpload($event)">
-          <label for="file-input">Выберите файл</label>
-        </div>
+        <h6>Изображения</h6>
+        <app-upload-img (files)="onFilesUpload($event)"></app-upload-img>
       </div>
   </div>
   <div class="description">

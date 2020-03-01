@@ -7,6 +7,7 @@ import { switchMap } from "rxjs/operators";
 import * as services from '../../../../shared/services/index';
 import * as models from '../../../../shared/interface';
 
+
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
@@ -24,8 +25,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   category
   submitSub: Subscription
   removeSub: Subscription
-  image: File
-  imagePreview
+  files = []
 
   constructor(
     private router: Router,
@@ -90,7 +90,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  remove(){
+  remove(): void{
     this.removeSub = this.ProductService.remove(this.id).subscribe(
       response => services.MaterialService.toast(response.message),
       error => services.MaterialService.toast(error.message),
@@ -98,26 +98,19 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     )
   }
 
-  onFileUpload(event){
-    const target = event.target;
-    const file = target.file[0]
-    this.image = file
-
-    const reader = new FileReader()
-
-    reader.onload = () =>  this.imagePreview = reader.result
-
-    reader.readAsDataURL(file)
-
+  public onFilesUpload(event){
+    this.files = event;
   }
 
-  onSubmit(){
+
+  onSubmit() {
       let obs$
 
       const product: models.Product = {
         cost: this.form.value.cost,
         name: this.form.value.name,
-        quantity: this.form.value.quantity
+        quantity: this.form.value.quantity,
+        images: this.files
       }
 
       if(this.form.value.category){

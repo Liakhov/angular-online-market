@@ -8,6 +8,7 @@ import { AngularEditorModule } from "@kolkov/angular-editor";
 import { PipesModule } from "../../../shared/pipe.module";
 import { ProductItemComponent } from "./product-item/product-item.component";
 import { ProductPageComponent } from "./product-page.component";
+import { SharedModule } from '../../../shared/shared.module';
 
 const routes: Routes = [
   {path: '', component: ProductPageComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    AngularEditorModule
+    AngularEditorModule,
+    SharedModule
   ]
 })
 export class ProductPageModule { }

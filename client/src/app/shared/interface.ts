@@ -5,7 +5,7 @@ export interface Product {
   quantity: number
   category?: string
   categoryName?: string
-  image?: string
+  images?: Blob[]
   description?: string
 }
 export interface Category {
