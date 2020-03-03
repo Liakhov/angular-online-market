@@ -25,6 +25,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   category
   submitSub: Subscription
   removeSub: Subscription
+  images = []
   files = []
 
   constructor(
@@ -39,7 +40,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
       this.category = data
     })
 
-    if(this.router.url === '/admin/product/new'){
+    if(this.router.url === '/admin/product/new') {
       this.isNew = true
     }else{
       this.activeRouter.params
@@ -52,6 +53,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
             })
         )
         .subscribe(data => {
+
           this.form.patchValue({
             name: data.name,
             cost: data.cost,
@@ -59,6 +61,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
             category: data.category,
             description: data.description
           })
+          this.images = data.images
           this.position = data
         })
     }
@@ -72,13 +75,13 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     })
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit(): void {
     setTimeout(() => {
       this.select = services.MaterialService.initSelect(this.selectCat)
     },500)
   }
 
-  ngOnDestroy(){
+  ngOnDestroy(): void {
     if(this.select){
       this.select.destroy()
     }
@@ -98,7 +101,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     )
   }
 
-  public onFilesUpload(event){
+  public onFilesUpload(event): void{
     this.files = event;
   }
 

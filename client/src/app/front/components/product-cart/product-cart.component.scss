@@ -3,6 +3,9 @@
   flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
+  a{
+    text-align: center;
+  }
 }
 .prod-title{
   margin-top: 10px;
@@ -12,9 +15,12 @@
   text-align: left;
   height: 44px;
   overflow: hidden;
+  &:hover{
+    color: #B99867;
+  }
 }
-.prod-title:hover{
-  color: #B99867;
+.prod-thumbnail{
+  max-height: 290px;
 }
 .price{
   font-size: 24px;

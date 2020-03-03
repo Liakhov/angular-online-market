@@ -28,12 +28,18 @@ module.exports.getAll = async function (req, res) {
 };
 module.exports.create = async function (req, res) {
     try{
+        const images = [];
+        for(const file of req.files){
+            images.push(file.path || '')
+        }
+
         const position = await new Position({
             name: req.body.name,
             cost: req.body.cost,
             quantity: req.body.quantity,
             category: req.body.category,
-            description: req.body.description
+            description: req.body.description,
+            images: images
         }).save();
         res.status(201).json(position)
 
@@ -59,7 +65,8 @@ module.exports.update = async function (req, res) {
         cost: req.body.cost,
         quantity: req.body.quantity,
         category: req.body.category,
-        description: req.body.description
+        description: req.body.description,
+        images: images
     }
 
     try{

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 
 @Component({
@@ -7,24 +7,18 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./upload-img.component.scss']
 })
 export class UploadImgComponent {
-  @Output() files = new EventEmitter();
+  @Input() images = []
+  @Output() files = new EventEmitter()
   thumbnails
-  thumbnailsPreview = []
 
   constructor() { }
 
   onFileUpload(event) {
     this.thumbnails = [...event.target.files];
-
-    const filesAmount = this.thumbnails.length;
-    for (let i = 0; i < filesAmount; i++) {
+    for(const img of this.thumbnails){
       const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.thumbnailsPreview.push(e.target.result);
-      }
-
-      reader.readAsDataURL(this.thumbnails[i]);
+      reader.onload = () => this.images.push(reader.result);
+      reader.readAsDataURL(img);
     }
     this.files.emit(this.thumbnails);
   }

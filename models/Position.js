@@ -22,6 +22,9 @@ const positionSchema = new Schema({
     },
     description: {
         type: String
+    },
+    images: {
+        type: Array
     }
 });
 
