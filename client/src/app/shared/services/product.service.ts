@@ -37,7 +37,8 @@ export class ProductService {
     fd.append('cost', product.cost);
     fd.append('quantity', product.quantity);
 
-    for(const img of product.image){
+
+    for(const img of product.images){
       fd.append('image', img, img['name'])
     }
 
@@ -49,6 +50,8 @@ export class ProductService {
       fd.append('description', product.description);
     }
 
+    console.log(fd)
+
     return this.http.post<Product>('/api/position', fd);
   }
 
@@ -58,7 +61,7 @@ export class ProductService {
     fd.append('cost', product.cost);
     fd.append('quantity', product.quantity);
 
-    for(const img of product.image){
+    for(const img of product.images){
       fd.append('image', img, img['name'])
     }
 

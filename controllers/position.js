@@ -17,7 +17,7 @@ module.exports.getAll = async function (req, res) {
         const categories = await Category.find({}, {name: 1})
 
         let result = positions.map(function (item) {
-            let categoryForItemPositin = categories.find( element =>  element._id.toString() === item.category.toString())
+            let categoryForItemPositin = categories.find( element =>  ('' + element._id).toString() === ('' + item.category).toString())
             if(categoryForItemPositin) item.categoryName = categoryForItemPositin.name
             return item
         })
@@ -60,6 +60,22 @@ module.exports.remove = async function (req, res) {
 };
 
 module.exports.update = async function (req, res) {
+    const images = [];
+    if(req.body.images && req.body.images.length){
+        for(const i of req.body.images){
+            images.push(i)
+        }
+    }else{
+        const position = await Position.findById(req.params.id)
+        for(const i of position.images){
+            images.push(i)
+        }
+    }
+
+    for(const file of req.files){
+        images.push(file.path || '')
+    }
+
     const updated = {
         name: req.body.name,
         cost: req.body.cost,
