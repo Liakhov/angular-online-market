@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 
 import * as services from '../../../shared/services/index';
 import * as models from '../../../shared/interface';
+import * as constants from '../../../shared/constants';
 
 @Component({
   selector: 'app-front-page',
@@ -21,10 +22,9 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
   slider: models.MaterialInstance
   limit = 4
 
-  constructor(private categoriesService: services.CategoryService, private productService: services.ProductService) {
-  }
+  constructor(private categoriesService: services.CategoryService, private productService: services.ProductService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.categories$ = this.categoriesService.fetch()
 
     this.products$ = this.productService.fetch({
@@ -32,8 +32,8 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
     })
   }
 
-  ngAfterViewInit(){
-    this.slider = services.MaterialService.initSlider(this.sliderBlock)
+  ngAfterViewInit(): void {
+    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER)
   }
 
   ngOnDestroy(): void {
@@ -42,7 +42,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  onResize(event: Event){
-    this.slider = services.MaterialService.initSlider(this.sliderBlock)
+  public onResize(): void {
+    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER)
   }
 }

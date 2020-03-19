@@ -22,8 +22,8 @@ export class MaterialService {
     return M.FormSelect.init(ref.nativeElement)
   }
 
-  static initSlider(ref: ElementRef): MaterialInstance{
-    return M.Carousel.init(ref.nativeElement, {fullWidth: true})
+  static initSlider(ref: ElementRef, options): MaterialInstance{
+    return M.Carousel.init(ref.nativeElement, options)
   }
 
   static initSidenav(ref: ElementRef){

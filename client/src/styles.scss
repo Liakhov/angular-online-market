@@ -98,3 +98,17 @@ input[type=file]:focus + label {
     }
   }
 }
+
+
+// preloader-wrapper
+.loader{
+  display: flex;
+  justify-content: center;
+  padding: 200px 0;
+  width: 100%;
+}
+@media screen and (max-width: 1024px){
+  .loader{
+    padding: 80px 0;
+  }
+}

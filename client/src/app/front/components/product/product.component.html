@@ -1,7 +1,13 @@
-<div class="wrapper product" *ngIf="product">
+<div class="wrapper product" *ngIf="!loading; else loader">
   <h4>{{product.name}}</h4>
   <div class="product-row">
-    <div></div>
+    <div>
+      <div class="carousel" #carousel>
+        <a class="carousel-item" *ngFor="let img of images">
+          <img src="{{img}}" alt="">
+        </a>
+      </div>
+    </div>
     <div>
       <div class="balance">
         <span class="balance-green" *ngIf="product.quantity > 10">
@@ -47,14 +53,23 @@
       </div>
     </div>
   </div>
-  <div class="product-row">
-    <div>
-      <h5>Описание</h5>
-      <div [innerHTML]="product.description"></div>
-    </div>
-
-    <div>
-      <h5>Отзывы покупателей</h5>
-    </div>
+  <div class="description">
+    <h5>Описание</h5>
+    <div [innerHTML]="product.description"></div>
   </div>
 </div>
+<ng-template #loader>
+  <div class="loader">
+    <div class="preloader-wrapper active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

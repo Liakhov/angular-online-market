@@ -31,47 +31,14 @@ export class ProductService {
   }
 
   create(product): Observable<Product> {
-
-    const fd = new FormData();
-    fd.append('name', product.name);
-    fd.append('cost', product.cost);
-    fd.append('quantity', product.quantity);
-
-
-    for(const img of product.images){
-      fd.append('image', img, img['name'])
-    }
-
-    if (product.category) {
-      fd.append('category', product.category);
-    }
-
-    if (product.description) {
-      fd.append('description', product.description);
-    }
-
-    console.log(fd)
+    const fd = this.createFormData(product);
 
     return this.http.post<Product>('/api/position', fd);
   }
 
   update(id, product): Observable<Product> {
-    const fd = new FormData();
-    fd.append('name', product.name);
-    fd.append('cost', product.cost);
-    fd.append('quantity', product.quantity);
+    const fd = this.createFormData(product);
 
-    for(const img of product.images){
-      fd.append('image', img, img['name'])
-    }
-
-    if (product.category) {
-      fd.append('category', product.category);
-    }
-
-    if (product.description) {
-      fd.append('description', product.description);
-    }
     return this.http.patch<Product>(`/api/position/${id}`, fd);
   }
 
@@ -79,7 +46,7 @@ export class ProductService {
     return this.http.delete<ToastMessage>(`/api/position/${id}`);
   }
 
-  addCart(product: Product) {
+  addCart(product: Product): void {
 
     const orderPosition: OrderPosition = {
       _id: product._id,
@@ -91,7 +58,25 @@ export class ProductService {
     this.store.dispatch(new Add(orderPosition));
   }
 
-  addWishList(product: Product) {
+  addWishList(product: Product): void {
     console.log(`Product add to wish list: ${product}`);
+  }
+
+  private createFormData(product: Product): FormData {
+
+    const fd = new FormData();
+
+    Object.keys(product).forEach(key => {
+      if( Array.isArray(product[key]) ){
+        for(const img of product[key]){
+          if(img instanceof File){
+            fd.append('image', img, img['name'])
+          }
+        }
+      }else{
+        fd.append(key, product[key])
+      }
+    });
+    return fd
   }
 }

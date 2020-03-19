@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import * as fromResolvers from './resolvers';
 import { FrontLayoutComponent } from "./containers/front-layout/front-layout.component";
 import { FrontPageComponent } from "./components/front-page/front-page.component";
 import { ShopComponent } from "./components/shop/shop.component";
@@ -20,7 +21,13 @@ const routes: Routes = [
     children: [
       {path: '', component: FrontPageComponent, pathMatch: 'full'},
       {path: 'shop', component: ShopComponent},
-      {path: 'shop/:id', component: ProductComponent},
+      {
+        path: 'shop/:id',
+        component: ProductComponent,
+        resolve: {
+          product: fromResolvers.ProductResolver
+        }
+      },
       {path: 'category/:id', component: CategoriesComponent},
       {path: 'cart', loadChildren: './components/cart/cart.module#CartModule'},
       {path: 'checkout', loadChildren: './components/checkout/checkout.module#CheckoutModule'},
@@ -46,6 +53,9 @@ const routes: Routes = [
     HttpClientModule,
     PipesModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    fromResolvers.ProductResolver
   ]
 })
 export class FrontModule { }
