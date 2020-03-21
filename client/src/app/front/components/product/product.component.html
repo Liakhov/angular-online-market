@@ -3,9 +3,14 @@
   <div class="product-row">
     <div>
       <div class="carousel" #carousel>
-        <a class="carousel-item" *ngFor="let img of images">
-          <img src="{{img}}" alt="">
-        </a>
+        <ng-template *ngIf="images.length; else defaultImg">
+          <a class="carousel-item" *ngFor="let img of images">
+            <img src="{{img}}" alt="">
+          </a>
+        </ng-template>
+        <ng-template #defaultImg>
+          <img src="/assets/img/nophoto.png" alt="" class="carousel-item">
+        </ng-template>
       </div>
     </div>
     <div>
