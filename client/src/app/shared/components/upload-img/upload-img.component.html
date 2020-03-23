@@ -1,5 +1,6 @@
 <div class="thumbnails">
   <div class="thumbnail-item" *ngFor="let img of images">
+    <i class="material-icons" (click)="onRemove(img)">close</i>
     <img src="{{img}}" alt="">
   </div>
 </div>

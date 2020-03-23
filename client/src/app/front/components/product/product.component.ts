@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from "rxjs";
 
@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit, OnDestroy, AfterViewInit {
     private productService: services.ProductService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loading = true
 
     this.productSub = this.activeRoute.data.subscribe( data => {
@@ -52,11 +52,11 @@ export class ProductComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public onResize(): void{
+  @HostListener('window:resize', ['$event'])  onResize(): void {
     this.carousel = services.MaterialService.initSlider(this.carouselBlock, constants.PRODUCT_SLIDER)
   }
 
-  public addToCart(product): void{
+  public addToCart(product): void {
     this.productService.addCart(product)
   }
 }

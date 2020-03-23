@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 
-
 @Component({
   selector: 'app-upload-img',
   templateUrl: './upload-img.component.html',
@@ -9,11 +8,12 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 export class UploadImgComponent {
   @Input() images = []
   @Output() files = new EventEmitter()
+  @Output() imgs = new EventEmitter()
   thumbnails
 
   constructor() { }
 
-  onFileUpload(event) {
+  public onFileUpload(event): void {
     this.thumbnails = [...event.target.files];
     for(const img of this.thumbnails){
       const reader = new FileReader();
@@ -21,5 +21,11 @@ export class UploadImgComponent {
       reader.readAsDataURL(img);
     }
     this.files.emit(this.thumbnails);
+  }
+
+  public onRemove(img): void {
+    const index = this.images.indexOf(img)
+    this.images.splice(index, 1)
+    this.imgs.emit(this.images)
   }
 }

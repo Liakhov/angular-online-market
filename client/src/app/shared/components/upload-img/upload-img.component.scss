@@ -2,12 +2,29 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  .thumbnail-item{
-    width: 100px;
-    margin: 5px;
-    text-align: center;
-    img{
-      max-height: 100px;
+}
+.thumbnail-item{
+  position: relative;
+  width: 100px;
+  margin: 5px;
+  text-align: center;
+  img{
+    max-height: 100px;
+  }
+  .material-icons{
+    display: none;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: #F44336;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  &:hover{
+    .material-icons{
+      display: block;
     }
   }
 }

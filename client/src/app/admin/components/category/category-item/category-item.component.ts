@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { switchMap } from "rxjs/operators";
 import { Observable, of, Subscription } from 'rxjs';
 
-import * as services from '../../../../shared/services/index';
+import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
 
 @Component({
@@ -90,7 +90,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(file)
   }
 
-  onSubmit(){
+  public onSubmit(): void{
       let obs$
 
       if(this.isNew){

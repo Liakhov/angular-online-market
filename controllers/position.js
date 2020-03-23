@@ -1,7 +1,7 @@
-const Position = require('../models/Position');
-const Category = require('../models/Category');
 const errorHandler = require('../utils/errorHandler');
 
+const Position = require('../models/Position');
+const Category = require('../models/Category');
 
 module.exports.getById = async function (req, res) {
     try {
@@ -10,7 +10,8 @@ module.exports.getById = async function (req, res) {
     } catch (e) {
         errorHandler(res, e)
     }
-};
+}
+
 module.exports.getAll = async function (req, res) {
     try{
         const positions = await Position.find().skip(+req.query.offset).limit(+req.query.limit)
@@ -59,23 +60,13 @@ module.exports.remove = async function (req, res) {
     }
 };
 
+
 module.exports.update = async function (req, res) {
-    const images = [];
-    if(req.body.images && req.body.images.length){
-        for(const i of req.body.images){
-            images.push(i)
-        }
-    }else{
-        const position = await Position.findById(req.params.id)
-        for(const i of position.images){
-            images.push(i)
-        }
-    }
+    const images = req.body.images ? req.body.images : [];
 
     for(const file of req.files){
         images.push(file.path || '')
     }
-
     const updated = {
         name: req.body.name,
         cost: req.body.cost,
@@ -92,7 +83,6 @@ module.exports.update = async function (req, res) {
             {new: true}
         )
         res.status(200).json('Изменения сохранены')
-
     }catch (e) {
         errorHandler(res, e)
     }

@@ -12,7 +12,7 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    padding: 30px;
+    padding: 10px;
     box-sizing: border-box;
     img{
       width: auto;
@@ -64,5 +64,14 @@
     >div{
       width: 100%;
     }
+  }
+}
+@media screen and (max-width: 480px){
+  .balance{
+    display: flex;
+    justify-content: center;
+  }
+  .product-trade{
+    justify-content: space-around;
   }
 }

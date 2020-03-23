@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
-import * as services from '../../../shared/services/index';
+import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';
 
 @Component({
@@ -12,7 +12,6 @@ import * as models from '../../../shared/interface';
   styleUrls: ['./front-layout.component.scss']
 })
 export class FrontLayoutComponent implements OnInit, OnDestroy {
-
   showMenu = false
   form: FormGroup
   subscibeMail$
@@ -37,11 +36,11 @@ export class FrontLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  dropdown(): void{
+  public dropdown(): void{
     this.showMenu = !this.showMenu;
   }
 
-  sendMail(): void{
+  public sendMail(): void{
     const email: models.Mail = {
       email: this.form.value.email
     }
@@ -52,7 +51,7 @@ export class FrontLayoutComponent implements OnInit, OnDestroy {
     this.form.reset()
   }
 
-  cartQuantity(cart): number{
+  public cartQuantity(cart): number{
     return cart.reduce((sum, item) => {
       return sum + item.quantity;
     }, 0)

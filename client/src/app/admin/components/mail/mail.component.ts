@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 
 import * as models from '../../../shared/interface';
-import * as services from '../../../shared/services/index';
+import * as services from '../../../shared/services';
 
 @Component({
   selector: 'app-subscribers',
@@ -24,7 +24,10 @@ export class MailComponent implements OnInit, OnDestroy {
   constructor(private mailService: services.MailService) { }
 
   ngOnInit() {
-    this.mailsSub = this.mailService.fetch().subscribe(data => this.mails = data)
+    this.mailsSub = this.mailService.fetch().subscribe(
+      data => this.mails = data,
+      error => services.MaterialService.toast(error.error.message)
+    )
 
     this.modal = services.MaterialService.initModal(this.modalElem)
 
@@ -41,7 +44,7 @@ export class MailComponent implements OnInit, OnDestroy {
     if(this.modal) this.modal.destroy()
   }
 
-  edit(item: models.Mail){
+  public edit(item: models.Mail): void {
     this.modal.open()
     this.itemMail = item
 
@@ -50,27 +53,27 @@ export class MailComponent implements OnInit, OnDestroy {
     })
   }
 
-  update(){
+  public update(): void {
     this.updateDateSub = this.mailService.update(this.itemMail._id, {
       email: this.form.value.email
-    }).subscribe(date => {
-      services.MaterialService.toast('Изменения сохранены')
-    })
+    }).subscribe(
+      () =>  services.MaterialService.toast('Изменения сохранены')
+    )
     this.ngOnInit()
   }
 
-  close(): void{
+  public close(): void {
     this.modal.close()
   }
 
-  remove(): void{
-    let result = confirm('Вы уверены что хотите удалить данную подписку?')
-    if(result){
-      this.removeSub = this.mailService.remove(this.itemMail._id).subscribe(data => {
-        services.MaterialService.toast(data.message)
-      })
-      this.modal.close()
-    }
+  public remove(): void {
+    const result = confirm('Вы уверены что хотите удалить данную подписку?')
+    if (result) {
+      this.removeSub = this.mailService.remove(this.itemMail._id).subscribe(
+        data  => services.MaterialService.toast(data.message),
+        error =>  services.MaterialService.toast(error.error.message),
+    () => this.modal.close()
+      )}
     this.ngOnInit()
   }
 

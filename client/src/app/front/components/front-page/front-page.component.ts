@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Observable } from "rxjs";
 
-import * as services from '../../../shared/services/index';
+import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';
 import * as constants from '../../../shared/constants';
 
@@ -9,16 +9,12 @@ import * as constants from '../../../shared/constants';
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
   styleUrls: ['./front-page.component.scss'],
-  host: {
-    '(window:resize)': 'onResize()'
-  }
 })
 
 export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
-
+  @ViewChild('slider', {static: false}) sliderBlock: ElementRef
   categories$: Observable<models.Category[]>
   products$: Observable<models.Product[]>
-  @ViewChild('slider', {static: false}) sliderBlock: ElementRef
   slider: models.MaterialInstance
   limit = 4
 
@@ -42,7 +38,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  public onResize(): void {
+  @HostListener('window:resize', ['$event'])  onResize(): void {
     this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER)
   }
 }

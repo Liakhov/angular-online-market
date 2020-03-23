@@ -4,9 +4,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { switchMap } from "rxjs/operators";
 
-import * as services from '../../../../shared/services/index';
+import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
-
 
 @Component({
   selector: 'app-product-item',
@@ -93,7 +92,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  remove(): void{
+  public remove(): void {
     this.removeSub = this.ProductService.remove(this.id).subscribe(
       response => services.MaterialService.toast(response.message),
       error => services.MaterialService.toast(error.message),
@@ -101,41 +100,46 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
     )
   }
 
-  public onFilesUpload(event): void{
+  public onFilesUpload(event): void {
     this.files = event;
   }
 
+  public onSubmit() {
+    let obs$
 
-  onSubmit() {
-      let obs$
+    console.log(this.files)
 
-      const product: models.Product = {
-        cost: this.form.value.cost,
-        name: this.form.value.name,
-        quantity: this.form.value.quantity,
-        images: this.files
-      }
+    const product: models.Product = {
+      cost: this.form.value.cost,
+      name: this.form.value.name,
+      quantity: this.form.value.quantity,
+      images: this.files
+    }
 
-      if(this.form.value.category){
-        product.category = this.form.value.category
-      }
-      if(this.form.value.description){
-        product.description = this.form.value.description
-      }
+    if(this.form.value.category){
+      product.category = this.form.value.category
+    }
+    if(this.form.value.description){
+      product.description = this.form.value.description
+    }
 
+    if(this.isNew){
+      obs$ = this.ProductService.create(product)
+    }else{
+      obs$ = this.ProductService.update(this.id, product)
+    }
+
+    this.submitSub = obs$.subscribe(() => {
       if(this.isNew){
-        obs$ = this.ProductService.create(product)
+        services.MaterialService.toast('Новый товар добавлен')
+        this.router.navigate([`/admin/product`])
       }else{
-        obs$ = this.ProductService.update(this.id, product)
+        services.MaterialService.toast('Изменения сохранены')
       }
+    })
+  }
 
-      this.submitSub = obs$.subscribe(() => {
-        if(this.isNew){
-          services.MaterialService.toast('Новый товар добавлен')
-          this.router.navigate([`/admin/product`])
-        }else{
-          services.MaterialService.toast('Изменения сохранены')
-        }
-      })
+  public onRemoveImg(event): void {
+    this.files = event
   }
 }
