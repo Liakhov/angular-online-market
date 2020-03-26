@@ -26,9 +26,8 @@ export class MailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.mailsSub = this.mailService.fetch().subscribe(
       data => this.mails = data,
-      error => services.MaterialService.toast(error.error.message)
+      error => services.MaterialService.toast(error.message)
     )
-
     this.modal = services.MaterialService.initModal(this.modalElem)
 
     this.form = new FormGroup({
@@ -57,7 +56,8 @@ export class MailComponent implements OnInit, OnDestroy {
     this.updateDateSub = this.mailService.update(this.itemMail._id, {
       email: this.form.value.email
     }).subscribe(
-      () =>  services.MaterialService.toast('Изменения сохранены')
+      () =>  services.MaterialService.toast('Изменения сохранены'),
+      error => services.MaterialService.toast(error.message)
     )
     this.ngOnInit()
   }
@@ -71,7 +71,7 @@ export class MailComponent implements OnInit, OnDestroy {
     if (result) {
       this.removeSub = this.mailService.remove(this.itemMail._id).subscribe(
         data  => services.MaterialService.toast(data.message),
-        error =>  services.MaterialService.toast(error.error.message),
+        error =>  services.MaterialService.toast(error.message),
     () => this.modal.close()
       )}
     this.ngOnInit()

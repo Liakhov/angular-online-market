@@ -35,9 +35,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   ) { }
 
   ngOnInit() {
-    this.categoryService.fetch().subscribe(data => {
-      this.category = data
-    })
+    this.categoryService.fetch().subscribe(
+      data => this.category = data,
+      error => services.MaterialService.toast(error.message)
+    )
 
     if(this.router.url === '/admin/product/new') {
       this.isNew = true
@@ -93,11 +94,15 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   public remove(): void {
-    this.removeSub = this.ProductService.remove(this.id).subscribe(
-      response => services.MaterialService.toast(response.message),
-      error => services.MaterialService.toast(error.message),
-      () => this.router.navigate(['/admin/product'])
-    )
+    const result = confirm('Вы уверены, что хотите удалить?')
+
+    if(result){
+      this.removeSub = this.ProductService.remove(this.id).subscribe(
+        response => services.MaterialService.toast(response.message),
+        error => services.MaterialService.toast(error.message),
+        () => this.router.navigate(['/admin/product'])
+      )
+    }
   }
 
   public onFilesUpload(event): void {

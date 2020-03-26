@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { UploadImgComponent } from "./components/upload-img/upload-img.component";
 
-
-
 @NgModule({
   declarations: [
-      UploadImgComponent
+    UploadImgComponent
   ],
   imports: [
     CommonModule
