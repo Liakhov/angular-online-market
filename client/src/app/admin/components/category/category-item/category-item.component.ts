@@ -99,8 +99,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
         obs$ = this.CategoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image)
       }
 
-      this.oSub = obs$.subscribe(data => {
-
+    this.oSub = obs$.subscribe(data => {
         if(this.isNew){
           services.MaterialService.toast(data.message)
           this.router.navigate(['/admin/category/'])

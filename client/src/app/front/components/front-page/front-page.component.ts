@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';

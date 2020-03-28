@@ -11,11 +11,10 @@ export class UploadImgComponent {
   @Output() imgs = new EventEmitter()
   thumbnails
 
-  constructor() { }
 
   public onFileUpload(event): void {
     this.thumbnails = [...event.target.files];
-    for(const img of this.thumbnails){
+    for (const img of this.thumbnails) {
       const reader = new FileReader();
       reader.onload = () => this.images.push(reader.result);
       reader.readAsDataURL(img);

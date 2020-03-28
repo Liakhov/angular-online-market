@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import * as fromResolvers from './resolvers';
-import { FrontLayoutComponent } from "./containers/front-layout/front-layout.component";
-import { FrontPageComponent } from "./components/front-page/front-page.component";
-import { ShopComponent } from "./components/shop/shop.component";
-import { ProductComponent } from "./components/product/product.component";
-import { ProductCartComponent } from "./components/product-cart/product-cart.component";
-import { CategoriesComponent } from "./components/categories/categories.component";
-import { PipesModule } from "../shared/pipe.module";
+import {FrontLayoutComponent} from './containers/front-layout/front-layout.component';
+import {FrontPageComponent} from './components/front-page/front-page.component';
+import {ShopComponent} from './components/shop/shop.component';
+import {ProductComponent} from './components/product/product.component';
+import {ProductCartComponent} from './components/product-cart/product-cart.component';
+import {CategoriesComponent} from './components/categories/categories.component';
+import {PipesModule} from '../shared/pipe.module';
 
 
 const routes: Routes = [
@@ -58,4 +58,5 @@ const routes: Routes = [
     fromResolvers.ProductResolver
   ]
 })
-export class FrontModule { }
+export class FrontModule {
+}

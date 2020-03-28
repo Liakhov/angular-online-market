@@ -71,7 +71,7 @@ export class ProductService {
         for (const item of product[key]) {
           if (item instanceof File) {
             fd.append('image', item, item['name'])
-          }else {
+          } else {
             fd.append(`${key}[]`, item);
           }
         }
