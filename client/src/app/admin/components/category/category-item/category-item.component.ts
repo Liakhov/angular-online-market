@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { switchMap } from "rxjs/operators";
-import { Observable, of, Subscription } from 'rxjs';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {switchMap} from "rxjs/operators";
+import {Observable, of, Subscription} from 'rxjs';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
@@ -25,7 +25,8 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   removeSub: Subscription
   catId: string
 
-  constructor(private router: Router, private CategoryService: services.CategoryService, private activeRouter: ActivatedRoute) { }
+  constructor(private router: Router, private CategoryService: services.CategoryService, private activeRouter: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -33,15 +34,15 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
       description: new FormControl(null)
     })
 
-    if(this.router.url === '/admin/category/new'){
+    if (this.router.url === '/admin/category/new') {
       this.isNew = true;
-    }else{
+    } else {
       this.activeRouter.params
         .pipe(
           switchMap(
             (params: Params) => {
               this.form.disable()
-              if(params['id']){
+              if (params['id']) {
                 this.isNew = false
                 this.catId = params['id']
                 return this.CategoryService.getByID(params['id'])
@@ -51,68 +52,75 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe(category => {
-          if(category){
-            this.category = category
-            this.form.patchValue({
-              name: category.name,
-              description: category.description
-            })
+            if (category) {
+              this.category = category
+              this.form.patchValue({
+                name: category.name,
+                description: category.description
+              })
 
-            services.MaterialService.resizeTextArea(this.textarea)
+              services.MaterialService.resizeTextArea(this.textarea)
 
-            if(category.image){
-              this.imagePreview = category.image
+              if (category.image && category.image !== 'null') {
+                this.imagePreview = category.image
+              }
+              this.form.enable()
             }
-            this.form.enable()
-          }
-        },
-        error => {
-          console.log(error)
-        })
+          },
+          error => {
+            console.log(error)
+          })
     }
-      this.products$ = this.CategoryService.getAllFromCategory(this.catId)
+    this.products$ = this.CategoryService.getAllFromCategory(this.catId)
+
+
   }
 
   ngOnDestroy(): void {
-    if(this.oSub) this.oSub.unsubscribe()
-    if(this.removeSub) this.removeSub.unsubscribe()
+    if (this.oSub) this.oSub.unsubscribe()
+    if (this.removeSub) this.removeSub.unsubscribe()
   }
 
-  onFileUpload(event){
+  public onFileUpload(event) {
     const target = event.target
     const file = target.files[0]
     this.image = file
 
     const reader = new FileReader()
 
-    reader.onload = () =>  this.imagePreview = reader.result
+    reader.onload = () => this.imagePreview = reader.result
 
     reader.readAsDataURL(file)
   }
 
-  public onSubmit(): void{
-      let obs$
+  public onSubmit(): void {
+    let obs$
 
-      if(this.isNew){
-        obs$ = this.CategoryService.create(this.form.value.name, this.form.value.description, this.image)
-      }else{
-        obs$ = this.CategoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image)
-      }
+    if (this.isNew) {
+      obs$ = this.CategoryService.create(this.form.value.name, this.form.value.description, this.image)
+    } else {
+      obs$ = this.CategoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image)
+    }
 
     this.oSub = obs$.subscribe(data => {
-        if(this.isNew){
-          services.MaterialService.toast(data.message)
-          this.router.navigate(['/admin/category/'])
-        }else{
-          services.MaterialService.toast('Изменения сохранены')
-        }
-      })
+      if (this.isNew) {
+        services.MaterialService.toast(data.message)
+        this.router.navigate(['/admin/category/'])
+      } else {
+        services.MaterialService.toast('Изменения сохранены')
+      }
+    })
   }
 
-  remove(){
+  public remove(): void {
     this.removeSub = this.CategoryService.remove(this.category._id).subscribe(data => {
       services.MaterialService.toast(data.message)
       this.router.navigate(['/admin/category/'])
     })
+  }
+
+  public onRemove(): void {
+    this.image = null;
+    this.imagePreview = null;
   }
 }

@@ -10,9 +10,10 @@ export interface Product {
 }
 export interface Category {
   _id?: string;
-  image: string;
   name: string;
   categoryName?: string;
+  image: string;
+  description: string;
   quantity: number;
 }
 export interface Order {

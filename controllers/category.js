@@ -12,15 +12,15 @@ module.exports.getById = async function (req, res) {
     }
 };
 module.exports.getAll = async function (req, res) {
-    try{
+    try {
         const category = await Category.find();
         res.status(200).json(category)
-    }catch (e) {
+    } catch (e) {
         errorHandler(res, e)
     }
 };
 module.exports.create = async function (req, res) {
-    try{
+    try {
         const category = new Category({
             name: req.body.name,
             description: req.body.description,
@@ -32,7 +32,7 @@ module.exports.create = async function (req, res) {
             message: "Категория успешно добавлена"
         })
 
-    }catch (e) {
+    } catch (e) {
         console.log(e);
     }
 };
@@ -42,15 +42,21 @@ module.exports.update = async function (req, res) {
         name: req.body.name
     };
 
-    if(req.body.description){
+    if (req.body.description) {
         updated.description = req.body.description
     }
 
-    if(req.file){
+    if (req.file) {
         updated.image = req.file.path
     }
 
-    try{
+    if (req.body.image) {
+        updated.image = req.body.image
+    }
+
+    console.log(req.body);
+
+    try {
         const category = await Category.findOneAndUpdate(
             {_id: req.params.id},
             {$set: updated},
@@ -58,18 +64,18 @@ module.exports.update = async function (req, res) {
         );
         res.status(200).json(category)
 
-    }catch (e) {
-        errorHandler(res,e)
+    } catch (e) {
+        errorHandler(res, e)
     }
 };
 
 module.exports.remove = async function (req, res) {
-    try{
+    try {
         await Category.remove({_id: req.params.id})
         res.status(200).json({
             message: 'Категория успешно удалена'
         })
-    }catch (e) {
+    } catch (e) {
         errorHandler(res, e)
     }
 };
