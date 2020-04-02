@@ -7,11 +7,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import * as fromResolvers from './resolvers';
 import {FrontLayoutComponent} from './containers/front-layout/front-layout.component';
 import {FrontPageComponent} from './components/front-page/front-page.component';
-import {ShopComponent} from './components/shop/shop.component';
 import {ProductComponent} from './components/product/product.component';
-import {ProductCartComponent} from './components/product-cart/product-cart.component';
 import {CategoriesComponent} from './components/categories/categories.component';
 import {PipesModule} from '../shared/pipe.module';
+import {SharedModule} from '../shared/shared.module';
+import {ShopComponent} from './components/shop/shop.component';
 
 
 const routes: Routes = [
@@ -20,7 +20,13 @@ const routes: Routes = [
     component: FrontLayoutComponent,
     children: [
       {path: '', component: FrontPageComponent, pathMatch: 'full'},
-      {path: 'shop', component: ShopComponent},
+      {
+        path: 'shop',
+        component: ShopComponent,
+        resolve: {
+          shop: fromResolvers.ShopResolver
+        }
+      },
       {
         path: 'shop/:id',
         component: ProductComponent,
@@ -34,7 +40,7 @@ const routes: Routes = [
       {path: 'contact', loadChildren: './components/contact/contact.module#ContactModule'}
     ]
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -42,9 +48,8 @@ const routes: Routes = [
     FrontLayoutComponent,
     FrontPageComponent,
     ProductComponent,
-    ProductCartComponent,
-    ShopComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ShopComponent
   ],
   imports: [
     FormsModule,
@@ -52,10 +57,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpClientModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
-    fromResolvers.ProductResolver
+    fromResolvers.ProductResolver,
+    fromResolvers.ShopResolver
   ]
 })
 export class FrontModule {

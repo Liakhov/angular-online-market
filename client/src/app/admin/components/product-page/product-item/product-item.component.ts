@@ -63,6 +63,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
             description: data.description
           });
           this.images = data.images;
+          this.files = data.images;
           this.position = data;
         });
     }
@@ -136,7 +137,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  public onRemoveImg(event): void {
+  public onChangeImages(event): void {
     this.files = event;
   }
 

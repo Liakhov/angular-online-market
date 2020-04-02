@@ -1,17 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DndModule} from 'ngx-drag-drop';
+import {RouterModule} from '@angular/router';
 
-import { UploadImgComponent } from "./components/upload-img/upload-img.component";
+import * as fromComponents from './components';
 
 @NgModule({
   declarations: [
-    UploadImgComponent
+    fromComponents.CardComponent,
+    fromComponents.UploadImgComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    DndModule
   ],
   exports: [
-    UploadImgComponent
+    fromComponents.CardComponent,
+    fromComponents.UploadImgComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

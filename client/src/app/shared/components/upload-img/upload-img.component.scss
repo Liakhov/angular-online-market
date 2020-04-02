@@ -3,6 +3,18 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+.dndPlaceholder{
+  list-style: none;
+  width: 120px;
+  margin: 5px;
+  background-color: #F44336;
+}
+.dnd-placeholder {
+  list-style: none;
+  width: 120px;
+  margin: 5px;
+  border: 2px dashed rgba(50, 58, 70, 0.3);
+}
 .thumbnail-item{
   position: relative;
   width: 120px;

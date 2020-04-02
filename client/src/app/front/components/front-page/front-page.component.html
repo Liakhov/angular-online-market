@@ -22,7 +22,7 @@
 <div class="wrapper">
   <h4>Популярные товары</h4>
   <div class="row">
-    <app-product-cart *ngFor="let product of products$ | async" [product]="product"></app-product-cart>
+    <app-card *ngFor="let product of products$ | async" [product]="product"></app-card>
   </div>
 </div>
 

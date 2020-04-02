@@ -1,1 +1,2 @@
-export { ProductResolver } from './product.resolver';
+export {ProductResolver} from './product.resolver';
+export {ShopResolver} from './shop.resolver';

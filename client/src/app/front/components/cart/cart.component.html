@@ -19,8 +19,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of cart">
+          {{item | json}}
           <td>
-            <img class="cart-img" src="{{item.img ? item.img : '/assets/img/nophoto.png'}}" alt="">
+            <img class="cart-img" src="{{item.images ? item.images : '/assets/img/nophoto.png'}}" alt="">
           </td>
           <td>{{item.name}}</td>
           <td>${{item.cost}}</td>

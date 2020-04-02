@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
-
-import { ProductService } from "../../../shared/services/product.service";
-import { Product } from "../../../shared/interface";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -11,12 +8,15 @@ import { Product } from "../../../shared/interface";
 })
 export class ShopComponent implements OnInit {
 
-  products$: Observable<Product[]>
+  products: any;
 
-  constructor(private productService: ProductService) { }
+  constructor(private activeRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.products$ = this.productService.fetch()
+    this.activeRoute.data.subscribe(data => {
+      this.products = data.shop;
+    });
   }
 
 }

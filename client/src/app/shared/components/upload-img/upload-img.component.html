@@ -1,9 +1,15 @@
-<div class="thumbnails">
-  <div class="thumbnail-item" *ngFor="let img of images">
+<div class="thumbnails" dndDropzone (dndDrop)="onDrop($event)">
+  <div class="thumbnail-item"
+       *ngFor="let img of images"
+       [dndDraggable]="img"
+       [dndEffectAllowed]="'all'"
+  >
     <i class="material-icons" (click)="onRemove(img)">close</i>
     <img src="{{img}}" alt="">
   </div>
+  <div class="dnd-placeholder" dndPlaceholderRef></div>
 </div>
+
 <div class="thumbnail file-field">
   <img src="assets/img/cloud-computing.svg" class="thumbnail_default" alt="">
   <input id="file-input" type="file" (change)="onFileUpload($event)" multiple>

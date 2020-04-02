@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {Store, select} from '@ngrx/store';
 
-import { Remove, Clear } from 'src/app/shared/store/actions/cart.action';
-import { Product } from "../../../shared/interface";
+import {Product} from '../../../shared/interface';
+import {Remove, Clear} from 'src/app/shared/store/actions/cart.action';
 
 @Component({
   selector: 'app-cart',
@@ -10,32 +10,32 @@ import { Product } from "../../../shared/interface";
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cart: Product[] = []
-  total: number
+  cart: Product[] = [];
+  total: number;
 
   constructor(private store: Store<{ cart: [] }>) {
-     store.pipe(select('cart')).subscribe(data => {
-         this.cart = data;
-     })
+    store.pipe(select('cart')).subscribe(data => {
+      this.cart = data;
+    });
   }
 
   ngOnInit(): void {
-    this.calcSum()
+    this.calcSum();
   }
 
-  remove(item): void {
-    this.store.dispatch(new Remove(item))
-    this.calcSum()
+  public remove(item): void {
+    this.store.dispatch(new Remove(item));
+    this.calcSum();
   }
 
-  reset(): void {
-    this.store.dispatch(new Clear())
-    this.total = 0
+  public reset(): void {
+    this.store.dispatch(new Clear());
+    this.total = 0;
   }
 
-  calcSum(): void{
+  private calcSum(): void {
     this.total = this.cart.reduce((sum, item) => {
-      return sum + (item.cost * item.quantity)
-    }, 0)
+      return sum + (item.cost * item.quantity);
+    }, 0);
   }
 }

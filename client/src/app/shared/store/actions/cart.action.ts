@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { OrderPosition } from "../../interface";
+import { OrderPosition } from '../../interface';
 
-export enum CartAction{
+export enum CartAction {
   Add = '[Cart Add] Add',
   Remove = '[Cart Remove] Remove',
   Clear = '[Cart Clear] Clear',
