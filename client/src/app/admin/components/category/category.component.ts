@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
 
-import { Category } from '../../../shared/interface';
-import { CategoryService } from '../../../shared/services/category.service';
+import * as services from '../../../shared/services';
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-category',
@@ -10,13 +10,14 @@ import { CategoryService } from '../../../shared/services/category.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  search
-  cat$: Observable<Category[]>
+  search;
+  cat$: Observable<models.Category[]>;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: services.CategoryService) {
+  }
 
   ngOnInit() {
-    this.cat$ = this.categoryService.fetch()
+    this.cat$ = this.categoryService.fetch();
   }
 
 }

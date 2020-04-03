@@ -1,3 +1,80 @@
 <div class="wrapper">
-    <h4>Оформление заказа</h4>
+  <h4>Оформление заказа</h4>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col l6 m6 s12">
+          <h5>Контактные данные</h5>
+            <div>
+              <label for="name">Имя</label>
+              <input id="name" type="text" formControlName="name">
+            </div>
+            <div>
+              <label for="telephone">Телефон</label>
+              <input id="telephone" type="text" formControlName="telephone">
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email">
+            </div>
+            <div>
+              <label for="comment">Коментарий</label>
+              <textarea id="comment" class="materialize-textarea" formControlName="comment"></textarea>
+            </div>
+        </div>
+      <div class="col l6 m6 s12">
+          <h5>Выбор способов доставки и оплаты</h5>
+          <div class="checkout">
+            <div class="checkout-left">
+              Доставка:
+            </div>
+            <div class="checkout-right">
+              <label>
+                <input name="delivery" type="radio" checked/>
+                <span>Самовывоз</span>
+              </label>
+              <label>
+                <input name="delivery" type="radio" checked/>
+                <span>Курьер по вашему адресу</span>
+              </label>
+              <label>
+                <input name="delivery" type="radio" checked/>
+                <span>Курьер по вашему адресу</span>
+              </label>
+            </div>
+          </div>
+          <div class="checkout">
+            <div class="checkout-left">
+              Оплата:
+            </div>
+            <div class="checkout-right">
+              <label>
+                <input name="payment" type="radio" checked/>
+                <span>Наличными</span>
+              </label>
+              <label>
+                <input name="payment" type="radio" checked/>
+                <span>Безналичными</span>
+              </label>
+            </div>
+          </div>
+          <div class="total">
+            <div>
+              Общая сумма: <b>{{1234}} $</b>
+            </div>
+            <button type="submit" class="btn" [disabled]="form.invalid">Заказ подтверждаю</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div id="modal1" class="modal" #modal>
+  <div class="modal-content">
+    <h4>Заказ успешно оформлен</h4>
+    <i class="material-icons">done</i>
+  </div>
+  <div class="modal-footer">
+    <a routerLink="/" class="modal-close waves-effect waves-green btn">На главную</a>
+  </div>
 </div>

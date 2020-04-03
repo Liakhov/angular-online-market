@@ -19,7 +19,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of cart">
-          {{item | json}}
           <td>
             <img class="cart-img" src="{{item.images ? item.images : '/assets/img/nophoto.png'}}" alt="">
           </td>
