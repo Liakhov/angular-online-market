@@ -36,6 +36,7 @@ const routes: Routes = [
       },
       {path: 'category/:id', component: CategoriesComponent},
       {path: 'cart', loadChildren: './components/cart/cart.module#CartModule'},
+      {path: 'wish', loadChildren: './components/wish/wish.module#WishModule' },
       {path: 'checkout', loadChildren: './components/checkout/checkout.module#CheckoutModule'},
       {path: 'contact', loadChildren: './components/contact/contact.module#ContactModule'}
     ]

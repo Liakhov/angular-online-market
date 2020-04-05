@@ -1,8 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Store, select} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
 
-import {Product} from '../../../shared/interface';
-import {Remove, Clear} from 'src/app/shared/store/actions/cart.action';
+import {AppState} from '../../../shared/store/state/app.state';
+import * as cartActions from '../../../shared/store/actions/cart.action';
+
+import * as models from '../../../shared/interface';
+import * as reducers from '../../../shared/store/reducers';
+
 
 @Component({
   selector: 'app-cart',
@@ -10,13 +16,12 @@ import {Remove, Clear} from 'src/app/shared/store/actions/cart.action';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cart: Product[] = [];
+  cart$: Observable<models.Position[]>;
+  cart: models.Position[] = [];
   total: number;
 
-  constructor(private store: Store<{ cart: [] }>) {
-    store.pipe(select('cart')).subscribe(data => {
-      this.cart = data;
-    });
+  constructor(private store: Store<AppState>) {
+    this.cart$ = this.store.pipe(select(reducers.getCart));
   }
 
   ngOnInit(): void {
@@ -24,17 +29,18 @@ export class CartComponent implements OnInit {
   }
 
   public remove(item): void {
-    this.store.dispatch(new Remove(item));
+    this.store.dispatch(new cartActions.Remove(item));
     this.calcSum();
   }
 
   public reset(): void {
-    this.store.dispatch(new Clear());
+    this.store.dispatch(new cartActions.Clear());
     this.total = 0;
   }
 
-  private calcSum(): void {
-    this.total = this.cart.reduce((sum, item) => {
+  private async calcSum(): Promise<void> {
+    const cart = await this.cart$.pipe(take(1)).toPromise();
+    this.total = cart.reduce((sum, item) => {
       return sum + (item.cost * item.quantity);
     }, 0);
   }

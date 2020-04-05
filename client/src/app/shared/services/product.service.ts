@@ -1,21 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
 
-import { Add } from '../store/actions/cart.action';
-import { OrderPosition, Product, ToastMessage } from '../interface';
+import {AppState} from '../store/state/app.state';
+
+import * as cartAction from '../store/actions/cart.action';
+import * as wishAction from '../store/actions/wish.action';
+import {Position, Product, ToastMessage} from '../interface';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductService {
-  cart$: Observable<[]>;
 
-  constructor( private http: HttpClient, private store: Store<{ cart: [] }> ) {
-    this.cart$ = store.pipe(select('cart'));
-  }
+  constructor(private http: HttpClient, private store: Store<AppState>) { }
 
   public fetch(params: any = {}): Observable<Product[]> {
     return this.http.get<Product[]>('/api/position', {
@@ -46,19 +46,31 @@ export class ProductService {
   }
 
   public addCart(product: Product): void {
+    const img = product.images[0] || '';
 
-    const orderPosition: OrderPosition = {
+    const orderPosition: Position = {
       _id: product._id,
       name: product.name,
       cost: product.cost,
+      image: img,
       quantity: 1
     };
 
-    this.store.dispatch(new Add(orderPosition));
+    this.store.dispatch(new cartAction.Add(orderPosition));
   }
 
   public addWishList(product: Product): void {
-    console.log(`Product add to wish list: ${product}`);
+    const img = product.images[0] || '';
+
+    const orderPosition: Position = {
+      _id: product._id,
+      name: product.name,
+      cost: product.cost,
+      image: img,
+      quantity: 1
+    };
+
+    this.store.dispatch(new wishAction.Add(orderPosition));
   }
 
   private createFormData(product: Product): FormData {
@@ -70,16 +82,15 @@ export class ProductService {
 
         for (const item of product[key]) {
           if (item instanceof File) {
-            fd.append('image', item, item['name'])
+            fd.append('image', item, item['name']);
           } else {
             fd.append(`${key}[]`, item);
           }
         }
-
       } else {
-        fd.append(key, product[key])
+        fd.append(key, product[key]);
       }
-    })
-    return fd
+    });
+    return fd;
   }
 }

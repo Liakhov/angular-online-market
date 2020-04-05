@@ -19,13 +19,14 @@ export interface Category {
 export interface Order {
   number?: number;
   name: string;
-  list: OrderPosition[];
+  list: Position[];
 }
-export interface OrderPosition {
+export class Position {
+  _id: string;
   name: string;
   cost: number;
   quantity: number;
-  _id?: string;
+  image: string;
 }
 
 export interface ToastMessage {

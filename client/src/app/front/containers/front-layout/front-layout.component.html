@@ -25,12 +25,13 @@
           </form>
         </div>
         <div class="btns">
-          <a routerLink="/" class="header-icon">
+          <a routerLink="/wish" class="header-icon wish">
+            <span *ngIf="(wish$ | async)?.length > 0">{{ cartQuantity( wish$ | async ) }}</span>
             <img src="/assets/img/heart.svg" alt="profile">
           </a>
-          <a routerLink="/login" class="header-icon">
-            <img src="/assets/img/user.svg" alt="profile">
-          </a>
+<!--          <a routerLink="/login" class="header-icon">-->
+<!--            <img src="/assets/img/user.svg" alt="profile">-->
+<!--          </a>-->
           <a routerLink="/cart" class="header-icon cart">
             <span *ngIf="(cart$ | async)?.length > 0">{{ cartQuantity( cart$ | async ) }}</span>
             <img src="/assets/img/shopping-cart.svg" alt="shoping cart">

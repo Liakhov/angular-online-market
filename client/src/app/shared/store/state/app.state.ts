@@ -1,18 +1,14 @@
-export class CartProduct {
-  _id: string;
-  name: string;
-  quantity: number;
-  cost: number;
-}
+import {ActionReducerMap} from '@ngrx/store';
+
+import * as fromCart from '../reducers/cart.reducer';
+import * as fromWish from '../reducers/wish.reducer';
 
 export interface AppState {
-  cart: CartProduct[];
+  cart: fromCart.State;
+  wish: fromWish.State;
 }
 
-export const initialAppState: AppState = {
-  cart: []
-}
-
-export function getInitialState(): AppState {
-  return initialAppState;
-}
+export const reducers: ActionReducerMap<AppState> = {
+  cart: fromCart.reducer,
+  wish: fromWish.reducer,
+};
