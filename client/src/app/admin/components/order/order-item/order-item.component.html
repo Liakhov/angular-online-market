@@ -1,63 +1,87 @@
-<div class="row order-info">
-  <div class="col s1">
-    <b>№</b>
+<div *ngIf="order; else loader">
+  <div class="row order-info">
+    <button type="button" (click)="save()" class="btn">
+      Сохранить
+    </button>
+    <button type="button" (click)="remove()" class="btn red remove">
+      <i class="material-icons">delete</i>
+    </button>
   </div>
-  <div class="col s2">
-    <b>Дата заказа</b>
-  </div>
-  <div class="col s2">
-    <b>Покупатель</b>
-  </div>
-  <div class="col s2">
-    <b>Номер телефона</b>
-  </div>
-  <div class="col s2">
-    <b>Email</b>
-  </div>
-  <div class="col s3">
-    <b>Адрес</b>
+  <div class="row">
+    <div class="col s1">
+      <div>
+        <b>№</b>
+      </div>
+    </div>
+    <div class="col s2">
+      <div><b>Дата заказа</b></div>
+    </div>
+    <div class="col s2">
+      <div>
+        <b>Покупатель</b>
+      </div>
+    </div>
+    <div class="col s2">
+      <div>
+        <b>Номер телефона</b>
+      </div>
+    </div>
+    <div class="col s2">
+      <b>Email</b>
+    </div>
+    <div class="col s3">
+      <div>
+        <b>Адрес</b>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col s1">
       {{order.number}}
     </div>
     <div class="col s2">
-      -
+      {{order.date}}
     </div>
     <div class="col s2">
       {{order.name}}
     </div>
     <div class="col s2">
-      -
+      {{order.tel}}
     </div>
     <div class="col s2">
-      -
+      {{order.email}}
     </div>
     <div class="col s3">
       -
     </div>
   </div>
-</div>
-<h5>Список товаров</h5>
-<div class="row">
+  <h5>Список товаров</h5>
+  <div class="row">
     <table class="striped">
       <thead>
       <tr>
         <th></th>
-        <th></th>
-        <th></th>
+        <th>Название</th>
+        <th>Количество</th>
+        <th>Цена</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Alvin</td>
-        <td>Eclair</td>
-        <td>$0.87</td>
+      <tr *ngFor="let item of order.list">
+        <td>
+          <img class="order-thumbnail" src="{{item.image}}" alt="">
+        </td>
+        <td>{{item.name}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.cost}}</td>
       </tr>
       </tbody>
     </table>
+    <h5>Итого: {{ calcSum(order.list) }} $</h5>
+  </div>
 </div>
-<h5>Итого:  грн</h5>
 
-
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
 

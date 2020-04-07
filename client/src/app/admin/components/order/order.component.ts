@@ -1,35 +1,35 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {take} from 'rxjs/operators';
 
-import { Order } from '../../../shared/interface';
-import { OrderService } from "../../../shared/services/order.service";
+import * as services from '../../../shared/services';
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit, OnDestroy {
-  orders = []
-  oSub: Subscription
+export class OrderComponent implements OnInit {
+  public orders: models.Order[];
 
-  constructor(private orderService: OrderService) { }
-
-  ngOnInit() {
-    this.oSub = this.orderService.fetch().subscribe(data =>  {
-      this.orders = data
-    })
-
+  constructor(private orderService: services.OrderService) {
   }
 
-  ngOnDestroy(): void {
-    if(this.oSub) {
-      this.oSub.unsubscribe()
+  ngOnInit(): void {
+    this.fetch();
+  }
+
+  private async fetch(): Promise<void> {
+    try {
+      this.orders = await this.orderService.fetch().pipe(take(1)).toPromise();
+    } catch (e) {
+      services.MaterialService.toast(e.message);
     }
   }
 
-  remove(order: Order){
-    const idx = this.orders.findIndex( item => item.number === order.number )
-    this.orders.splice(idx, 1)
+  public calcSum(arr): number {
+    return  arr.reduce((sum, item) => {
+      return sum + (item.cost * item.quantity);
+    }, 0);
   }
 }

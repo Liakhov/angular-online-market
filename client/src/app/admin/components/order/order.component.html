@@ -1,28 +1,24 @@
-<table class="striped" *ngIf="orders.length > 0; else empty" >
+<table class="striped" *ngIf="orders.length > 0; else empty">
   <thead>
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
+  <tr>
+    <th>&#x2116;</th>
+    <th>Имя</th>
+    <th>Дата</th>
+    <th>Сумма</th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders" routerLink="/admin/order/{{order.number}}" >
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>{{order.name}}</td>
-      <td>
-        <button type="button" (click)="remove(order)" class="btn red">
-          <i class="material-icons">delete</i>
-        </button>
-        </td>
-    </tr>
+  <tr *ngFor="let order of orders" routerLink="{{order._id}}">
+    <td></td>
+    <td>{{order.name}}</td>
+    <td>{{order.date}}</td>
+    <td>{{ calcSum(order.list) }}</td>
+  </tr>
   </tbody>
 
 </table>
 <ng-template #empty>
-  <div class="center">
+  <div class="content center">
     На данный момент список заказов пустой
   </div>
 </ng-template>

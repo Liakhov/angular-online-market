@@ -17,9 +17,14 @@ export interface Category {
   quantity: number;
 }
 export interface Order {
+  _id?: string;
   number?: number;
   name: string;
+  email: string;
+  tel: string;
   list: Position[];
+  comment?: string;
+  date?: Date;
 }
 export class Position {
   _id: string;

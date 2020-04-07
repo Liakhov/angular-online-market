@@ -1,11 +1,10 @@
 const Category = require('../models/Category');
-const Position = require('../models/Position');
 const errorHandler = require('../utils/errorHandler');
 
 
 module.exports.getById = async function (req, res) {
     try {
-        const category = await Category.findById(req.params.id)
+        const category = await Category.findById(req.params.id);
         res.status(200).json(category)
     } catch (e) {
         errorHandler(res, e)
@@ -25,7 +24,7 @@ module.exports.create = async function (req, res) {
             name: req.body.name,
             description: req.body.description,
             image: req.file ? req.file.path : ''
-        })
+        });
 
         await category.save();
         res.status(201).json({

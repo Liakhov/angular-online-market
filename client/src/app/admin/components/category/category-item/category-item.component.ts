@@ -72,8 +72,6 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
           });
     }
     this.products$ = this.CategoryService.getAllFromCategory(this.catId);
-
-
   }
 
   ngOnDestroy(): void {
@@ -91,9 +89,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     this.image = file;
 
     const reader = new FileReader();
-
     reader.onload = () => this.imagePreview = reader.result;
-
     reader.readAsDataURL(file);
   }
 

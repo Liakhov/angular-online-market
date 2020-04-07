@@ -8,7 +8,8 @@ import * as fromComponents from './components';
 @NgModule({
   declarations: [
     fromComponents.CardComponent,
-    fromComponents.UploadImgComponent
+    fromComponents.UploadImgComponent,
+    fromComponents.LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,8 @@ import * as fromComponents from './components';
   ],
   exports: [
     fromComponents.CardComponent,
-    fromComponents.UploadImgComponent
+    fromComponents.UploadImgComponent,
+    fromComponents.LoaderComponent
   ]
 })
 export class SharedModule {

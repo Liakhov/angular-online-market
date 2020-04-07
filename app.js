@@ -7,6 +7,7 @@ const positionRoutes = require('./routes/position');
 const categoryRoutes = require('./routes/category');
 const mailRoutes = require('./routes/mail');
 const messageRoutes = require('./routes/message');
+const orderRoutes = require('./routes/order');
 
 const app = express();
 
@@ -35,9 +36,10 @@ app.use('/api/position', positionRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/mail', mailRoutes);
 app.use('/api/message', messageRoutes);
+app.use('/api/order', orderRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/dist/angular-online-market'))
+    app.use(express.static('client/dist/angular-online-market'));
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'dist', 'angular-online-market' ,'index.html'))
