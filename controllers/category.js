@@ -53,8 +53,6 @@ module.exports.update = async function (req, res) {
         updated.image = req.body.image
     }
 
-    console.log(req.body);
-
     try {
         const category = await Category.findOneAndUpdate(
             {_id: req.params.id},

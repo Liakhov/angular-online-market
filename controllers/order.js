@@ -18,7 +18,6 @@ module.exports.getById = async function (req, res) {
     }
 };
 module.exports.create = async function (req, res) {
-    console.log(req.body);
     try {
         const order = new Order({
             name: req.body.name,
