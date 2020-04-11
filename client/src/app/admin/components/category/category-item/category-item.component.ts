@@ -13,7 +13,6 @@ import * as models from '../../../../shared/interface';
   styleUrls: ['./category-item.component.scss']
 })
 export class CategoryItemComponent implements OnInit, OnDestroy {
-
   @ViewChild('textarea', {static: false}) textarea: ElementRef;
   isNew: boolean;
   form: FormGroup;

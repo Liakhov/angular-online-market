@@ -4,7 +4,7 @@ const errorHandler = require('../utils/errorHandler');
 module.exports.getAll = async function (req, res) {
     try {
         const order = await Order.find();
-        res.status(200).json(order)
+        res.status(200).json(order);
     } catch (e) {
         errorHandler(res, e)
     }
@@ -18,8 +18,13 @@ module.exports.getById = async function (req, res) {
     }
 };
 module.exports.create = async function (req, res) {
+    let orderIndex = await Order.findOne({}, {index: 1}).sort({date: -1});
+    const maxIndex = orderIndex ? orderIndex.index : 0;
+
     try {
         const order = new Order({
+            index: maxIndex + 1,
+            status: 'new',
             name: req.body.name,
             tel: req.body.tel,
             email: req.body.email,
@@ -38,35 +43,26 @@ module.exports.create = async function (req, res) {
 };
 
 module.exports.update = async function (req, res) {
-    // const updated = {
-    //     name: req.body.name
-    // };
-    //
-    // if (req.body.description) {
-    //     updated.description = req.body.description
-    // }
-    //
-    // if (req.file) {
-    //     updated.image = req.file.path
-    // }
-    //
-    // if (req.body.image) {
-    //     updated.image = req.body.image
-    // }
-    //
-    // console.log(req.body);
-    //
-    // try {
-    //     const category = await Category.findOneAndUpdate(
-    //         {_id: req.params.id},
-    //         {$set: updated},
-    //         {new: true}
-    //     );
-    //     res.status(200).json(category)
-    //
-    // } catch (e) {
-    //     errorHandler(res, e)
-    // }
+    const updated = {
+        name: req.body.name,
+        tel: req.body.tel,
+        email: req.body.email,
+        status: req.body.status,
+        list: req.body.list
+    };
+    try {
+        await Order.findOneAndUpdate(
+            {_id: req.params.id},
+            {$set: updated},
+            {new: true, useFindAndModify: false}
+        );
+        res.status(200).json({
+            message: 'Заказ обновлен'
+        })
+
+    } catch (e) {
+        errorHandler(res, e)
+    }
 };
 
 module.exports.remove = async function (req, res) {

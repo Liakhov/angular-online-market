@@ -68,7 +68,7 @@ module.exports.update = async function (req, res) {
 
 module.exports.remove = async function (req, res) {
     try {
-        await Category.remove({_id: req.params.id})
+        await Category.remove({_id: req.params.id});
         res.status(200).json({
             message: 'Категория успешно удалена'
         })

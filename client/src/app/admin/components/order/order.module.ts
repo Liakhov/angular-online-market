@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import {OrderComponent} from './order.component';
 import {OrderItemComponent} from './order-item/order-item.component';
@@ -21,7 +22,8 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     PipesModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ],
   exports: [RouterModule]
 })

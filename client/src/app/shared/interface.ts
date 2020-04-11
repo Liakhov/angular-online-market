@@ -18,13 +18,14 @@ export interface Category {
 }
 export interface Order {
   _id?: string;
-  number?: number;
+  index?: number;
   name: string;
   email: string;
   tel: string;
   list: Position[];
   comment?: string;
   date?: Date;
+  status?: string;
 }
 export class Position {
   _id: string;

@@ -1,0 +1,24 @@
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:focus {
+  outline: none;
+}
+
+.badge {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 2px;
+
+  &.new-order {
+    background-color: #26a69a;
+  }
+  &.processing {
+    background: #ffa726;
+  }
+  &.completed {
+    background: #5c6bc0;
+  }
+}

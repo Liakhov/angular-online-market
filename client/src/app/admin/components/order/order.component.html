@@ -10,9 +10,18 @@
   </thead>
   <tbody>
   <tr *ngFor="let order of orders" routerLink="{{order._id}}">
-    <td></td>
+    <td>{{order.index}}</td>
     <td>{{order.name}}</td>
-    <td>-</td>
+    <td>
+      <span class="badge"
+            [ngClass]="{
+            'new-order': order.status === 'new',
+            'processing': order.status === 'processing',
+            'completed':  order.status === 'completed'
+            }">
+        {{statusText(order.status)}}
+      </span>
+    </td>
     <td>{{order.date | formDate}}</td>
     <td>{{ calcSum(order.list) }}</td>
   </tr>

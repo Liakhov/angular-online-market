@@ -1,6 +1,0 @@
-tbody tr{
-  cursor: pointer;
-}
-tbody tr:focus{
-  outline: none;
-}

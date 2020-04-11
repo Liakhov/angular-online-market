@@ -2,6 +2,12 @@ const mongose = require('mongoose');
 const Schema = mongose.Schema;
 
 const orderSchema = new Schema({
+    index: {
+      type: Number
+    },
+    status: {
+        type: String
+    },
     name: {
         type: String,
         required: true
