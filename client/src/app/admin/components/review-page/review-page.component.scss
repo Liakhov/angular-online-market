@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  cursor: pointer;
+  i {
+    font-size: 48px;
+    color: white;
+  }
+}
+
+.card-info {
+  font-size: 16px;
+  text-align: right;
+  color: whitesmoke;
+}
+.card-number {
+  display: block;
+  font-size: 32px;
+  line-height: 32px;
+}

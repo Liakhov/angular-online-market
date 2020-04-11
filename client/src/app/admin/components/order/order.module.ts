@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+
 import {OrderComponent} from './order.component';
 import {OrderItemComponent} from './order-item/order-item.component';
-import {RouterModule, Routes} from '@angular/router';
 import {SharedModule} from '../../../shared/shared.module';
+import {PipesModule} from '../../../shared/pipe.module';
 
 const routes: Routes = [
   {path: '', component: OrderComponent},
@@ -18,6 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
+    PipesModule,
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]

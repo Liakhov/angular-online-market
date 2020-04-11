@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {take} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
@@ -45,5 +45,4 @@ export class OrderItemComponent implements OnInit {
       return sum + (item.cost * item.quantity);
     }, 0);
   }
-
 }
