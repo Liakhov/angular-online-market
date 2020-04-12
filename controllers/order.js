@@ -29,7 +29,8 @@ module.exports.create = async function (req, res) {
             tel: req.body.tel,
             email: req.body.email,
             comment: req.body.comment,
-            list: req.body.list
+            list: req.body.list,
+            address: req.body.address
         });
 
         await order.save();
@@ -48,7 +49,8 @@ module.exports.update = async function (req, res) {
         tel: req.body.tel,
         email: req.body.email,
         status: req.body.status,
-        list: req.body.list
+        list: req.body.list,
+        address: req.body.address
     };
     try {
         await Order.findOneAndUpdate(

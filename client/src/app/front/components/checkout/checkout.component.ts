@@ -22,7 +22,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   public modal: models.MaterialInstance;
   public form: FormGroup;
 
-  constructor(private store: Store<AppState>, private OrderService: services.OrderService) {
+  constructor(private store: Store<AppState>, private orderService: services.OrderService) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
   }
 
@@ -41,7 +41,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
       name: this.form.value.name,
       email: this.form.value.email,
       tel: this.form.value.telephone,
-      list: this.cart
+      list: this.cart,
+      address: this.form.value.address
     };
 
     if (this.form.value.comment) {
@@ -49,7 +50,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     }
 
     try {
-      await this.OrderService.create(order).pipe(take(1)).toPromise();
+      await this.orderService.create(order).pipe(take(1)).toPromise();
       this.modal.open();
     } catch (e) {
       services.MaterialService.toast(e.message);
@@ -61,7 +62,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
       name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       telephone: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      comment: new FormControl(null)
+      comment: new FormControl(null),
+      address: new FormControl(null)
     });
   }
 

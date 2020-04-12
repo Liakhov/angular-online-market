@@ -26,6 +26,7 @@ export interface Order {
   comment?: string;
   date?: Date;
   status?: string;
+  address?: string;
 }
 export class Position {
   _id: string;

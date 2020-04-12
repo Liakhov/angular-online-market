@@ -29,6 +29,9 @@ const orderSchema = new Schema({
     },
     list: {
         type: Array
+    },
+    address: {
+        type: String
     }
 });
 module.exports = mongose.model('order', orderSchema);
