@@ -9,6 +9,7 @@
 <div>
   <ul class="sidenav sidenav-fixed" #sidenav>
     <li class="bold" *ngFor="let link of links" routerLinkActive="active">
+      <span *ngIf="link.url === '/admin/order'" class="new badge">{{meta.newOrders}}</span>
       <a [routerLink]=[link.url]>
         {{link.name}}
       </a>

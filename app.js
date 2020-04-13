@@ -8,6 +8,7 @@ const categoryRoutes = require('./routes/category');
 const mailRoutes = require('./routes/mail');
 const messageRoutes = require('./routes/message');
 const orderRoutes = require('./routes/order');
+const metaRoutes = require('./routes/meta');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/mail', mailRoutes);
 app.use('/api/message', messageRoutes);
 app.use('/api/order', orderRoutes);
+app.use('/api/meta', metaRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/dist/angular-online-market'));

@@ -8,12 +8,12 @@ import * as services from './../../shared/services';
 @Injectable()
 export class ShopResolver implements Resolve<any> {
 
-  constructor(private ProductService: services.ProductService) {
+  constructor(private productService: services.ProductService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
 
-    return this.ProductService.fetch()
+    return this.productService.fetch()
       .pipe(
         catchError(() => EMPTY),
         mergeMap(data => of(data))

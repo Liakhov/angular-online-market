@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
-import { AdminLayoutComponent } from "./containers/admin-layout/admin-layout.component";
-import { FormsModule } from "@angular/forms";
+import { AdminLayoutComponent } from './containers/admin-layout/admin-layout.component';
+import * as fromResolvers from './resolvers';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminLayoutComponent,
+    resolve: {
+      admin: fromResolvers.AdminPanelResolver
+    },
     children: [
       {path: '', redirectTo: 'review', pathMatch: 'full'},
       {path: 'review', loadChildren: './components/review-page/review-page.module#ReviewPageModule'},
@@ -19,7 +23,7 @@ const routes: Routes = [
       {path: 'message', loadChildren: './components/message/message.module#MessageModule'}
     ]
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -29,6 +33,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    fromResolvers.AdminPanelResolver
   ]
 })
 export class AdminModule { }

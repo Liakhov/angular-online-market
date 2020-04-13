@@ -56,3 +56,7 @@ export interface MaterialInstance {
   close?(): void;
   destroy?(): void;
 }
+
+export class Meta {
+  newOrders: number;
+}

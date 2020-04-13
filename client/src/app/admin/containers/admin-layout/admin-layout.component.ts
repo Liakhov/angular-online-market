@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { MaterialService } from "../../../shared/services/material.service";
-import { MaterialInstance } from "../../../shared/interface";
+import * as services from '../../../shared/services';
+import * as models from '../../../shared/interface';
+
 
 @Component({
   selector: 'app-admin-layout',
@@ -9,35 +11,38 @@ import { MaterialInstance } from "../../../shared/interface";
   styleUrls: ['./admin-layout.component.scss']
 })
 export class AdminLayoutComponent implements OnInit, OnDestroy {
-
-  @ViewChild('sidenav', {static: true}) sidenavElem: ElementRef
-  sidenav: MaterialInstance
-
-  links = [
+  @ViewChild('sidenav', {static: true}) sidenavElem: ElementRef;
+  public sidenav: models.MaterialInstance;
+  public meta: models.Meta;
+  public links = [
     {url: '/admin/review', name: 'Обзор'},
     {url: '/admin/order', name: 'Заказы'},
     {url: '/admin/category', name: 'Категории'},
     {url: '/admin/product', name: 'Товары'},
     {url: '/admin/mail', name: 'Подписки'},
     {url: '/admin/message', name: 'Сообщения'}
-  ]
+  ];
 
-  constructor() { }
+  constructor(private activeRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.sidenav = MaterialService.initSidenav(this.sidenavElem)
+    this.sidenav = services.MaterialService.initSidenav(this.sidenavElem);
+
+    this.activeRoute.data.subscribe(data => {
+      this.meta = new models.Meta();
+      this.meta.newOrders = data.admin.newOrder.length;
+    });
   }
 
   ngOnDestroy(): void {
-    if(this.sidenav){
-      this.sidenav.destroy()
+    if (this.sidenav) {
+      this.sidenav.destroy();
     }
   }
 
-  openSidenav(event: Event): void{
-    event.preventDefault()
-    this.sidenav.open()
+  public openSidenav(event: Event): void {
+    event.preventDefault();
+    this.sidenav.open();
   }
-
-
 }
