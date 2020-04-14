@@ -59,4 +59,5 @@ export interface MaterialInstance {
 
 export class Meta {
   newOrders: number;
+  products: number;
 }

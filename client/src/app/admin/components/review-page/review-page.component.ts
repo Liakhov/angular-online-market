@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-review-page',
@@ -6,11 +9,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./review-page.component.scss']
 })
 export class ReviewPageComponent implements OnInit {
+  public meta: models.Meta;
 
-  constructor() {
+  constructor(private activeRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activeRoute.data.subscribe(data => {
+      this.meta = new models.Meta();
+      this.meta.newOrders = data.admin.newOrder.length;
+      this.meta.products = data.admin.products.length;
+    });
   }
-
 }

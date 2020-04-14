@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule, Routes} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
-import { AdminLayoutComponent } from './containers/admin-layout/admin-layout.component';
+import {AdminLayoutComponent} from './containers/admin-layout/admin-layout.component';
 import * as fromResolvers from './resolvers';
 
 const routes: Routes = [
@@ -15,7 +15,13 @@ const routes: Routes = [
     },
     children: [
       {path: '', redirectTo: 'review', pathMatch: 'full'},
-      {path: 'review', loadChildren: './components/review-page/review-page.module#ReviewPageModule'},
+      {
+        path: 'review',
+        resolve: {
+          admin: fromResolvers.AdminPanelResolver
+        },
+        loadChildren: './components/review-page/review-page.module#ReviewPageModule'
+      },
       {path: 'order', loadChildren: './components/order/order.module#OrderModule'},
       {path: 'category', loadChildren: './components/category/category.module#CategoryModule'},
       {path: 'product', loadChildren: './components/product-page/product-page.module#ProductPageModule'},
@@ -38,4 +44,5 @@ const routes: Routes = [
     fromResolvers.AdminPanelResolver
   ]
 })
-export class AdminModule { }
+export class AdminModule {
+}

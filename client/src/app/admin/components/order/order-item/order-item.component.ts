@@ -1,11 +1,16 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
 import {take} from 'rxjs/operators';
+
+import {AppState} from '../../../../shared/store/state/app.state';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
 import * as constants from './../../../../shared/constants';
+import * as actions from '../../../../shared/store/actions/meta.action';
+
 
 @Component({
   selector: 'app-order-item',
@@ -20,7 +25,11 @@ export class OrderItemComponent implements OnInit, AfterViewInit {
   public orderStatuses = constants.ORDER_STATUS;
   public form: FormGroup;
 
-  constructor(private route: ActivatedRoute, public routing: Router, private orderService: services.OrderService) {
+  constructor(
+    private route: ActivatedRoute,
+    public routing: Router,
+    private orderService: services.OrderService,
+    private store: Store<AppState>) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -50,7 +59,7 @@ export class OrderItemComponent implements OnInit, AfterViewInit {
   }
 
   public async onSubmit(): Promise<void> {
-    const order = {
+    const order: models.Order = {
       name: this.order.name,
       tel: this.order.tel,
       email: this.order.email,
@@ -59,7 +68,7 @@ export class OrderItemComponent implements OnInit, AfterViewInit {
     };
     try {
       const data = await this.orderService.update(this.order._id, order).pipe(take(1)).toPromise();
-
+      this.orderToStore();
       services.MaterialService.toast(data.message);
     } catch (e) {
       services.MaterialService.toast(e.message);
@@ -79,5 +88,18 @@ export class OrderItemComponent implements OnInit, AfterViewInit {
       description: new FormControl(null),
       status: new FormControl(this.order.status)
     });
+  }
+
+  private orderToStore(): void {
+    const status = this.form.value.status;
+    if (status === 'new') {
+      const orders = [];
+      orders.push(this.id);
+      this.store.dispatch(new actions.Add(orders));
+    }
+
+    if (status === 'processing' || status === 'completed') {
+      this.store.dispatch(new actions.Remove(this.id));
+    }
   }
 }
