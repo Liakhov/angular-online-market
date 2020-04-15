@@ -37,10 +37,10 @@
     <div class="col m5 s12">
       <h6>Изображения</h6>
       <app-upload-img
-        [images]="files"
+        [images]="images"
         (files)="onFilesUpload($event)"
-        (onRemoveImg)="onRemoveImg($event)"
-        (onDndImg)="onDndImg($event)">
+        (removeImg)="onRemoveImg($event)"
+        (dndImg)="onDndImg($event)">
       </app-upload-img>
     </div>
   </div>

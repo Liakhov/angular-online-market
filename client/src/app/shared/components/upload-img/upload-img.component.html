@@ -1,6 +1,6 @@
 <div class="thumbnails" dndDropzone (dndDrop)="onDrop($event)">
   <div class="thumbnail-item"
-       *ngFor="let img of someImages"
+       *ngFor="let img of images"
        [dndDraggable]="img"
        [dndEffectAllowed]="'all'"
   >

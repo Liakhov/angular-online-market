@@ -20,7 +20,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   id: string;
   select: models.MaterialInstance;
   category;
-  images = [];
+  public images = [];
   public files = [];
 
   constructor(
@@ -54,9 +54,8 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
             category: data.category,
             description: data.description
           });
-          this.images = data.images;
-          this.files = data.images;
           this.position = data;
+          this.transformImage();
         });
     }
   }
@@ -99,20 +98,35 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     const imgFiles = [];
     this.files.forEach(i => imgFiles.push(i));
     this.files = imgFiles.concat(event);
+    this.transformImage();
+  }
+
+  private transformImage() {
+    this.images = [];
+
+    this.files.forEach(i => {
+      if (i instanceof File) {
+          const reader = new FileReader();
+          reader.onload = () => this.images.push(reader.result);
+          reader.readAsDataURL(i);
+      } else {
+        this.images.push(i);
+      }
+    });
   }
 
   public onRemoveImg(index: number): void {
-    console.log(this.files);
     this.files.splice(index, 1);
-    console.log(this.files);
+    this.transformImage();
   }
 
-  public onDndImg(event): void {
+  public onDndImg(event: models.DndMeta): void {
     const dndElem = this.files.splice(event.dataIndex, 1);
     this.files.splice(event.eventIndex, 0, dndElem[0]);
+    this.transformImage();
   }
 
-  public async onSubmit(): Promise<void> {
+   public async onSubmit(): Promise<void> {
     const product: models.Product = {
       cost: this.form.value.cost,
       name: this.form.value.name,
@@ -136,14 +150,13 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
         const productUpdate = await this.productService.update(this.id, product).pipe(take(1)).toPromise();
         services.MaterialService.toast('Изменения сохранены');
         this.files = productUpdate.images;
-        this.images = productUpdate.images;
       }
     } catch (e) {
       services.MaterialService.toast(e.message);
     }
   }
 
-  private createForm(): void {
+   private createForm(): void {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
       cost: new FormControl(null, [Validators.required, Validators.min(0)]),

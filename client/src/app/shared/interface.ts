@@ -61,3 +61,8 @@ export class Meta {
   newOrders: number;
   products: number;
 }
+
+export class DndMeta {
+  eventIndex: number;
+  dataIndex: number;
+}
