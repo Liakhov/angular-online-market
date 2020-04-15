@@ -15,7 +15,8 @@ import {Position, Product, ToastMessage} from '../interface';
 
 export class ProductService {
 
-  constructor(private http: HttpClient, private store: Store<AppState>) { }
+  constructor(private http: HttpClient, private store: Store<AppState>) {
+  }
 
   public fetch(params: any = {}): Observable<Product[]> {
     return this.http.get<Product[]>('/api/position', {
@@ -79,7 +80,6 @@ export class ProductService {
     Object.keys(product).forEach(key => {
 
       if (Array.isArray(product[key])) {
-
         for (const item of product[key]) {
           if (item instanceof File) {
             fd.append('image', item, item['name']);
@@ -93,4 +93,5 @@ export class ProductService {
     });
     return fd;
   }
+
 }

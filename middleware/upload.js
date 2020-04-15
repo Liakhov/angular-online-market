@@ -3,11 +3,10 @@ const moment = require('moment');
 
 const storage = multer.diskStorage({
     destination(req, file, cb){
-        // Первый null - потому что нет ошибок
         cb(null, 'uploads')
     },
     filename(req, file, cb){
-        const date = moment().format('DDMMYYYY-HHmmss_SSS')
+        const date = moment().format('DDMMYYYY-HHmmss_SSS');
         cb(null, `${date}-${file.originalname}`)
     }
 });

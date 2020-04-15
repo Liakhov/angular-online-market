@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, take} from 'rxjs/operators';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
@@ -13,7 +12,6 @@ import * as models from '../../../../shared/interface';
   styleUrls: ['./product-item.component.scss']
 })
 export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef;
   @ViewChild('inputImage', {static: false}) inputImage: ElementRef;
   form: FormGroup;
@@ -22,25 +20,20 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   id: string;
   select: models.MaterialInstance;
   category;
-  submitSub: Subscription;
-  removeSub: Subscription;
   images = [];
-  files = [];
+  public files = [];
 
   constructor(
     private router: Router,
-    private ProductService: services.ProductService,
+    private productService: services.ProductService,
     private activeRouter: ActivatedRoute,
     private categoryService: services.CategoryService
   ) {
   }
 
-  ngOnInit() {
-    this.categoryService.fetch().subscribe(
-      data => this.category = data,
-      error => services.MaterialService.toast(error.message)
-    );
-
+  ngOnInit(): void {
+    this.createForm();
+    this.fetch();
     if (this.router.url === '/admin/product/new') {
       this.isNew = true;
     } else {
@@ -50,11 +43,10 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
             (params: Params) => {
               this.isNew = false;
               this.id = params.id;
-              return this.ProductService.getByID(params['id']);
+              return this.productService.getByID(params['id']);
             })
         )
         .subscribe(data => {
-
           this.form.patchValue({
             name: data.name,
             cost: data.cost,
@@ -67,7 +59,6 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
           this.position = data;
         });
     }
-    this.createForm();
   }
 
   ngAfterViewInit(): void {
@@ -80,33 +71,48 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.select) {
       this.select.destroy();
     }
-    if (this.submitSub) {
-      this.submitSub.unsubscribe();
-    }
-    if (this.removeSub) {
-      this.removeSub.unsubscribe();
+  }
+
+  public async fetch(): Promise<void> {
+    try {
+      this.category = await this.categoryService.fetch().pipe(take(1)).toPromise();
+    } catch (e) {
+      services.MaterialService.toast(e.message);
     }
   }
 
-  public remove(): void {
+  public async remove(): Promise<void> {
     const result = confirm('Вы уверены, что хотите удалить?');
 
     if (result) {
-      this.removeSub = this.ProductService.remove(this.id).subscribe(
-        response => services.MaterialService.toast(response.message),
-        error => services.MaterialService.toast(error.message),
-        () => this.router.navigate(['/admin/product'])
-      );
+      try {
+        const response = await this.productService.remove(this.id).pipe(take(1)).toPromise();
+        services.MaterialService.toast(response.message);
+        this.router.navigate(['/admin/product']);
+      } catch (e) {
+        services.MaterialService.toast(e.message);
+      }
     }
   }
 
   public onFilesUpload(event): void {
-    this.files = [...this.images, ...event];
+    const imgFiles = [];
+    this.files.forEach(i => imgFiles.push(i));
+    this.files = imgFiles.concat(event);
   }
 
-  public onSubmit() {
-    let obs$;
+  public onRemoveImg(index: number): void {
+    console.log(this.files);
+    this.files.splice(index, 1);
+    console.log(this.files);
+  }
 
+  public onDndImg(event): void {
+    const dndElem = this.files.splice(event.dataIndex, 1);
+    this.files.splice(event.eventIndex, 0, dndElem[0]);
+  }
+
+  public async onSubmit(): Promise<void> {
     const product: models.Product = {
       cost: this.form.value.cost,
       name: this.form.value.name,
@@ -121,33 +127,29 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
       product.description = this.form.value.description;
     }
 
-    if (this.isNew) {
-      obs$ = this.ProductService.create(product);
-    } else {
-      obs$ = this.ProductService.update(this.id, product);
-    }
-
-    this.submitSub = obs$.subscribe(() => {
+    try {
       if (this.isNew) {
+        await this.productService.create(product).pipe(take(1)).toPromise();
         services.MaterialService.toast('Новый товар добавлен');
         this.router.navigate([`/admin/product`]);
       } else {
+        const productUpdate = await this.productService.update(this.id, product).pipe(take(1)).toPromise();
         services.MaterialService.toast('Изменения сохранены');
+        this.files = productUpdate.images;
+        this.images = productUpdate.images;
       }
-    });
-  }
-
-  public onChangeImages(event): void {
-    this.files = event;
+    } catch (e) {
+      services.MaterialService.toast(e.message);
+    }
   }
 
   private createForm(): void {
-      this.form = new FormGroup({
-        name: new FormControl(null, Validators.required),
-        cost: new FormControl(null, [Validators.required, Validators.min(0)]),
-        quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
-        category: new FormControl(null),
-        description: new FormControl(null)
-      });
+    this.form = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      cost: new FormControl(null, [Validators.required, Validators.min(0)]),
+      quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
+      category: new FormControl(null),
+      description: new FormControl(null)
+    });
   }
 }

@@ -36,8 +36,12 @@
     </div>
     <div class="col m5 s12">
       <h6>Изображения</h6>
-      <app-upload-img [images]="images" (files)="onFilesUpload($event)"
-                      (imagesChanges)="onChangeImages($event)"></app-upload-img>
+      <app-upload-img
+        [images]="files"
+        (files)="onFilesUpload($event)"
+        (onRemoveImg)="onRemoveImg($event)"
+        (onDndImg)="onDndImg($event)">
+      </app-upload-img>
     </div>
   </div>
   <div class="description">

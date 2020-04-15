@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input} from '@angular/core';
+import {Component, EventEmitter, Output, Input, OnChanges, SimpleChange} from '@angular/core';
 import {DndDropEvent} from 'ngx-drag-drop';
 
 
@@ -8,30 +8,57 @@ import {DndDropEvent} from 'ngx-drag-drop';
   styleUrls: ['./upload-img.component.scss']
 })
 export class UploadImgComponent {
+  public thumbnails = [];
   @Input() images = [];
-  @Output() files: EventEmitter<File[]> = new EventEmitter();
-  @Output() imagesChanges = new EventEmitter();
+  @Output() files: EventEmitter<File[]> = new EventEmitter<File[]>();
+  @Output() onDndImg = new EventEmitter();
+  @Output() onRemoveImg: EventEmitter<number> = new EventEmitter<number>();
+
+
+  get someImages() {
+    const test = [...this.images];
+
+    return test;
+  }
+
+  // ngOnChanges(changes: {[images: string]: SimpleChange}) {
+  //   this.images = changes.images.currentValue;
+  //   this.thumbnails = [];
+  //
+  //   if (this.images.length > 0) {
+  //     this.images.forEach(i => {
+  //       if (i instanceof File) {
+  //           const reader = new FileReader();
+  //           reader.onload = () => this.thumbnails.push(reader.result);
+  //           reader.readAsDataURL(i);
+  //       } else {
+  //         this.thumbnails.push(i);
+  //       }
+  //     });
+  //   }
+  // }
 
   public onFileUpload(event): void {
     const thumbnails = [...event.target.files];
-    for (const img of thumbnails) {
-      const reader = new FileReader();
-      reader.onload = () => this.images.push(reader.result);
-      reader.readAsDataURL(img);
-    }
+    console.log(thumbnails);
+    // for (const img of thumbnails) {
+    //   const reader = new FileReader();
+    //   reader.onload = () => this.images.push(reader.result);
+    //   reader.readAsDataURL(img);
+    // }
     this.files.emit(thumbnails);
   }
 
   public onRemove(img): void {
     const index = this.images.indexOf(img);
-    this.images.splice(index, 1);
-    this.imagesChanges.emit(this.images);
+    this.onRemoveImg.emit(index);
   }
 
   public onDrop(event: DndDropEvent): void {
-    const index = this.images.indexOf(event.data);
-    this.images.splice(index, 1);
-    this.images.splice(event.index, 0, event.data);
-    this.imagesChanges.emit(this.images);
+    const dndData = {
+      eventIndex: event.index,
+      dataIndex: this.images.indexOf(event.data)
+    };
+    this.onDndImg.emit(dndData);
   }
 }
