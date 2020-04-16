@@ -26,10 +26,7 @@ import {reducers} from './shared/store/reducers';
     PipesModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production
-    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     AngularEditorModule,
     HttpClientModule,
     FormsModule,
