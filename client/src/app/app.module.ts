@@ -6,7 +6,7 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 
-import {environment} from '../environments/environment';
+import {environment} from '../environments/environment.prod';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
