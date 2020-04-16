@@ -7,7 +7,6 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 
 import {environment} from '../environments/environment';
-import {EnvironmentInterface} from '../environments/environment.interface';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -28,7 +27,8 @@ import {reducers} from './shared/store/reducers';
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
-      logOnly: environment.type !== EnvironmentInterface.DEVELOPMENT
+      maxAge: 25,
+      logOnly: environment.production
     }),
     AngularEditorModule,
     HttpClientModule,
