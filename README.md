@@ -1,8 +1,12 @@
-# angular-online-market
+# Angular online store
 https://angular-online-market.herokuapp.com/
 
-1. Git clone 
+## Installation
+
+1. git clone 
 2. npm i
 3. cd client && npm i
 4. Add file key ./config/keys.dev.js with MONGO_URI
-5. npn run dev
+
+## Run project
+1. npn run dev
