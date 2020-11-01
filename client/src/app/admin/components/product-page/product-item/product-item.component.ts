@@ -14,12 +14,12 @@ import * as models from '../../../../shared/interface';
 export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef;
   @ViewChild('inputImage', {static: false}) inputImage: ElementRef;
-  form: FormGroup;
-  isNew: boolean;
-  position;
-  id: string;
-  select: models.MaterialInstance;
-  category;
+  public form: FormGroup;
+  public isNew: boolean;
+  public position;
+  public id: string;
+  public select: models.MaterialInstance;
+  public category;
   public images = [];
   public files = [];
 
@@ -47,13 +47,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
             })
         )
         .subscribe(data => {
-          this.form.patchValue({
-            name: data.name,
-            cost: data.cost,
-            quantity: data.quantity,
-            category: data.category,
-            description: data.description
-          });
+          this.patchForm(data);
           this.position = data;
           this.transformImage();
         });
@@ -106,9 +100,9 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.files.forEach(i => {
       if (i instanceof File) {
-          const reader = new FileReader();
-          reader.onload = () => this.images.push(reader.result);
-          reader.readAsDataURL(i);
+        const reader = new FileReader();
+        reader.onload = () => this.images.push(reader.result);
+        reader.readAsDataURL(i);
       } else {
         this.images.push(i);
       }
@@ -126,7 +120,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     this.transformImage();
   }
 
-   public async onSubmit(): Promise<void> {
+  public async onSubmit(): Promise<void> {
     const product: models.Product = {
       cost: this.form.value.cost,
       name: this.form.value.name,
@@ -156,13 +150,23 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-   private createForm(): void {
+  private createForm(): void {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
       cost: new FormControl(null, [Validators.required, Validators.min(0)]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
       category: new FormControl(null),
       description: new FormControl(null)
+    });
+  }
+
+  private patchForm(data): void {
+    this.form.patchValue({
+      name: data.name,
+      cost: data.cost,
+      quantity: data.quantity,
+      category: data.category,
+      description: data.description
     });
   }
 }

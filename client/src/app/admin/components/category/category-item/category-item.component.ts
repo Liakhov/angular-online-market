@@ -24,7 +24,10 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   removeSub: Subscription;
   catId: string;
 
-  constructor(private router: Router, private CategoryService: services.CategoryService, private activeRouter: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private categoryService: services.CategoryService,
+    private activeRouter: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -44,7 +47,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
               if (params['id']) {
                 this.isNew = false;
                 this.catId = params['id'];
-                return this.CategoryService.getByID(params['id']);
+                return this.categoryService.getByID(params['id']);
               }
               return of(null);
             }
@@ -70,7 +73,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
             console.log(error);
           });
     }
-    this.products$ = this.CategoryService.getAllFromCategory(this.catId);
+    this.products$ = this.categoryService.getAllFromCategory(this.catId);
   }
 
   ngOnDestroy(): void {
@@ -96,9 +99,9 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     let obs$;
 
     if (this.isNew) {
-      obs$ = this.CategoryService.create(this.form.value.name, this.form.value.description, this.image);
+      obs$ = this.categoryService.create(this.form.value.name, this.form.value.description, this.image);
     } else {
-      obs$ = this.CategoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image);
+      obs$ = this.categoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image);
     }
 
     this.oSub = obs$.subscribe(data => {
@@ -112,7 +115,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   }
 
   public remove(): void {
-    this.removeSub = this.CategoryService.remove(this.category._id).subscribe(data => {
+    this.removeSub = this.categoryService.remove(this.category._id).subscribe(data => {
       services.MaterialService.toast(data.message);
       this.router.navigate(['/admin/category/']);
     });

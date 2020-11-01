@@ -1,16 +1,24 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper">
-      <a routerLink="/" class="waves-effect right">Выйти</a>
-      <a href="#" data-target="slide-out" class="sidenav-trigger" (click)="openSidenav($event);"><i
-        class="material-icons">menu</i></a>
+      <a routerLink="/" class="waves-effect right">
+        Выйти
+      </a>
+      <a href="#" data-target="slide-out" class="sidenav-trigger" (click)="openSidenav($event);">
+        <i class="material-icons">menu</i>
+      </a>
     </div>
   </nav>
 </div>
 <div>
   <ul class="sidenav sidenav-fixed" #sidenav>
     <li class="bold" *ngFor="let link of links" routerLinkActive="active">
-      <span *ngIf="link.url === '/admin/order' && (orders$ | async).length > 0" class="new badge">{{ (orders$ | async).length }}</span>
+      <span
+        *ngIf="link.url === '/admin/order' && (orders$ | async).length > 0"
+        class="new badge"
+      >
+        {{ (orders$ | async).length }}
+      </span>
       <a [routerLink]=[link.url]>
         {{link.name}}
       </a>

@@ -13,10 +13,10 @@ import * as constants from '../../../shared/constants';
 
 export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('slider', {static: false}) sliderBlock: ElementRef;
-  categories$: Observable<models.Category[]>;
-  products$: Observable<models.Product[]>;
-  slider: models.MaterialInstance;
-  limit = 4;
+  public categories$: Observable<models.Category[]>;
+  public products$: Observable<models.Product[]>;
+  public slider: models.MaterialInstance;
+  public limit = 4;
 
   constructor(private categoriesService: services.CategoryService, private productService: services.ProductService) {
   }
@@ -26,11 +26,11 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.products$ = this.productService.fetch({
       limit: this.limit
-    })
+    });
   }
 
   ngAfterViewInit(): void {
-    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER)
+    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER);
   }
 
   ngOnDestroy(): void {
@@ -40,6 +40,6 @@ export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   @HostListener('window:resize', ['$event']) onResize(): void {
-    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER)
+    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER);
   }
 }

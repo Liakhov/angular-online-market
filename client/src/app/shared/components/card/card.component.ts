@@ -18,11 +18,11 @@ export class CardComponent {
     return this.product.images[0] ? this.product.images[0] : '/assets/img/nophoto.png';
   }
 
-  addToCart(product) {
+  public addToCart(product): void {
     this.productService.addCart(product);
   }
 
-  addToWishList(product) {
+  public addToWishList(product): void {
     this.productService.addWishList(product);
   }
 }

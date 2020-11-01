@@ -10,11 +10,13 @@ import * as services from '../../../shared/services';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit {
-  search;
-  product$: Observable<models.Product[]>;
-  cat$: Observable<models.Category[]>;
+  public search;
+  public product$: Observable<models.Product[]>;
+  public cat$: Observable<models.Category[]>;
 
-  constructor(private productService: services.ProductService, private categoryService: services.CategoryService) {
+  constructor(
+    private productService: services.ProductService,
+    private categoryService: services.CategoryService) {
   }
 
   ngOnInit() {

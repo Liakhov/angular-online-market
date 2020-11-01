@@ -8,16 +8,16 @@ import * as services from './../../shared/services';
 @Injectable()
 export class ProductResolver implements Resolve<any> {
 
-  constructor(private ProductService: services.ProductService) {
+  constructor(private productService: services.ProductService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     const id = route.paramMap.get('id');
 
-    return this.ProductService.getByID(id)
+    return this.productService.getByID(id)
       .pipe(
         catchError(() => EMPTY),
         mergeMap(data => of(data))
-    )
+      );
   }
 }
