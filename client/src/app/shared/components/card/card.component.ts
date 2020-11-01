@@ -14,10 +14,6 @@ export class CardComponent {
   constructor(private productService: services.ProductService) {
   }
 
-  get thumbnail(): string {
-    return this.product.images[0] ? this.product.images[0] : '/assets/img/nophoto.png';
-  }
-
   public addToCart(product): void {
     this.productService.addCart(product);
   }

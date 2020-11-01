@@ -1,4 +1,4 @@
-<table class="striped" *ngIf="orders?.length > 0; else empty">
+<table class="striped" *ngIf="orders.length; else empty">
   <thead>
   <tr>
     <th>&#x2116;</th>
@@ -15,9 +15,9 @@
     <td>
       <span class="badge"
             [ngClass]="{
-            'new-order': order.status === 'new',
-            'processing': order.status === 'processing',
-            'completed':  order.status === 'completed'
+              'new-order': order.status === 'new',
+              'processing': order.status === 'processing',
+              'completed':  order.status === 'completed'
             }">
         {{statusText(order.status)}}
       </span>

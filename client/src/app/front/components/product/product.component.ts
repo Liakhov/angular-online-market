@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 
@@ -11,21 +11,18 @@ import * as constants from '../../../shared/constants';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductComponent implements OnDestroy, AfterViewInit {
   @ViewChild('carousel', {static: false}) carouselBlock: ElementRef;
-  carousel: models.MaterialInstance;
-  product: models.Product;
-  productSub: Subscription;
-  id: string;
-  images: [];
-  loading = false;
+  public carousel: models.MaterialInstance;
+  public product: models.Product;
+  public productSub: Subscription;
+  public images: [];
+  public loading = false;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private productService: services.ProductService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.loading = true;
 
     this.productSub = this.activeRoute.data.subscribe(data => {

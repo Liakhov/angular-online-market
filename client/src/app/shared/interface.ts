@@ -45,6 +45,7 @@ export interface Message {
   name: string;
   email: string;
   message: string;
+  date: number;
 }
 export interface Mail {
   email: string;

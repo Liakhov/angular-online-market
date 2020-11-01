@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import * as models from '../../../shared/interface';
@@ -8,13 +8,10 @@ import * as models from '../../../shared/interface';
   templateUrl: './review-page.component.html',
   styleUrls: ['./review-page.component.scss']
 })
-export class ReviewPageComponent implements OnInit {
+export class ReviewPageComponent {
   public meta: models.Meta;
 
   constructor(private activeRoute: ActivatedRoute) {
-  }
-
-  ngOnInit() {
     this.activeRoute.data.subscribe(data => {
       this.meta = new models.Meta();
       this.meta.newOrders = data.admin.newOrder.length;

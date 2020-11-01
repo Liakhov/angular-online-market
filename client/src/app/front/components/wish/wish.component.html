@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="cart-header">
     <h4>Список желаний</h4>
-    <button class="btn waves-effect waves-light red" *ngIf="(wish$ | async)?.length > 0;" (click)="reset()" type="button">
+    <button class="btn waves-effect waves-light red" *ngIf="(wish$ | async)?.length;" (click)="reset()" type="button">
       <i class="material-icons">delete_sweep</i>
     </button>
   </div>
-  <div *ngIf="(wish$ | async)?.length > 0; else empty">
+  <div class="wish-container" *ngIf="(wish$ | async)?.length; else empty">
     <table>
       <thead>
       <tr>
@@ -16,18 +16,18 @@
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of (wish$ | async)">
-          <td>
-            <img class="cart-img" src="{{item.image ? item.image : '/assets/img/nophoto.png'}}" alt="">
-          </td>
-          <td>{{item.name}}</td>
-          <td>${{item.cost}}</td>
-          <td>
-            <button class="btn waves-effect waves-light red" (click)="remove(item)" type="button">
-              <i class="material-icons">delete</i>
-            </button>
-          </td>
-        </tr>
+      <tr *ngFor="let item of (wish$ | async)">
+        <td>
+          <img class="cart-img" src="{{item.image || '/assets/img/nophoto.png'}}" alt="">
+        </td>
+        <td>{{item.name}}</td>
+        <td>${{item.cost}}</td>
+        <td>
+          <button class="btn waves-effect waves-light red" (click)="remove(item)" type="button">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

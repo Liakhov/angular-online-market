@@ -42,7 +42,7 @@
   </button>
 </form>
 
-<div *ngIf="(products$ | async)?.length > 0">
+<div *ngIf="(products$ | async)?.length">
   <h5>Список товаров в категории "{{form.value.name}}"</h5>
   <table class="striped">
     <thead>

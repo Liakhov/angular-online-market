@@ -3,12 +3,11 @@ import {Store, select} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 
-import {AppState} from '../../../shared/store/state/app.state';
 import * as cartActions from '../../../shared/store/actions/cart.action';
-
 import * as models from '../../../shared/interface';
 import * as reducers from '../../../shared/store/reducers';
 
+import {AppState} from '../../../shared/store/state/app.state';
 
 @Component({
   selector: 'app-cart',
@@ -16,16 +15,16 @@ import * as reducers from '../../../shared/store/reducers';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cart$: Observable<models.Position[]>;
-  cart: models.Position[] = [];
-  total: number;
+  public cart$: Observable<models.Position[]>;
+  public cart: models.Position[] = [];
+  public total: number;
 
   constructor(private store: Store<AppState>) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
   }
 
-  ngOnInit(): void {
-    this.calcSum();
+  async ngOnInit(): Promise<void> {
+    await this.calcSum();
   }
 
   public remove(item): void {

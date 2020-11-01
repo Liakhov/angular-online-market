@@ -11,7 +11,7 @@ import * as constants from './../../../shared/constants';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  public orders: models.Order[];
+  public orders: models.Order[] = [];
   public status = constants.ORDER_STATUS;
 
   constructor(private orderService: services.OrderService) {

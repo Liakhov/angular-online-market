@@ -1,18 +1,25 @@
-.empty{
+.wish-container {
+  margin-bottom: 50px;
+}
+
+.empty {
   width: 100%;
   padding: 50px 0;
   text-align: center;
 }
-.cart-img{
+
+.cart-img {
   width: 35px;
 }
-.cart-header{
+
+.cart-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.cart-bottom{
+
+.cart-bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -20,6 +27,7 @@
   margin: 30px 0 100px;
   font-size: 20px;
 }
-.quantity{
+
+.quantity {
   max-width: 100px;
 }

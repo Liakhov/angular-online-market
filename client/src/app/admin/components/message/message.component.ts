@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {take} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 import * as services from '../../../shared/services';
-import {Message} from '../../../shared/interface';
+import * as models from '../../../shared/interface';
 
 
 @Component({
@@ -11,16 +12,16 @@ import {Message} from '../../../shared/interface';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
-  messages$;
+  public messages$: Observable<models.Message[]>;
 
   constructor(private messageService: services.MessageService) {
   }
 
-  ngOnInit(): void {
-    this.fetch();
+  async ngOnInit(): Promise<void> {
+    await this.fetch();
   }
 
-  public async remove(message: Message): Promise<void> {
+  public async remove(message: models.Message): Promise<void> {
     const result = confirm('Вы уверены что хотите удалить данное сообщение?');
 
     if (result) {
@@ -31,7 +32,7 @@ export class MessageComponent implements OnInit {
         services.MaterialService.toast(e.message);
       }
     }
-    this.fetch();
+    await this.fetch();
   }
 
   private async fetch(): Promise<void> {

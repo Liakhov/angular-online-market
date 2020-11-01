@@ -14,15 +14,15 @@ import * as models from '../../../../shared/interface';
 })
 export class CategoryItemComponent implements OnInit, OnDestroy {
   @ViewChild('textarea', {static: false}) textarea: ElementRef;
-  isNew: boolean;
-  form: FormGroup;
-  category: models.Category;
-  image: File;
-  imagePreview;
-  products$: Observable<models.Product[]>;
-  oSub: Subscription;
-  removeSub: Subscription;
-  catId: string;
+  public form: FormGroup;
+  public isNew: boolean;
+  private image: File;
+  public imagePreview: string | ArrayBuffer;
+  public products$: Observable<models.Product[]>;
+  private category: models.Category;
+  private catId: string;
+  private oSub: Subscription;
+  private removeSub: Subscription;
 
   constructor(
     private router: Router,
@@ -31,10 +31,7 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      description: new FormControl(null)
-    });
+    this.createForm();
 
     if (this.router.url === '/admin/category/new') {
       this.isNew = true;
@@ -125,4 +122,12 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     this.image = null;
     this.imagePreview = null;
   }
+
+  private createForm(): void {
+    this.form = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      description: new FormControl(null)
+    });
+  }
+
 }

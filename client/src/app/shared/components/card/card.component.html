@@ -1,7 +1,7 @@
 <div class="col l3 m6 s12">
   <div class="cart-prod">
     <a routerLink="/shop/{{product._id}}">
-      <img class="prod-thumbnail" src="{{ thumbnail }}" alt="">
+      <img class="prod-thumbnail" src="{{ this.product.images[0] || '/assets/img/nophoto.png' }}" alt="">
       <p class="prod-title">{{product.name}}</p>
     </a>
     <div class="cart-prod_bottom">

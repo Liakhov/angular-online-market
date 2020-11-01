@@ -14,7 +14,7 @@
   <ul class="sidenav sidenav-fixed" #sidenav>
     <li class="bold" *ngFor="let link of links" routerLinkActive="active">
       <span
-        *ngIf="link.url === '/admin/order' && (orders$ | async).length > 0"
+        *ngIf="link.url === '/admin/order' && (orders$ | async).length"
         class="new badge"
       >
         {{ (orders$ | async).length }}

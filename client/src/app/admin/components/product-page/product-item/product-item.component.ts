@@ -31,9 +31,9 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.createForm();
-    this.fetch();
+    await this.fetch();
     if (this.router.url === '/admin/product/new') {
       this.isNew = true;
     } else {

@@ -1,4 +1,4 @@
-<table *ngIf="(messages$ | async)?.length > 0;else empty">
+<table *ngIf="(messages$ | async)?.length;else empty">
   <thead>
     <th>№</th>
     <th>Имя</th>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
@@ -9,19 +9,12 @@ import * as services from '../../../shared/services';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit, OnDestroy {
+export class ContactComponent implements OnDestroy {
   public form: FormGroup;
   private formSub: Subscription;
 
   constructor(private messageService: services.MessageService) {
-  }
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-      email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(32)]),
-      message: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
-    });
+    this.createForm();
   }
 
   ngOnDestroy(): void {
@@ -43,5 +36,13 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.form.enable();
       }
     );
+  }
+
+  private createForm(): void {
+    this.form = new FormGroup({
+      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+      email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(32)]),
+      message: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(255)])
+    });
   }
 }

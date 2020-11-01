@@ -15,7 +15,6 @@ import * as actions from '../../../shared/store/actions/wish.action';
 })
 export class WishComponent {
   public wish$: Observable<models.Position[]>;
-  cart: models.Position[] = [];
 
   constructor(private store: Store<AppState>) {
     this.wish$ = this.store.pipe(select(reducers.getWish));

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, HostListener} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, HostListener} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import * as services from '../../../shared/services';
@@ -11,19 +11,18 @@ import * as constants from '../../../shared/constants';
   styleUrls: ['./front-page.component.scss'],
 })
 
-export class FrontPageComponent implements OnInit, AfterViewInit, OnDestroy {
+export class FrontPageComponent implements AfterViewInit, OnDestroy {
   @ViewChild('slider', {static: false}) sliderBlock: ElementRef;
   public categories$: Observable<models.Category[]>;
   public products$: Observable<models.Product[]>;
   public slider: models.MaterialInstance;
   public limit = 4;
 
-  constructor(private categoriesService: services.CategoryService, private productService: services.ProductService) {
-  }
+  constructor(
+    private categoriesService: services.CategoryService,
+    private productService: services.ProductService) {
 
-  ngOnInit(): void {
     this.categories$ = this.categoriesService.fetch();
-
     this.products$ = this.productService.fetch({
       limit: this.limit
     });

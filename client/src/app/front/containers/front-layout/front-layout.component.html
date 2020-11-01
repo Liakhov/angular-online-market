@@ -6,17 +6,6 @@
             <img src="/assets/img/logo.png" alt="Bicycle shop">
           </a>
         </div>
-        <div class="dropdown-contact">
-          <div class="contact-block">
-            <div class="contact-row">
-              <a href="tel:+380988008888">+38 099 800 98 98</a>
-              <i class="material-icons">arrow_drop_down</i>
-            </div>
-            <div class="contact-row dropdown">
-              <a href="tel:+380988008888">+38 099 900 98 98</a>
-            </div>
-          </div>
-        </div>
         <div>
           <form>
             <div class="input-field">
@@ -26,14 +15,14 @@
         </div>
         <div class="btns">
           <a routerLink="/wish" class="header-icon wish">
-            <span *ngIf="(wish$ | async)?.length > 0">{{ cartQuantity( wish$ | async ) }}</span>
+            <span *ngIf="(wish$ | async)?.length">{{ cartQuantity( wish$ | async ) }}</span>
             <img src="/assets/img/heart.svg" alt="profile">
           </a>
-<!--          <a routerLink="/login" class="header-icon">-->
-<!--            <img src="/assets/img/user.svg" alt="profile">-->
-<!--          </a>-->
+          <a routerLink="/admin" class="header-icon">
+            <img src="/assets/img/user.svg" alt="profile">
+          </a>
           <a routerLink="/cart" class="header-icon cart">
-            <span *ngIf="(cart$ | async)?.length > 0">{{ cartQuantity( cart$ | async ) }}</span>
+            <span *ngIf="(cart$ | async)?.length">{{ cartQuantity( cart$ | async ) }}</span>
             <img src="/assets/img/shopping-cart.svg" alt="shoping cart">
           </a>
         </div>

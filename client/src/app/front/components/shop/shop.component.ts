@@ -1,22 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+
+import * as models from '../../../shared/interface';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
-
-  products: any;
+export class ShopComponent {
+  public products: models.Product[];
 
   constructor(private activeRoute: ActivatedRoute) {
-  }
-
-  ngOnInit() {
     this.activeRoute.data.subscribe(data => {
       this.products = data.shop;
     });
   }
-
 }

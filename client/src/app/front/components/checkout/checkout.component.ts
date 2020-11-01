@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
@@ -15,20 +15,17 @@ import * as reducers from '../../../shared/store/reducers';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit, AfterViewInit {
+export class CheckoutComponent implements AfterViewInit {
   @ViewChild('modal', {static: false}) modalElem: ElementRef;
-  public cart$: Observable<models.Position[]>;
-  public cart: models.Position[] = [];
+  private cart$: Observable<models.Position[]>;
   public modal: models.MaterialInstance;
   public form: FormGroup;
+  public summ: number;
 
   constructor(private store: Store<AppState>, private orderService: services.OrderService) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
-  }
-
-  async ngOnInit(): Promise<void> {
     this.createForm();
-    this.cart = await this.cart$.pipe(take(1)).toPromise();
+    this.calcSum();
   }
 
   ngAfterViewInit(): void {
@@ -37,11 +34,12 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
 
 
   public async onSubmit(): Promise<void> {
+    const cart = await this.cart$.pipe(take(1)).toPromise();
     const order: models.Order = {
       name: this.form.value.name,
       email: this.form.value.email,
       tel: this.form.value.telephone,
-      list: this.cart,
+      list: cart,
       address: this.form.value.address
     };
 
@@ -67,4 +65,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     });
   }
 
+  private async calcSum(): Promise<void> {
+    const cart = await this.cart$.pipe(take(1)).toPromise();
+    this.summ = cart.reduce((sum, item) => {
+      return sum + (item.cost * item.quantity);
+    }, 0);
+  }
 }

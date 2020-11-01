@@ -118,51 +118,6 @@
   }
 }
 
-.dropdown-contact {
-  @media (max-width: 600px) {
-    display: none;
-  }
-}
-
-.contact-block {
-  position: relative;
-  background: white;
-  border-radius: 5px 5px 0 0;
-
-  &:hover {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-
-    .dropdown {
-      display: block;
-    }
-  }
-
-  a {
-    font-size: 17px;
-    color: #3c3c3c;
-  }
-}
-
-.contact-row {
-  display: flex;
-  cursor: pointer;
-  padding: 10px 15px;
-
-  span {
-    margin-right: 5px;
-  }
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  background: white;
-  box-shadow: 0 7px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 0 0 5px 5px;
-}
-
 main {
   flex: 1;
 }

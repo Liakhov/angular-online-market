@@ -6,7 +6,7 @@
         <div class="carousel-item" *ngFor="let img of images">
           <img src="{{img}}" alt="">
         </div>
-        <div class="carousel-item" *ngIf="images.length < 1">
+        <div class="carousel-item" *ngIf="!images.length">
           <img src="/assets/img/nophoto.png" class="no-img" alt="">
         </div>
       </div>
@@ -17,11 +17,11 @@
           <i class="material-icons">check_circle</i>
           Есть в наличии
         </span>
-        <span class="balance-orange" *ngIf="product.quantity < 10 && product.quantity !== 0">
+        <span class="balance-orange" *ngIf="product.quantity < 10 && product.quantity">
               <i class="material-icons">access_time</i>
               Заканчивается
             </span>
-        <span class="balance-grey" *ngIf="product.quantity === 0">
+        <span class="balance-grey" *ngIf="!product.quantity">
               <i class="material-icons">remove_circle_outline</i>
               Товар закончился
           </span>
@@ -35,7 +35,7 @@
             class="btn waves-effect waves-light cart"
             type="button"
             (click)="addToCart(product)"
-            [disabled]="product.quantity === 0"
+            [disabled]="!product.quantity"
           >
             <i class="material-icons left">shopping_cart</i>
             Купить

@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
 import {take} from 'rxjs/operators';
 
 import * as models from '../../../shared/interface';
@@ -12,21 +11,19 @@ import * as services from '../../../shared/services';
   styleUrls: ['./mail.component.scss']
 })
 export class MailComponent implements OnInit, OnDestroy {
-
   @ViewChild('modal', {static: true}) modalElem: ElementRef;
-  modal: models.MaterialInstance;
-  mails;
-  form: FormGroup;
-  itemMail: models.Mail;
-  mailsSub: Subscription;
+  public modal: models.MaterialInstance;
+  public mails = [];
+  public form: FormGroup;
+  public itemMail: models.Mail;
 
   constructor(private mailService: services.MailService) {
+    this.createForm();
   }
 
-  ngOnInit() {
-    this.fetch();
+  async ngOnInit(): Promise<void> {
+    await this.fetch();
     this.modal = services.MaterialService.initModal(this.modalElem);
-    this.createForm();
   }
 
   ngOnDestroy(): void {
@@ -77,7 +74,7 @@ export class MailComponent implements OnInit, OnDestroy {
         services.MaterialService.toast(e.message);
       }
     }
-    this.fetch();
+    await this.fetch();
   }
 
   private createForm(): void {
