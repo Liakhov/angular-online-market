@@ -1,20 +1,32 @@
-.wrapper{
+.wrapper {
   text-align: center;
   margin-top: 100px;
   margin-bottom: 100px;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     margin-top: 30px;
     margin-bottom: 30px;
   }
 }
-.wrapper h4{
+
+.wrapper h4 {
   margin-bottom: 30px;
 }
-.card-content img{
+
+.card-content img {
   height: 100px;
   width: auto;
 }
-.carousel-item.active{
-  position: relative !important;
+
+.carousel-item {
+  &.active {
+    position: relative !important;
+  }
+
+  &.carousel-item img {
+    height: auto;
+  }
 }
+
+
+
 

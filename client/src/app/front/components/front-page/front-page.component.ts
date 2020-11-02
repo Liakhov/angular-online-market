@@ -29,7 +29,9 @@ export class FrontPageComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER);
+    setTimeout(() => {
+      this.slider = services.MaterialService.initSlider(this.sliderBlock, constants.PRODUCT_SLIDER);
+    }, 200);
   }
 
   ngOnDestroy(): void {
