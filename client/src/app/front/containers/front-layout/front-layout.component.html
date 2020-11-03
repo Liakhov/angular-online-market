@@ -5,50 +5,5 @@
     <router-outlet></router-outlet>
   </main>
 
-  <footer>
-    <div class="wrapper row footer">
-      <div class="col l3 m6 s12">
-        <h5>Страницы</h5>
-        <ul>
-          <li><a routerLink="/">Главная</a></li>
-          <li><a routerLink="/shop">Магазин</a></li>
-          <li><a routerLink="/contact">Контакты</a></li>
-        </ul>
-      </div>
-      <div class="col l3 m6 s12">
-        <h5>Категории</h5>
-        <ul>
-          <li *ngFor="let cat of categories$ | async">
-            <a routerLink="/category/{{cat._id}}">{{cat.name}}</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col l3 m6 s12">
-        <h5>Cоц сети</h5>
-        <div class="social">
-          <a href="#">
-            <img src="/assets/img/instagram.svg" alt="">
-          </a>
-          <a href="#">
-            <img src="/assets/img/facebook.svg" alt="">
-          </a>
-          <a href="">
-            <img src="/assets/img/twitter.svg" alt="">
-          </a>
-        </div>
-      </div>
-      <div class="col l3 m6 s12">
-        <h5>Подписаться</h5>
-        <form [formGroup]="form" (submit)="sendMail()">
-          <input type="text" placeholder="email@example.com" class="subscribe_input" formControlName="email">
-          <button [disabled]="form.invalid" class="btn waves-effect waves-light subscribe_btn" type="submit"
-                  name="action">Subscribe
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="wrapper footer-copyright">
-      © Copyright 2019 All rights reserved | Powered by Yurii Liakhov.
-    </div>
-  </footer>
+  <app-footer [categories]="categories$ | async" (submit)="sendMail($event)"></app-footer>
 </div>

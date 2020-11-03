@@ -7,6 +7,7 @@ import {AppState} from '../../../shared/store/state/app.state';
 
 import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';
+import * as constants from '../../../shared/constants';
 import * as reducers from '../../../shared/store/reducers';
 import * as metaActions from '../../../shared/store/actions/meta.action';
 
@@ -20,14 +21,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
   public sidenav: models.MaterialInstance;
   public meta: models.Meta;
   public orders$: Observable<string[]>;
-  public links = [
-    {url: '/admin/review', name: 'Обзор'},
-    {url: '/admin/order', name: 'Заказы'},
-    {url: '/admin/category', name: 'Категории'},
-    {url: '/admin/product', name: 'Товары'},
-    {url: '/admin/mail', name: 'Подписки'},
-    {url: '/admin/message', name: 'Сообщения'}
-  ];
+  public links = constants.ADMIN_MENU;
 
   constructor(private activeRoute: ActivatedRoute, private store: Store<AppState>) {
     this.orders$ = this.store.pipe(select(reducers.getMetaOrders));
@@ -38,7 +32,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     this.sidenav = services.MaterialService.initSidenav(this.sidenavElem);
 
     this.activeRoute.data.subscribe(data => {
-      const orders = data.admin.newOrder.map( v => v._id);
+      const orders = data.admin.newOrder.map(v => v._id);
       this.store.dispatch(new metaActions.Add(orders));
     });
   }
