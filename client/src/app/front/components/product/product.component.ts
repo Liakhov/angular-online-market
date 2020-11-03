@@ -12,7 +12,7 @@ import * as constants from '../../../shared/constants';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnDestroy, AfterViewInit {
-  @ViewChild('carousel', {static: false}) carouselBlock: ElementRef;
+  @ViewChild('carousel') carouselBlock: ElementRef;
   public carousel: models.MaterialInstance;
   public product: models.Product;
   public productSub: Subscription;

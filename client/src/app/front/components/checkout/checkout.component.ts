@@ -17,7 +17,7 @@ import * as reducers from '../../../shared/store/reducers';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements AfterViewInit {
-  @ViewChild('modal', {static: false}) modalElem: ElementRef;
+  @ViewChild('modal') modalElem: ElementRef;
   private cart$: Observable<models.Position[]>;
   public modal: models.MaterialInstance;
   public form: FormGroup;

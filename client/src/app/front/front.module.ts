@@ -37,10 +37,10 @@ const routes: Routes = [
         }
       },
       {path: 'category/:id', component: CategoriesComponent},
-      {path: 'cart', loadChildren: './components/cart/cart.module#CartModule'},
-      {path: 'wish', loadChildren: './components/wish/wish.module#WishModule' },
-      {path: 'checkout', loadChildren: './components/checkout/checkout.module#CheckoutModule'},
-      {path: 'contact', loadChildren: './components/contact/contact.module#ContactModule'}
+      {path: 'cart', loadChildren: () => import('./components/cart/cart.module').then(m => m.CartModule)},
+      {path: 'wish', loadChildren: () => import('./components/wish/wish.module').then(m => m.WishModule) },
+      {path: 'checkout', loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule)},
+      {path: 'contact', loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule)}
     ]
   }
 ];

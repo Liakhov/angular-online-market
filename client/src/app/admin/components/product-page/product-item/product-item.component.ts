@@ -13,7 +13,7 @@ import * as models from '../../../../shared/interface';
 })
 export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef;
-  @ViewChild('inputImage', {static: false}) inputImage: ElementRef;
+  @ViewChild('inputImage') inputImage: ElementRef;
   public form: FormGroup;
   public isNew: boolean;
   public position;

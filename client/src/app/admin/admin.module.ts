@@ -20,13 +20,13 @@ const routes: Routes = [
         resolve: {
           admin: fromResolvers.AdminPanelResolver
         },
-        loadChildren: './components/review-page/review-page.module#ReviewPageModule'
+        loadChildren: () => import('./components/review-page/review-page.module').then(m => m.ReviewPageModule)
       },
-      {path: 'order', loadChildren: './components/order/order.module#OrderModule'},
-      {path: 'category', loadChildren: './components/category/category.module#CategoryModule'},
-      {path: 'product', loadChildren: './components/product-page/product-page.module#ProductPageModule'},
-      {path: 'mail', loadChildren: './components/mail/mail.module#MailModule'},
-      {path: 'message', loadChildren: './components/message/message.module#MessageModule'}
+      {path: 'order', loadChildren: () => import('./components/order/order.module').then(m => m.OrderModule)},
+      {path: 'category', loadChildren: () => import('./components/category/category.module').then(m => m.CategoryModule)},
+      {path: 'product', loadChildren: () => import('./components/product-page/product-page.module').then(m => m.ProductPageModule)},
+      {path: 'mail', loadChildren: () => import('./components/mail/mail.module').then(m => m.MailModule)},
+      {path: 'message', loadChildren: () => import('./components/message/message.module').then(m => m.MessageModule)}
     ]
   }
 ];

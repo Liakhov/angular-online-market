@@ -18,7 +18,7 @@ import * as actions from '../../../../shared/store/actions/meta.action';
   styleUrls: ['./order-item.component.scss']
 })
 export class OrderItemComponent implements OnInit, AfterViewInit {
-  @ViewChild('selectStatus', {static: false}) selectStatus: ElementRef;
+  @ViewChild('selectStatus') selectStatus: ElementRef;
   private id: string;
   public select: models.MaterialInstance;
   public order: models.Order;
