@@ -12,6 +12,7 @@ import {CategoriesComponent} from './components/categories/categories.component'
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
 import {ShopComponent} from './components/shop/shop.component';
+import {HeaderComponent} from './components/header/header.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
     FrontPageComponent,
     ProductComponent,
     CategoriesComponent,
-    ShopComponent
+    ShopComponent,
+    HeaderComponent
   ],
   imports: [
     FormsModule,

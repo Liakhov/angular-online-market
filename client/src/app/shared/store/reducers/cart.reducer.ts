@@ -15,24 +15,33 @@ export function reducer(state = initialState, action: actions.Actions): State {
   switch (action.type) {
 
     case CartAction.ADD: {
-      const candidate = state.cart.find(p => p._id === action.payload._id);
+      const cart = [...state.cart];
+      const candidate = cart.find(p => p._id === action.payload._id);
       if (candidate) {
         candidate.quantity += action.payload.quantity;
       } else {
-        state.cart.push(action.payload);
+        cart.push(action.payload);
       }
-      return state;
+      return {
+        ...state,
+        cart: [...cart]
+      };
     }
 
     case CartAction.REMOVE: {
-      const index = state.cart.indexOf(action.payload);
-      state.cart.splice(index, 1);
-      return state;
+      const cart = [...state.cart];
+      const index = cart.indexOf(action.payload);
+      cart.splice(index, 1);
+      return {
+        ...state,
+        cart: [...cart]
+      };
     }
 
     case CartAction.CLEAR: {
-      state.cart.length = 0;
-      return state;
+      return {
+        ...initialState
+      };
     }
 
     default: {

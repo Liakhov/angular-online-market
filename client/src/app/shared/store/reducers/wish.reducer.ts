@@ -13,22 +13,31 @@ export function reducer(state = initialState, action: actions.Actions): State {
   switch (action.type) {
 
     case actions.ADD: {
-      const candidate = state.wish.find(p => p._id === action.payload._id);
+      const wish = [...state.wish];
+      const candidate = wish.find(p => p._id === action.payload._id);
       if (!candidate) {
-        state.wish.push(action.payload);
+        wish.push(action.payload);
       }
-      return state;
+      return {
+        ...state,
+        wish: [...wish]
+      };
     }
 
     case actions.REMOVE: {
+      const wish = [...state.wish];
       const index = state.wish.indexOf(action.payload);
-      state.wish.splice(index, 1);
-      return state;
+      wish.splice(index, 1);
+      return {
+        ...state,
+        wish: [...wish]
+      };
     }
 
     case actions.CLEAR: {
-      state.wish.length = 0;
-      return state;
+      return {
+        ...initialState
+      };
     }
 
     default:

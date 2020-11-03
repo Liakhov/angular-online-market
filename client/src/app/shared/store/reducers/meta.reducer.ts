@@ -13,22 +13,28 @@ export function reducer(state = initialState, action: actions.Actions): State {
   switch (action.type) {
 
     case MetaAction.ADD: {
-      for (const order of action.payload) {
-        const candidate = state.orders.indexOf(order);
-        if (candidate === -1) {
-          state.orders.push(order);
-        }
-      }
-      return state;
+      return {
+        ...state,
+        orders: [...state.orders, ...action.payload]
+      };
     }
 
     case MetaAction.REMOVE: {
-      const index = state.orders.indexOf(action.payload);
+      const orders = [...state.orders];
+      const index = orders.indexOf(action.payload);
       if (index !== -1) {
-        state.orders.splice(index, 1);
+        orders.splice(index, 1);
       }
-      return state;
+      return {
+        ...state,
+        orders: [...orders]
+      };
     }
+
+    case MetaAction.CLEAR:
+      return {
+        ...initialState
+      };
 
     default: {
       return state;

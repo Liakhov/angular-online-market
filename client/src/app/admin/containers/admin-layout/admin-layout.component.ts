@@ -47,6 +47,7 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
     if (this.sidenav) {
       this.sidenav.destroy();
     }
+    this.store.dispatch(new metaActions.Clear());
   }
 
   public openSidenav(event: Event): void {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {Store, select} from '@ngrx/store';
@@ -14,12 +14,11 @@ import * as reducers from '../../../shared/store/reducers';
   templateUrl: './front-layout.component.html',
   styleUrls: ['./front-layout.component.scss']
 })
-export class FrontLayoutComponent implements OnInit {
-  showMenu = false;
-  form: FormGroup;
-  cart$: Observable<models.Position[]>;
-  wish$: Observable<models.Position[]>;
-  categories$: Observable<models.Category[]>;
+export class FrontLayoutComponent {
+  public form: FormGroup;
+  public categories$: Observable<models.Category[]>;
+  public cart$: Observable<models.Position[]>;
+  public wish$: Observable<models.Position[]>;
 
   constructor(
     private mailService: services.MailService,
@@ -27,18 +26,8 @@ export class FrontLayoutComponent implements OnInit {
     private categoriesService: services.CategoryService) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
     this.wish$ = this.store.pipe(select(reducers.getWish));
-  }
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)])
-    });
-
     this.categories$ = this.categoriesService.fetch();
-  }
-
-  public dropdown(): void {
-    this.showMenu = !this.showMenu;
+    this.createForm();
   }
 
   public async sendMail(): Promise<void> {
@@ -54,10 +43,9 @@ export class FrontLayoutComponent implements OnInit {
     this.form.reset();
   }
 
-  public cartQuantity(cart): number {
-    return cart.reduce((sum, item) => {
-      return sum + item.quantity;
-    }, 0);
+  private createForm(): void {
+    this.form = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)])
+    });
   }
-
 }

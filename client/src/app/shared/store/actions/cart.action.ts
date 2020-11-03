@@ -16,7 +16,6 @@ export class Add implements Action {
 }
 
 export class Remove implements Action {
-
   public readonly type = CartAction.REMOVE;
 
   constructor(public payload: Position) {
@@ -24,9 +23,7 @@ export class Remove implements Action {
 }
 
 export class Clear implements Action {
-
   public readonly type = CartAction.CLEAR;
 }
-
 
 export type Actions = Add | Clear | Remove;

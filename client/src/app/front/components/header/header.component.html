@@ -1,0 +1,41 @@
+<header>
+  <div class="wrapper header-top">
+    <div class="logo">
+      <a routerLink="/">
+        <img src="/assets/img/logo.png" alt="Bicycle shop">
+      </a>
+    </div>
+    <div>
+      <form>
+        <div class="input-field">
+          <input type="text" placeholder="Поиск...">
+        </div>
+      </form>
+    </div>
+    <div class="btns">
+      <a routerLink="/wish" class="header-icon wish">
+        <span *ngIf="(wish$ | async)?.length">{{ cartQuantity(wish$ | async) }}</span>
+        <img src="/assets/img/heart.svg" alt="profile">
+      </a>
+      <a routerLink="/admin" class="header-icon">
+        <img src="/assets/img/user.svg" alt="profile">
+      </a>
+      <a routerLink="/cart" class="header-icon cart">
+        <span *ngIf="cart?.length">{{ cartQuantity(cart) }}</span>
+        <img src="/assets/img/shopping-cart.svg" alt="shoping cart">
+      </a>
+    </div>
+  </div>
+  <div class="menu">
+    <button type="button" class="btn-menu" (click)="dropdown()">
+      <img src="/assets/img/menu-button.svg" alt="menu">
+    </button>
+    <div [className]="showMenu ? 'menu-block active' : 'wrapper menu-block'">
+      <div class="header-menu">
+        <a routerLink="/">Главная</a>
+        <a routerLink="/shop">Магазин</a>
+        <a routerLink="/contact">Контакты</a>
+      </div>
+    </div>
+  </div>
+</header>
