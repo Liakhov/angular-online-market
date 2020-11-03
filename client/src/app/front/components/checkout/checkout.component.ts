@@ -7,6 +7,7 @@ import {take} from 'rxjs/operators';
 import {AppState} from '../../../shared/store/state/app.state';
 
 import * as models from './../../../shared/interface';
+import * as actions from './../../../shared/store/actions/cart.action';
 import * as services from './../../../shared/services';
 import * as reducers from '../../../shared/store/reducers';
 
@@ -20,7 +21,7 @@ export class CheckoutComponent implements AfterViewInit {
   private cart$: Observable<models.Position[]>;
   public modal: models.MaterialInstance;
   public form: FormGroup;
-  public summ: number;
+  public sum: number;
 
   constructor(private store: Store<AppState>, private orderService: services.OrderService) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
@@ -50,6 +51,7 @@ export class CheckoutComponent implements AfterViewInit {
     try {
       await this.orderService.create(order).pipe(take(1)).toPromise();
       this.modal.open();
+      this.store.dispatch(new actions.Clear());
     } catch (e) {
       services.MaterialService.toast(e.message);
     }
@@ -67,7 +69,7 @@ export class CheckoutComponent implements AfterViewInit {
 
   private async calcSum(): Promise<void> {
     const cart = await this.cart$.pipe(take(1)).toPromise();
-    this.summ = cart.reduce((sum, item) => {
+    this.sum = cart.reduce((sum, item) => {
       return sum + (item.cost * item.quantity);
     }, 0);
   }
