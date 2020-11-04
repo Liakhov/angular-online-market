@@ -3,7 +3,7 @@
     [cart]="cart$ | async"
     [wish$]="wish$"
     [searchResult]="searchResult"
-    (input)="onSearch($event)"
+    (search)="onSearch($event)"
   ></app-header>
   <main>
     <router-outlet></router-outlet>
