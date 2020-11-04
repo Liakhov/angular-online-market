@@ -6,9 +6,18 @@
       </a>
     </div>
     <div>
-      <form>
+      <form [formGroup]="form">
         <div class="input-field">
-          <input type="text" placeholder="Поиск...">
+          <input type="text" placeholder="Поиск..." formControlName="search">
+          <ul class="dropdown" *ngIf="searchResult.length">
+            <li
+              *ngFor="let item of searchResult"
+              routerLink="{{ item.type === 'category' ? '/category/' + item.id : '/shop/' + item.id }}"
+              (click)="onOpenLink()"
+            >
+              {{ item.name }}
+            </li>
+          </ul>
         </div>
       </form>
     </div>

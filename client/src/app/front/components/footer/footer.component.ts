@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import * as models from '../../../shared/interface';
@@ -6,12 +6,13 @@ import * as models from '../../../shared/interface';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
   public form: FormGroup;
   @Input() categories: models.Category[];
-  @Output() submit: EventEmitter<models.Mail> = new EventEmitter<models.Mail>();
+  @Output() submitEmail: EventEmitter<models.Mail> = new EventEmitter<models.Mail>();
 
   constructor() {
     this.createForm();
@@ -21,8 +22,8 @@ export class FooterComponent {
     const email: models.Mail = {
       email: this.form.value.email
     };
-    this.submit.emit(email);
     this.form.reset();
+    this.submitEmail.emit(email);
   }
 
   private createForm(): void {

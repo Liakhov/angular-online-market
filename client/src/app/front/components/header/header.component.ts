@@ -1,5 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Observable} from 'rxjs';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input, OnDestroy, OnInit,
+  Output,
+} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
+import {tap} from 'rxjs/operators';
+import {FormControl, FormGroup} from '@angular/forms';
 
 import * as models from '../../../shared/interface';
 
@@ -9,12 +17,33 @@ import * as models from '../../../shared/interface';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
+  public form: FormGroup;
+  public showMenu = false;
+  private sub: Subscription;
   @Input() cart: models.Position[];
   @Input() wish$: Observable<models.Position[]>;
-  public showMenu = false;
+  @Input() searchResult = [];
+  @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {
+  ngOnInit(): void {
+    this.createForm();
+    this.searchChanges();
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+  }
+
+  private searchChanges(): void {
+    this.sub = this.form.get('search')
+      .valueChanges
+      .pipe(
+        tap(e => this.search.emit(e))
+      )
+      .subscribe();
   }
 
   public dropdown(): void {
@@ -25,5 +54,15 @@ export class HeaderComponent {
     return cart.reduce((sum, item) => {
       return sum + item.quantity;
     }, 0);
+  }
+
+  public onOpenLink(): void {
+    this.form.reset();
+  }
+
+  private createForm(): void {
+    this.form = new FormGroup({
+      search: new FormControl(''),
+    });
   }
 }

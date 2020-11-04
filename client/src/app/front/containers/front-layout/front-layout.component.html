@@ -1,9 +1,13 @@
 <div class="main">
-  <app-header [cart]="cart$ | async" [wish$]="wish$"></app-header>
-
+  <app-header
+    [cart]="cart$ | async"
+    [wish$]="wish$"
+    [searchResult]="searchResult"
+    (input)="onSearch($event)"
+  ></app-header>
   <main>
     <router-outlet></router-outlet>
   </main>
 
-  <app-footer [categories]="categories$ | async" (submit)="sendMail($event)"></app-footer>
+  <app-footer [categories]="categories$ | async" (submitEmail)="sendMail($event)"></app-footer>
 </div>
