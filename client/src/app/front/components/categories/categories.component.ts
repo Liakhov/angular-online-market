@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-import * as services from '../../../shared/services';
 import * as models from 'src/app/shared/interface';
 
 @Component({
@@ -11,11 +11,9 @@ import * as models from 'src/app/shared/interface';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent {
-  private id: string;
-  public categories$: Observable<models.Product[]>;
+  public category$: Observable<models.Product[]>;
 
-  constructor(private route: ActivatedRoute, private categoryService: services.CategoryService) {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.categories$ = this.categoryService.getAllFromCategory(this.id);
+  constructor(private route: ActivatedRoute) {
+    this.category$ = this.route.data.pipe(map(data => data.category));
   }
 }

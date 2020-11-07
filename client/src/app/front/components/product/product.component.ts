@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import * as models from '../../../shared/interface';
 import * as services from '../../../shared/services';
@@ -12,24 +13,15 @@ import * as constants from '../../../shared/constants';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnDestroy, AfterViewInit {
-  @ViewChild('carousel') carouselBlock: ElementRef;
   public carousel: models.MaterialInstance;
-  public product: models.Product;
-  public productSub: Subscription;
-  public images: [];
-  public loading = false;
+  public product$: Observable<models.Product>;
+  @ViewChild('carousel') carouselBlock: ElementRef;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private productService: services.ProductService
   ) {
-    this.loading = true;
-
-    this.productSub = this.activeRoute.data.subscribe(data => {
-      this.product = data.product;
-      this.images = data.product.images;
-      this.loading = false;
-    });
+    this.product$ = this.activeRoute.data.pipe(map(data => data.product));
   }
 
 
@@ -38,9 +30,6 @@ export class ProductComponent implements OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    if (this.productSub) {
-      this.productSub.unsubscribe();
-    }
     if (this.carousel) {
       this.carousel.destroy();
     }

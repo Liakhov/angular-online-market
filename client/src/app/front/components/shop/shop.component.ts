@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import * as models from '../../../shared/interface';
 
@@ -9,11 +11,11 @@ import * as models from '../../../shared/interface';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent {
-  public products: models.Product[];
+  public products$: Observable<models.Product[]>;
 
   constructor(private activeRoute: ActivatedRoute) {
-    this.activeRoute.data.subscribe(data => {
-      this.products = data.shop;
-    });
+    this.products$ = this.activeRoute.data.pipe(
+      map(data => data.products)
+    );
   }
 }

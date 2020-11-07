@@ -1,12 +1,12 @@
-<div class="wrapper product" *ngIf="!loading; else loader">
-  <h4>{{product.name}}</h4>
+<div class="wrapper product" *ngIf="product$ | async as product; else loader">
+  <h4>{{ product.name }}</h4>
   <div class="product-row">
     <div>
       <div class="carousel" #carousel>
-        <div class="carousel-item" *ngFor="let img of images">
+        <div class="carousel-item" *ngFor="let img of product.images">
           <img src="{{img}}" alt="">
         </div>
-        <div class="carousel-item" *ngIf="!images.length">
+        <div class="carousel-item" *ngIf="!product.images.length">
           <img src="/assets/img/nophoto.png" class="no-img" alt="">
         </div>
       </div>

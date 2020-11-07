@@ -26,7 +26,7 @@ const routes: Routes = [
         path: 'shop',
         component: ShopComponent,
         resolve: {
-          shop: fromResolvers.ShopResolver
+          products: fromResolvers.ShopResolver
         }
       },
       {
@@ -36,10 +36,17 @@ const routes: Routes = [
           product: fromResolvers.ProductResolver
         }
       },
-      {path: 'category/:id', component: CategoriesComponent},
+      {
+        path: 'category/:id', component: CategoriesComponent, resolve: {
+          category: fromResolvers.CategoryResolver
+        }
+      },
       {path: 'cart', loadChildren: () => import('./components/cart/cart.module').then(m => m.CartModule)},
-      {path: 'wish', loadChildren: () => import('./components/wish/wish.module').then(m => m.WishModule) },
-      {path: 'checkout', loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule)},
+      {path: 'wish', loadChildren: () => import('./components/wish/wish.module').then(m => m.WishModule)},
+      {
+        path: 'checkout',
+        loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule)
+      },
       {path: 'contact', loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule)}
     ]
   }
@@ -67,7 +74,8 @@ const routes: Routes = [
   ],
   providers: [
     fromResolvers.ProductResolver,
-    fromResolvers.ShopResolver
+    fromResolvers.ShopResolver,
+    fromResolvers.CategoryResolver
   ]
 })
 export class FrontModule {
