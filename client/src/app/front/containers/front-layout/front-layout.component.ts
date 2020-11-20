@@ -58,7 +58,7 @@ export class FrontLayoutComponent implements OnInit, OnDestroy {
             this.searchResult.length = 0;
           }
         }),
-        filter((query: string) => query && query.length > 0),
+        filter((query: string) => !!query),
         debounceTime(500),
         distinctUntilChanged(),
         switchMap(query => this.searchService.fetch(query).pipe(catchError(() => EMPTY))),

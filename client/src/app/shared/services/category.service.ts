@@ -9,7 +9,8 @@ import * as models from '../interface';
 })
 
 export class CategoryService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   fetch(): Observable<models.Category[]> {
     return this.http.get<models.Category[]>('/api/category');
@@ -35,7 +36,7 @@ export class CategoryService {
     return this.http.patch<models.Category>(`/api/category/${id}`, category);
   }
 
-  create(name: string, description?: string, image?: File): Observable<models.Category> {
+  create(name: string, description?: string, image?: File): Observable<models.ToastMessage> {
     const category = new FormData();
     category.append('name', name);
 
@@ -46,7 +47,7 @@ export class CategoryService {
     if (description) {
       category.append('description', description);
     }
-    return this.http.post<models.Category>('/api/category', category);
+    return this.http.post<models.ToastMessage>('/api/category', category);
   }
 
   remove(id: string): Observable<models.ToastMessage> {

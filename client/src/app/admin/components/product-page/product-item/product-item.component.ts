@@ -139,7 +139,7 @@ export class ProductItemComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.isNew) {
         await this.productService.create(product).pipe(take(1)).toPromise();
         services.MaterialService.toast('Новый товар добавлен');
-        this.router.navigate([`/admin/product`]);
+        await this.router.navigate([`/admin/product`]);
       } else {
         const productUpdate = await this.productService.update(this.id, product).pipe(take(1)).toPromise();
         services.MaterialService.toast('Изменения сохранены');

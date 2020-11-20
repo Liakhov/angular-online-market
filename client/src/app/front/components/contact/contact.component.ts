@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 import * as services from '../../../shared/services';
 
@@ -9,33 +9,23 @@ import * as services from '../../../shared/services';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnDestroy {
+export class ContactComponent {
   public form: FormGroup;
-  private formSub: Subscription;
 
   constructor(private messageService: services.MessageService) {
     this.createForm();
   }
 
-  ngOnDestroy(): void {
-    if (this.formSub) {
-      this.formSub.unsubscribe();
-    }
-  }
-
-  onSubmit() {
+  public async onSubmit(): Promise<void> {
     this.form.disable();
-
-    this.formSub = this.messageService.sendMessage(this.form.value).subscribe(
-      () => {
-        services.MaterialService.toast('Сообщение отправлено');
-        this.form.reset();
-      },
-      error => {
-        console.log(error);
-        this.form.enable();
-      }
-    );
+    try {
+      await this.messageService.sendMessage(this.form.value).pipe(take(1)).toPromise();
+      services.MaterialService.toast('Сообщение отправлено');
+      this.form.reset();
+    } catch (e) {
+      console.log(e);
+      this.form.enable();
+    }
   }
 
   private createForm(): void {

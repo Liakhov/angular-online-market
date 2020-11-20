@@ -3,7 +3,7 @@
     <div class="card teal lighten-1" routerLink="/admin/order">
       <i class="material-icons">shopping_cart</i>
       <div class="card-info">
-        <span class="card-number">{{meta.newOrders}}</span>New Orders
+        <span class="card-number">{{(meta$ | async)?.newOrders}}</span>New Orders
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
     <div class="card indigo lighten-1" routerLink="/admin/product">
       <i class="material-icons">local_offer</i>
       <div class="card-info">
-        <span class="card-number">{{meta.products}}</span>Products
+        <span class="card-number">{{(meta$ | async)?.products}}</span>Products
       </div>
     </div>
   </div>

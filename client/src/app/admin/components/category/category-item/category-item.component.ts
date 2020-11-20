@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {switchMap} from 'rxjs/operators';
-import {Observable, of, Subscription} from 'rxjs';
+import {switchMap, take} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
@@ -12,7 +12,7 @@ import * as models from '../../../../shared/interface';
   templateUrl: './category-item.component.html',
   styleUrls: ['./category-item.component.scss']
 })
-export class CategoryItemComponent implements OnInit, OnDestroy {
+export class CategoryItemComponent implements OnInit {
   @ViewChild('textarea') textarea: ElementRef;
   public form: FormGroup;
   public isNew: boolean;
@@ -21,8 +21,6 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
   public products$: Observable<models.Product[]>;
   private category: models.Category;
   private catId: string;
-  private oSub: Subscription;
-  private removeSub: Subscription;
 
   constructor(
     private router: Router,
@@ -53,13 +51,8 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
         .subscribe(category => {
             if (category) {
               this.category = category;
-              this.form.patchValue({
-                name: category.name,
-                description: category.description
-              });
-
+              this.patchForm(category);
               services.MaterialService.resizeTextArea(this.textarea);
-
               if (category.image && category.image !== 'null') {
                 this.imagePreview = category.image;
               }
@@ -73,15 +66,6 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     this.products$ = this.categoryService.getAllFromCategory(this.catId);
   }
 
-  ngOnDestroy(): void {
-    if (this.oSub) {
-      this.oSub.unsubscribe();
-    }
-    if (this.removeSub) {
-      this.removeSub.unsubscribe();
-    }
-  }
-
   public onFileUpload(event) {
     const target = event.target;
     const file = target.files[0];
@@ -92,30 +76,28 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(file);
   }
 
-  public onSubmit(): void {
-    let obs$;
-
+  public async onSubmit(): Promise<void> {
+    const {value} = this.form;
     if (this.isNew) {
-      obs$ = this.categoryService.create(this.form.value.name, this.form.value.description, this.image);
+      const data = await this.categoryService
+        .create(value.name, value.description, this.image)
+        .pipe(take(1))
+        .toPromise();
+      services.MaterialService.toast(data.message);
+      await this.router.navigate(['/admin/category']);
     } else {
-      obs$ = this.categoryService.update(this.category._id, this.form.value.name, this.form.value.description, this.image);
+      await this.categoryService
+        .update(this.category._id, value.name, value.description, this.image)
+        .pipe(take(1))
+        .toPromise();
+      services.MaterialService.toast('Изменения сохранены');
     }
-
-    this.oSub = obs$.subscribe(data => {
-      if (this.isNew) {
-        services.MaterialService.toast(data.message);
-        this.router.navigate(['/admin/category/']);
-      } else {
-        services.MaterialService.toast('Изменения сохранены');
-      }
-    });
   }
 
-  public remove(): void {
-    this.removeSub = this.categoryService.remove(this.category._id).subscribe(data => {
-      services.MaterialService.toast(data.message);
-      this.router.navigate(['/admin/category/']);
-    });
+  public async remove(): Promise<void> {
+    const data = await this.categoryService.remove(this.category._id).pipe(take(1)).toPromise();
+    services.MaterialService.toast(data.message);
+    await this.router.navigate(['/admin/category']);
   }
 
   public onRemove(): void {
@@ -130,4 +112,10 @@ export class CategoryItemComponent implements OnInit, OnDestroy {
     });
   }
 
+  private patchForm(category: models.Category): void {
+    this.form.patchValue({
+      name: category.name,
+      description: category.description
+    });
+  }
 }

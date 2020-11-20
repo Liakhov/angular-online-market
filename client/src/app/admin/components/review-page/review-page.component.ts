@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import * as models from '../../../shared/interface';
 
@@ -9,13 +11,16 @@ import * as models from '../../../shared/interface';
   styleUrls: ['./review-page.component.scss']
 })
 export class ReviewPageComponent {
-  public meta: models.Meta;
+  public meta$: Observable<models.Meta>;
 
   constructor(private activeRoute: ActivatedRoute) {
-    this.activeRoute.data.subscribe(data => {
-      this.meta = new models.Meta();
-      this.meta.newOrders = data.admin.newOrder.length;
-      this.meta.products = data.admin.products.length;
-    });
+    this.meta$ = this.activeRoute.data.pipe(
+      map(data => {
+        return {
+          newOrders: data.admin.newOrder.length,
+          products: data.admin.products.length
+        };
+      })
+    );
   }
 }

@@ -2,10 +2,17 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 
+import * as fromResolvers from '../../resolvers';
 import {ReviewPageComponent} from './review-page.component';
 
 const routes: Routes = [
-  {path: '', component: ReviewPageComponent}
+  {
+    path: '',
+    resolve: {
+      admin: fromResolvers.AdminPanelResolver
+    },
+    component: ReviewPageComponent
+  }
 ];
 
 @NgModule({
