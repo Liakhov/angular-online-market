@@ -9,7 +9,8 @@ import * as fromComponents from './components';
   declarations: [
     fromComponents.CardComponent,
     fromComponents.UploadImgComponent,
-    fromComponents.LoaderComponent
+    fromComponents.LoaderComponent,
+    fromComponents.ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import * as fromComponents from './components';
   exports: [
     fromComponents.CardComponent,
     fromComponents.UploadImgComponent,
-    fromComponents.LoaderComponent
+    fromComponents.LoaderComponent,
+    fromComponents.ButtonComponent
   ]
 })
 export class SharedModule {

@@ -23,9 +23,10 @@ export class ContactComponent {
       services.MaterialService.toast('Сообщение отправлено');
       this.form.reset();
     } catch (e) {
+      services.MaterialService.toast('Произошла ошибка');
       console.log(e);
-      this.form.enable();
     }
+    this.form.enable();
   }
 
   private createForm(): void {

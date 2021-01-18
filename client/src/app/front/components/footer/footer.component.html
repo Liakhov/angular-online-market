@@ -34,9 +34,15 @@
       <h5>Подписаться</h5>
       <form [formGroup]="form" (submit)="sendMail()">
         <input type="text" placeholder="email@example.com" class="subscribe_input" formControlName="email">
-        <button [disabled]="form.invalid" class="btn waves-effect waves-light subscribe_btn" type="submit"
-                name="action">Subscribe
-        </button>
+        <app-button
+          [type]="'submit'"
+          [isDisabled]="form.invalid"
+          [wavesEffect]="true"
+          [wavesLight]="true"
+          [background]="'blue-dark'"
+        >
+          Subscribe
+        </app-button>
       </form>
     </div>
   </div>

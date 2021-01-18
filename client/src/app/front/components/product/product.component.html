@@ -31,15 +31,17 @@
           {{product.cost}} $
         </div>
         <div class="product-to-cart">
-          <button
-            class="btn waves-effect waves-light cart"
-            type="button"
+          <app-button
+            class="cart"
+            [wavesEffect]="true"
+            [wavesLight]="true"
             (click)="addToCart(product)"
-            [disabled]="!product.quantity"
+            [isDisabled]="!product.quantity"
           >
             <i class="material-icons left">shopping_cart</i>
             Купить
-          </button>
+          </app-button>
+
         </div>
       </div>
       <div class="info-block">

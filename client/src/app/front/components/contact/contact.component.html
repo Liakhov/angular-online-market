@@ -29,7 +29,12 @@
           <textarea id="message" type="text" class="materialize-textarea" formControlName="message"></textarea>
         </div>
 
-        <button class="btn" type="submit" [disabled]="form.invalid">Отправить</button>
+        <app-button
+          [type]="'submit'"
+          [isDisabled]="form.invalid"
+        >
+          Отправить
+        </app-button>
       </form>
     </div>
     <div class="col l6 m6 s12 contact">

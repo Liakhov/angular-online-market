@@ -1,5 +1,7 @@
 @import './assets/styles/index';
 
+$blue-dark: #294057;
+
 *{
   margin: 0;
   padding: 0;
@@ -44,6 +46,9 @@ tr:focus{
 }
 .categories h4{
   margin-bottom: 30px;
+}
+.blue-dark {
+  background-color: $blue-dark;
 }
 
 // Upload image

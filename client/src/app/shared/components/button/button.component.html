@@ -1,0 +1,12 @@
+<button
+  class="btn"
+  name="action"
+  type="{{type}}"
+  [class.waves-effect]="wavesEffect"
+  [class.waves-light]="wavesLight"
+  [class.blue-dark]="background === 'blue-dark'"
+  [disabled]="isDisabled"
+
+>
+  <ng-content></ng-content>
+</button>
