@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+
+  <input type="text" placeholder="Поиск..." formControlName="search">
+
+  <ul class="dropdown" *ngIf="searchResult.length">
+    <li
+      *ngFor="let item of searchResult"
+      (click)="onClickDropdown(item)"
+    >
+      {{ item.name }}
+    </li>
+  </ul>
+
+</form>

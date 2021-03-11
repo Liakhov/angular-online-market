@@ -1,0 +1,17 @@
+<div class="main">
+  <app-header
+    [cart]="cart$ | async"
+    [wish]="wish$ | async"
+    [searchResult]="searchResult"
+    (search)="onSearch($event)"
+  ></app-header>
+
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer
+    [categories]="categories$ | async"
+    (submitEmail)="sendMail($event)"
+  ></app-footer>
+</div>

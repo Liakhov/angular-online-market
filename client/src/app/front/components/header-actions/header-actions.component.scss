@@ -1,0 +1,27 @@
+.btns {
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 23px;
+  }
+}
+
+.header-icon {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  margin-left: auto;
+  width: 35px;
+  color: #294057;
+
+  span {
+    padding-right: 5px;
+  }
+}
+
+.cart,
+.wish {
+  width: 50px;
+}

@@ -8,6 +8,7 @@ export interface Product {
   images?: any;
   description?: string;
 }
+
 export interface Category {
   _id?: string;
   name: string;
@@ -16,6 +17,7 @@ export interface Category {
   description: string;
   quantity: number;
 }
+
 export interface Order {
   _id?: string;
   index?: number;
@@ -28,6 +30,7 @@ export interface Order {
   status?: string;
   address?: string;
 }
+
 export class Position {
   _id: string;
   name: string;
@@ -47,14 +50,18 @@ export interface Message {
   message: string;
   date: number;
 }
+
 export interface Mail {
   email: string;
   date?: Date;
   _id?: string;
 }
+
 export interface MaterialInstance {
   open?(): void;
+
   close?(): void;
+
   destroy?(): void;
 }
 
@@ -66,4 +73,10 @@ export class Meta {
 export class DndMeta {
   eventIndex: number;
   dataIndex: number;
+}
+
+export interface SearchItem {
+  id: string;
+  name: string;
+  type: string;
 }

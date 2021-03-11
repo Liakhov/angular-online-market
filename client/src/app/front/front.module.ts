@@ -4,64 +4,83 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import {HomeContainerComponent} from './containers/home-container/home-container.component';
+import {ProductContainerComponent} from './containers/product-container/product-container.component';
+import {CategoriesContainerComponent} from './containers/categories-container/categories-container.component';
+import {ShopContainerComponent} from './containers/shop-container/shop-container.component';
+import {HomeComponent} from './components/home/home.component';
+import {HeaderComponent} from './components/header/header.component';
+import {LogoComponent} from './components/logo/logo.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {HeaderActionsComponent} from './components/header-actions/header-actions.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {CardComponent} from './components/card/card.component';
 import * as fromResolvers from './resolvers';
-import {FrontLayoutComponent} from './containers/front-layout/front-layout.component';
-import {FrontPageComponent} from './components/front-page/front-page.component';
-import {ProductComponent} from './components/product/product.component';
-import {CategoriesComponent} from './components/categories/categories.component';
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
-import {ShopComponent} from './components/shop/shop.component';
-import {HeaderComponent} from './components/header/header.component';
-import {FooterComponent} from './components/footer/footer.component';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: FrontLayoutComponent,
+    component: HomeContainerComponent,
     children: [
-      {path: '', component: FrontPageComponent, pathMatch: 'full'},
+      {path: '', component: HomeComponent, pathMatch: 'full'},
       {
         path: 'shop',
-        component: ShopComponent,
+        component: ShopContainerComponent,
         resolve: {
           products: fromResolvers.ShopResolver
         }
       },
       {
         path: 'shop/:id',
-        component: ProductComponent,
+        component: ProductContainerComponent,
         resolve: {
           product: fromResolvers.ProductResolver
         }
       },
       {
-        path: 'category/:id', component: CategoriesComponent, resolve: {
+        path: 'category/:id', component: CategoriesContainerComponent, resolve: {
           category: fromResolvers.CategoryResolver
         }
       },
-      {path: 'cart', loadChildren: () => import('./components/cart/cart.module').then(m => m.CartModule)},
-      {path: 'wish', loadChildren: () => import('./components/wish/wish.module').then(m => m.WishModule)},
+      {
+        path: 'cart',
+        loadChildren: () => import('./containers/cart-container/cart-container.module')
+          .then(m => m.CartContainerModule)
+      },
+      {
+        path: 'wish',
+        loadChildren: () => import('./containers/wish-container/wish-container.module')
+          .then(m => m.WishContainerModule)
+      },
       {
         path: 'checkout',
-        loadChildren: () => import('./components/checkout/checkout.module').then(m => m.CheckoutModule)
+        loadChildren: () => import('./containers/checkout-container/checkout-container.module')
+          .then(m => m.CheckoutContainerModule)
       },
-      {path: 'contact', loadChildren: () => import('./components/contact/contact.module').then(m => m.ContactModule)}
+      {
+        path: 'contact',
+        loadChildren: () => import('./containers/contact-container/contact-container.module')
+          .then(m => m.ContactContainerModule)
+      }
     ]
   }
 ];
 
 @NgModule({
   declarations: [
-    FrontLayoutComponent,
-    FrontLayoutComponent,
-    FrontPageComponent,
-    ProductComponent,
-    CategoriesComponent,
-    ShopComponent,
+    HomeContainerComponent,
+    HomeComponent,
+    ProductContainerComponent,
+    CategoriesContainerComponent,
+    ShopContainerComponent,
     HeaderComponent,
-    FooterComponent
+    LogoComponent,
+    MenuComponent,
+    HeaderActionsComponent,
+    FooterComponent,
+    CardComponent
   ],
   imports: [
     FormsModule,

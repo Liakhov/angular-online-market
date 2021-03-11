@@ -1,0 +1,19 @@
+<div class="menu">
+
+  <button type="button" class="btn-menu" (click)="onToggleDropdown()">
+    <img src="/assets/img/menu-button.svg" alt="menu">
+  </button>
+
+  <div [className]="showMenu ? 'menu-block active' : 'wrapper menu-block'">
+    <div class="header-menu">
+      <a
+        *ngFor="let item of menu"
+        routerLink="{{item.url}}"
+        (click)="onToggleDropdown()"
+      >
+        {{item.name}}
+      </a>
+    </div>
+  </div>
+
+</div>

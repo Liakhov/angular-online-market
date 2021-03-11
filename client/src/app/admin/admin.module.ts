@@ -3,13 +3,13 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {AdminLayoutComponent} from './containers/admin-layout/admin-layout.component';
+import {AdminContainerComponent} from './containers/admin-container/admin-container.component';
 import * as fromResolvers from './resolvers';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminLayoutComponent,
+    component: AdminContainerComponent,
     resolve: {
       admin: fromResolvers.AdminPanelResolver
     },
@@ -17,27 +17,33 @@ const routes: Routes = [
       {path: '', redirectTo: 'review', pathMatch: 'full'},
       {
         path: 'review',
-        loadChildren: () => import('./components/review-page/review-page.module').then(m => m.ReviewPageModule)
+        loadChildren: () => import('./containers/review-page-container/review-page-container.module')
+          .then(m => m.ReviewPageContainerModule)
       },
       {
         path: 'order',
-        loadChildren: () => import('./components/order/order.module').then(m => m.OrderModule)
+        loadChildren: () => import('./containers/order-container/order-container.module')
+          .then(m => m.OrderContainerModule)
       },
       {
         path: 'category',
-        loadChildren: () => import('./components/category/category.module').then(m => m.CategoryModule)
+        loadChildren: () => import('./containers/category-container/category-container.module')
+          .then(m => m.CategoryContainerModule)
       },
       {
         path: 'product',
-        loadChildren: () => import('./components/product-page/product-page.module').then(m => m.ProductPageModule)
+        loadChildren: () => import('./containers/product-page-container/product-page-container.module')
+          .then(m => m.ProductPageContainerModule)
       },
       {
         path: 'mail',
-        loadChildren: () => import('./components/mail/mail.module').then(m => m.MailModule)
+        loadChildren: () => import('./containers/mail-container/mail-container.module')
+          .then(m => m.MailContainerModule)
       },
       {
         path: 'message',
-        loadChildren: () => import('./components/message/message.module').then(m => m.MessageModule)
+        loadChildren: () => import('./containers/message-container/message-container.module')
+          .then(m => m.MessageContainerModule)
       }
     ]
   }
@@ -45,7 +51,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AdminLayoutComponent
+    AdminContainerComponent
   ],
   imports: [
     CommonModule,

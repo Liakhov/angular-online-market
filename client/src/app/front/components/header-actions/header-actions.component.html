@@ -1,0 +1,17 @@
+<div class="btns">
+
+  <a routerLink="/wish" class="header-icon wish">
+    <span *ngIf="wish.length">{{ cartQuantity(wish) }}</span>
+    <img src="/assets/img/heart.svg" alt="profile">
+  </a>
+
+  <a routerLink="/admin" class="header-icon">
+    <img src="/assets/img/user.svg" alt="profile">
+  </a>
+
+  <a routerLink="/cart" class="header-icon cart">
+    <span *ngIf="cart.length">{{ cartQuantity(cart) }}</span>
+    <img src="/assets/img/shopping-cart.svg" alt="shoping cart">
+  </a>
+
+</div>

@@ -2,12 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Input, OnDestroy, OnInit,
+  Input,
   Output,
 } from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {FormControl, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
 
 import * as models from '../../../shared/interface';
 
@@ -17,52 +15,18 @@ import * as models from '../../../shared/interface';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
-  public showMenu = false;
-  private sub: Subscription;
+export class HeaderComponent {
   @Input() cart: models.Position[];
-  @Input() wish$: Observable<models.Position[]>;
+  @Input() wish: models.Position[];
   @Input() searchResult = [];
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit(): void {
-    this.createForm();
-    this.searchChanges();
+  constructor(private router: Router) {
   }
 
-  ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
+  public onSearchClick(searchClick: models.SearchItem): void {
+    const url = searchClick.type === 'category' ? '/category/' + searchClick.id : '/shop/' + searchClick.id;
+    this.router.navigate([url]);
   }
 
-  private searchChanges(): void {
-    this.sub = this.form.get('search')
-      .valueChanges
-      .pipe(
-        tap(e => this.search.emit(e))
-      )
-      .subscribe();
-  }
-
-  public dropdown(): void {
-    this.showMenu = !this.showMenu;
-  }
-
-  public cartQuantity(cart): number {
-    return cart.reduce((sum, item) => {
-      return sum + item.quantity;
-    }, 0);
-  }
-
-  public onOpenLink(): void {
-    this.form.reset();
-  }
-
-  private createForm(): void {
-    this.form = new FormGroup({
-      search: new FormControl(''),
-    });
-  }
 }

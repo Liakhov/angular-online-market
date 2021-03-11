@@ -11,6 +11,7 @@ import * as models from '../../../shared/interface';
 })
 export class FooterComponent {
   public form: FormGroup;
+  public year = new Date().getFullYear();
   @Input() categories: models.Category[];
   @Output() submitEmail: EventEmitter<models.Mail> = new EventEmitter<models.Mail>();
 
