@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EffectsModule} from '@ngrx/effects';
 
 import {HomeContainerComponent} from './containers/home-container/home-container.component';
 import {ProductContainerComponent} from './containers/product-container/product-container.component';
@@ -18,13 +19,18 @@ import {CardComponent} from './components/card/card.component';
 import * as fromResolvers from './resolvers';
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
+import * as effects from './store/effects';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeContainerComponent,
     children: [
-      {path: '', component: HomeComponent, pathMatch: 'full'},
+      {
+        path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+      },
       {
         path: 'shop',
         component: ShopContainerComponent,
@@ -71,10 +77,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeContainerComponent,
-    HomeComponent,
     ProductContainerComponent,
     CategoriesContainerComponent,
     ShopContainerComponent,
+    HomeComponent,
     HeaderComponent,
     LogoComponent,
     MenuComponent,
@@ -86,6 +92,7 @@ const routes: Routes = [
     FormsModule,
     CommonModule,
     RouterModule.forChild(routes),
+    EffectsModule.forFeature([effects.CartEffects, effects.WishEffects]),
     HttpClientModule,
     PipesModule,
     ReactiveFormsModule,

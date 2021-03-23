@@ -3,11 +3,9 @@ import {Store, select} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 
-import * as cartActions from '../../../shared/store/actions/cart.action';
+import * as cartActions from '../../store/actions/cart.action';
 import * as models from '../../../shared/interface';
-import * as reducers from '../../../shared/store/reducers';
-
-import {AppState} from '../../../shared/store/state/app.state';
+import * as reducers from '../../store/reducers';
 
 @Component({
   selector: 'app-cart-container',
@@ -19,7 +17,7 @@ export class CartContainerComponent implements OnInit {
   public cart: models.Position[] = [];
   public total: number;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<reducers.State>) {
     this.cart$ = this.store.pipe(select(reducers.getCart));
   }
 

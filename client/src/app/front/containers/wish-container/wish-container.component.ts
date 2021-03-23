@@ -2,11 +2,11 @@ import {Component} from '@angular/core';
 import {Store, select} from '@ngrx/store';
 import {Observable} from 'rxjs';
 
-import {AppState} from '../../../shared/store/state/app.state';
+import {AppState} from '../../../store/app.state';
 
 import * as models from '../../../shared/interface';
-import * as reducers from '../../../shared/store/reducers';
-import * as actions from '../../../shared/store/actions/wish.action';
+import * as reducers from '../../store/reducers';
+import * as actions from '../../store/actions/wish.action';
 
 @Component({
   selector: 'app-wish-container',

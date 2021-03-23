@@ -3,11 +3,10 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 
-import {AppState} from '../store/state/app.state';
+import {AppState} from '../../store/app.state';
 
-import * as cartAction from '../store/actions/cart.action';
-import * as wishAction from '../store/actions/wish.action';
-import {Position, Product, ToastMessage} from '../interface';
+import * as wishAction from '../../front/store/actions/wish.action';
+import * as models from '../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,52 +17,38 @@ export class ProductService {
   constructor(private http: HttpClient, private store: Store<AppState>) {
   }
 
-  public fetch(params: any = {}): Observable<Product[]> {
-    return this.http.get<Product[]>('/api/position', {
+  public fetch(params: any = {}): Observable<models.Product[]> {
+    return this.http.get<models.Product[]>('/api/position', {
       params: new HttpParams({
         fromObject: params
       })
     });
   }
 
-  public getByID(id: string): Observable<Product> {
-    return this.http.get<Product>(`/api/position/${id}`);
+  public getByID(id: string): Observable<models.Product> {
+    return this.http.get<models.Product>(`/api/position/${id}`);
   }
 
-  public create(product): Observable<Product> {
+  public create(product): Observable<models.Product> {
     const fd = this.createFormData(product);
 
-    return this.http.post<Product>('/api/position', fd);
+    return this.http.post<models.Product>('/api/position', fd);
   }
 
-  public update(id, product): Observable<Product> {
+  public update(id, product): Observable<models.Product> {
     const fd = this.createFormData(product);
 
-    return this.http.patch<Product>(`/api/position/${id}`, fd);
+    return this.http.patch<models.Product>(`/api/position/${id}`, fd);
   }
 
-  public remove(id: string): Observable<ToastMessage> {
-    return this.http.delete<ToastMessage>(`/api/position/${id}`);
+  public remove(id: string): Observable<models.ToastMessage> {
+    return this.http.delete<models.ToastMessage>(`/api/position/${id}`);
   }
 
-  public addCart(product: Product): void {
+  public addWishList(product: models.Product): void {
     const img = product.images[0] || '';
 
-    const orderPosition: Position = {
-      _id: product._id,
-      name: product.name,
-      cost: product.cost,
-      image: img,
-      quantity: 1
-    };
-
-    this.store.dispatch(new cartAction.Add(orderPosition));
-  }
-
-  public addWishList(product: Product): void {
-    const img = product.images[0] || '';
-
-    const orderPosition: Position = {
+    const orderPosition: models.Position = {
       _id: product._id,
       name: product.name,
       cost: product.cost,
@@ -74,7 +59,7 @@ export class ProductService {
     this.store.dispatch(new wishAction.Add(orderPosition));
   }
 
-  private createFormData(product: Product): FormData {
+  private createFormData(product: models.Product): FormData {
     const fd = new FormData();
 
     Object.keys(product).forEach(key => {

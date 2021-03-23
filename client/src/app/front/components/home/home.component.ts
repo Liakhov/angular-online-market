@@ -17,8 +17,8 @@ export class HomeComponent {
 
   constructor(
     private categoriesService: services.CategoryService,
-    private productService: services.ProductService) {
-
+    private productService: services.ProductService
+  ) {
     this.categories$ = this.categoriesService.fetch();
     this.products$ = this.productService.fetch({
       limit: this.limit

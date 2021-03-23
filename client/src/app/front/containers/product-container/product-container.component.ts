@@ -2,10 +2,14 @@ import {AfterViewInit, Component, ElementRef, HostListener, OnDestroy, ViewChild
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Store} from '@ngrx/store';
 
 import * as models from '../../../shared/interface';
 import * as services from '../../../shared/services';
 import * as constants from '../../../shared/constants';
+
+import {AppState} from '../../../store/app.state';
+import * as actions from '../../store/actions/cart.action';
 
 @Component({
   selector: 'app-product-container',
@@ -19,7 +23,7 @@ export class ProductContainerComponent implements OnDestroy, AfterViewInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private productService: services.ProductService
+    private store: Store<AppState>
   ) {
     this.product$ = this.activeRoute.data.pipe(map(data => data.product));
   }
@@ -40,6 +44,13 @@ export class ProductContainerComponent implements OnDestroy, AfterViewInit {
   }
 
   public addToCart(product): void {
-    this.productService.addCart(product);
+    const item: models.Position = {
+      _id: product._id,
+      name: product.name,
+      cost: product.cost,
+      image: product.images[0] || '',
+      quantity: 1
+    };
+    this.store.dispatch(new actions.Add(item));
   }
 }

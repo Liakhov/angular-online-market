@@ -5,8 +5,10 @@ import {catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, 
 
 import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';
-import * as state from '../../../shared/store/state/app.state';
-import * as reducers from '../../../shared/store/reducers';
+
+import * as reducers from '../../store/reducers';
+import * as cartActions from '../../store/actions/cart.action';
+import * as wishActions from '../../store/actions/wish.action';
 
 @Component({
   selector: 'app-home-container',
@@ -23,16 +25,20 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private mailService: services.MailService,
-    private store: Store<state.AppState>,
+    private store$: Store<reducers.State>,
     private categoriesService: services.CategoryService,
-    private searchService: services.SearchService) {
-    this.cart$ = this.store.pipe(select(reducers.getCart));
-    this.wish$ = this.store.pipe(select(reducers.getWish));
+    private searchService: services.SearchService,
+    private storageService: services.StorageService
+  ) {
     this.categories$ = this.categoriesService.fetch();
+    this.cart$ = this.store$.pipe(select(reducers.getCart));
+    this.wish$ = this.store$.pipe(select(reducers.getWish));
   }
 
   ngOnInit(): void {
     this.searchChanges();
+    this.initCart();
+    this.initWish();
   }
 
   ngOnDestroy(): void {
@@ -69,5 +75,19 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
 
   public onSearch(event): void {
     this.search.next(event);
+  }
+
+  private async initCart(): Promise<void> {
+    const cart = await this.storageService.get('cart').pipe(take(1)).toPromise();
+    if (cart && cart.length) {
+      this.store$.dispatch(new cartActions.AddSuccess(cart));
+    }
+  }
+
+  private async initWish(): Promise<void> {
+    const wish = await this.storageService.get('wish').pipe(take(1)).toPromise();
+    if (wish && wish.length) {
+      this.store$.dispatch(new wishActions.AddSuccess(wish));
+    }
   }
 }

@@ -4,12 +4,12 @@ import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 
-import {AppState} from '../../../shared/store/state/app.state';
+import {AppState} from '../../../store/app.state';
 
 import * as models from '../../../shared/interface';
-import * as actions from '../../../shared/store/actions/cart.action';
+import * as actions from '../../store/actions/cart.action';
 import * as services from '../../../shared/services';
-import * as reducers from '../../../shared/store/reducers';
+import * as reducers from '../../store/reducers';
 
 @Component({
   selector: 'app-checkout-container',

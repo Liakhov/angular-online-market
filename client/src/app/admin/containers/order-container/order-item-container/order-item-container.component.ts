@@ -4,12 +4,12 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {take} from 'rxjs/operators';
 
-import {AppState} from '../../../../shared/store/state/app.state';
+import {AppState} from '../../../../store/app.state';
 
 import * as services from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
 import * as constants from '../../../../shared/constants';
-import * as actions from '../../../../shared/store/actions/meta.action';
+import * as actions from '../../../store/actions/orders.action';
 
 
 @Component({
@@ -51,6 +51,7 @@ export class OrderItemContainerComponent implements OnInit, AfterViewInit {
   public async remove(): Promise<void> {
     try {
       const data = await this.orderService.remove(this.id).pipe(take(1)).toPromise();
+      this.store.dispatch(new actions.Remove(this.id));
       services.MaterialService.toast(data.message);
       this.routing.navigateByUrl('/admin/order');
     } catch (e) {
@@ -95,7 +96,7 @@ export class OrderItemContainerComponent implements OnInit, AfterViewInit {
     if (status === 'new') {
       const orders = [];
       orders.push(this.id);
-      this.store.dispatch(new actions.Add(orders));
+      this.store.dispatch(new actions.Init(orders));
     }
 
     if (status === 'processing' || status === 'completed') {
