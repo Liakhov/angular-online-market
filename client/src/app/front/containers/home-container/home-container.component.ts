@@ -27,8 +27,7 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
     private mailService: services.MailService,
     private store$: Store<reducers.State>,
     private categoriesService: services.CategoryService,
-    private searchService: services.SearchService,
-    private storageService: services.StorageService
+    private searchService: services.SearchService
   ) {
     this.categories$ = this.categoriesService.fetch();
     this.cart$ = this.store$.pipe(select(reducers.getCart));
@@ -37,8 +36,8 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchChanges();
-    this.initCart();
-    this.initWish();
+    this.store$.dispatch(new cartActions.Init());
+    this.store$.dispatch(new wishActions.Init());
   }
 
   ngOnDestroy(): void {
@@ -75,19 +74,5 @@ export class HomeContainerComponent implements OnInit, OnDestroy {
 
   public onSearch(event): void {
     this.search.next(event);
-  }
-
-  private async initCart(): Promise<void> {
-    const cart = await this.storageService.get('cart').pipe(take(1)).toPromise();
-    if (cart && cart.length) {
-      this.store$.dispatch(new cartActions.AddSuccess(cart));
-    }
-  }
-
-  private async initWish(): Promise<void> {
-    const wish = await this.storageService.get('wish').pipe(take(1)).toPromise();
-    if (wish && wish.length) {
-      this.store$.dispatch(new wishActions.AddSuccess(wish));
-    }
   }
 }

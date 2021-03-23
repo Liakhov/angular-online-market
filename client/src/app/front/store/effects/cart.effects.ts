@@ -13,6 +13,19 @@ import * as actions from '../actions/cart.action';
 export class CartEffects {
 
   @Effect()
+  initCart$ = this.actions$.pipe(
+    ofType<actions.Init>(actions.INIT),
+    switchMap(() => {
+      return this.storageService.get('cart').pipe(
+        map(storage => {
+          const cart = storage || [];
+          return new actions.InitSuccess(cart);
+        })
+      );
+    })
+  );
+
+  @Effect()
   addCart$ = this.actions$.pipe(
     ofType<actions.Add>(actions.ADD),
     switchMap(({payload}) => {

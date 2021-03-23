@@ -13,6 +13,19 @@ import * as actions from '../actions/wish.action';
 export class WishEffects {
 
   @Effect()
+  initWish$ = this.actions$.pipe(
+    ofType<actions.Init>(actions.INIT),
+    switchMap(() => {
+      return this.storageService.get('wish').pipe(
+        map(storage => {
+          const wish = storage || [];
+          return new actions.InitSuccess(wish);
+        })
+      );
+    })
+  );
+
+  @Effect()
   addWish$ = this.actions$.pipe(
     ofType<actions.Add>(actions.ADD),
     switchMap(({payload}) => {
