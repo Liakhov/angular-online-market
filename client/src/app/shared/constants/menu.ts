@@ -26,12 +26,8 @@ export const ADMIN_MENU = [
 ];
 export const FRONT_MENU = [
   {
-    url: '/',
-    name: 'Главная'
-  },
-  {
     url: '/shop',
-    name: 'Магазин'
+    name: 'Каталог'
   },
   {
     url: '/contact',

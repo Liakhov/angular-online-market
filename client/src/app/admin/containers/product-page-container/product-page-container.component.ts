@@ -16,7 +16,8 @@ export class ProductPageContainerComponent {
 
   constructor(
     private productService: services.ProductService,
-    private categoryService: services.CategoryService) {
+    private categoryService: services.CategoryService
+  ) {
     this.product$ = this.productService.fetch();
     this.cat$ = this.categoryService.fetch();
   }

@@ -2,6 +2,16 @@ const mongose = require('mongoose');
 const Schema = mongose.Schema;
 
 const positionSchema = new Schema({
+    active: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    recommend: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     name: {
         type: String,
         required: true
@@ -15,7 +25,7 @@ const positionSchema = new Schema({
         type: Schema.Types.ObjectID
     },
     categoryName: {
-      type: String
+        type: String
     },
     quantity: {
         type: Number

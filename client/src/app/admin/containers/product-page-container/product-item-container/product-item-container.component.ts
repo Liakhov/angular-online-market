@@ -122,6 +122,8 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
 
   public async onSubmit(): Promise<void> {
     const product: models.Product = {
+      active: this.form.value.active,
+      recommend: this.form.value.recommend,
       cost: this.form.value.cost,
       name: this.form.value.name,
       quantity: this.form.value.quantity,
@@ -152,6 +154,8 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
 
   private createForm(): void {
     this.form = new FormGroup({
+      active: new FormControl(null),
+      recommend: new FormControl(null),
       name: new FormControl(null, Validators.required),
       cost: new FormControl(null, [Validators.required, Validators.min(0)]),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
@@ -162,6 +166,8 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
 
   private patchForm(data): void {
     this.form.patchValue({
+      active: data.active,
+      recommend: data.recommend,
       name: data.name,
       cost: data.cost,
       quantity: data.quantity,

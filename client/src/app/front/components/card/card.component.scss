@@ -1,13 +1,15 @@
-.cart-prod{
+.cart-prod {
   display: inline-flex;
   flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
-  a{
+
+  a {
     text-align: center;
   }
 }
-.prod-title{
+
+.prod-title {
   margin-top: 10px;
   margin-bottom: 8px;
   color: #294057;
@@ -15,23 +17,28 @@
   text-align: left;
   height: 44px;
   overflow: hidden;
-  &:hover{
+
+  &:hover {
     color: #B99867;
   }
 }
-.prod-thumbnail{
+
+.prod-thumbnail {
   max-height: 220px;
 }
-.price{
+
+.price {
   font-size: 24px;
   text-align: left;
   color: #333333;
 }
-.cart-prod_bottom{
+
+.cart-prod_bottom {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.cart{
+
+.cart {
   margin-left: 0.5rem;
 }

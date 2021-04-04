@@ -1,71 +1,91 @@
-.form-roform{
+.form-roform {
   margin: 10px auto 30px;
 }
-.form-header{
+
+.form-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.form-body{
+
+.form-body {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
   margin-bottom: 10px;
-  .name{
+
+  .name {
     width: 100%;
     margin-right: 2%;
   }
-  .category{
+
+  .category {
     width: 50%;
     padding-top: 5px;
   }
-  .cost{
+
+  .cost {
     width: 20%;
     margin: 0 1%;
   }
-  .quantity{
+
+  .quantity {
     width: 20%;
     margin-left: 1%;
   }
+
+  .checkbox {
+    margin-left: .75rem;
+  }
 }
-.description{
+
+.description {
   width: 100%;
   margin: 50px auto;
 }
-h5{
+
+h5 {
   margin-bottom: 20px;
 }
-.remove-btn{
+
+.remove-btn {
   margin-right: 15px;
 }
-@media (max-width: 600px){
-  .form-header{
+
+@media (max-width: 600px) {
+  .form-header {
     flex-direction: column;
   }
-  .form-body{
+  .form-body {
     flex-wrap: wrap;
-    .name{
+
+    .name {
       width: 100%;
     }
-    .description{
+
+    .description {
       width: 100%;
     }
-    .category{
+
+    .category {
       margin-left: 0;
     }
   }
 }
-@media (max-width: 480px){
-  .form-body{
-    .category{
+
+@media (max-width: 480px) {
+  .form-body {
+    .category {
       width: 100%;
     }
-    .cost{
+
+    .cost {
       width: 40%;
       margin: 0;
     }
-    .quantity{
+
+    .quantity {
       width: 40%;
     }
   }

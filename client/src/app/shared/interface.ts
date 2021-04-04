@@ -1,5 +1,7 @@
 export interface Product {
   _id?: string;
+  active: boolean;
+  recommend: boolean;
   name: string;
   cost: number;
   quantity: number;
@@ -79,4 +81,9 @@ export interface SearchItem {
   id: string;
   name: string;
   type: string;
+}
+
+export interface HomeProductList {
+  recommended: Array<Position>;
+  newItems: Array<Position>;
 }

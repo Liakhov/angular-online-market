@@ -13,6 +13,7 @@ import * as models from '../../../shared/interface';
 export class HomeComponent {
   public categories$: Observable<models.Category[]>;
   public products$: Observable<models.Product[]>;
+  public list$: Observable<models.HomeProductList>;
   public limit = 4;
 
   constructor(
@@ -23,5 +24,6 @@ export class HomeComponent {
     this.products$ = this.productService.fetch({
       limit: this.limit
     });
+    this.list$ = this.productService.getHomeProductList();
   }
 }

@@ -10,6 +10,7 @@
     <th>Категория</th>
     <th>Количество</th>
     <th>Цена</th>
+    <th></th>
   </tr>
   </thead>
   <tbody class="table-list">
@@ -18,6 +19,10 @@
     <td>{{item.categoryName}}</td>
     <td>{{item.quantity}}</td>
     <td>{{item.cost}}</td>
+    <td class="td-icon">
+      <img src="/assets/img/star{{item.recommend ? '-active' : ''}}.svg" title="Рекомендуемый" alt="Рекомендуемый">
+      <img src="/assets/img/lamp{{item.active ? '-active' : ''}}.svg" title="Активный" alt="Активный">
+    </td>
   </tr>
   </tbody>
 </table>

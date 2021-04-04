@@ -29,6 +29,10 @@ export class ProductService {
     return this.http.get<models.Product>(`/api/position/${id}`);
   }
 
+  public getHomeProductList(): Observable<models.HomeProductList> {
+    return this.http.get<models.HomeProductList>('/api/position/homeProductList');
+  }
+
   public create(product): Observable<models.Product> {
     const fd = this.createFormData(product);
 
