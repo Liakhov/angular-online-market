@@ -34,15 +34,11 @@
             </div>
             <div class="checkout-right">
               <label>
-                <input name="delivery" type="radio" checked/>
+                <input name="delivery" formControlName="delivery" value="{{delivery.picksUp}}" type="radio" checked/>
                 <span>Самовывоз</span>
               </label>
               <label>
-                <input name="delivery" type="radio" checked/>
-                <span>Курьер по вашему адресу</span>
-              </label>
-              <label>
-                <input name="delivery" type="radio" checked/>
+                <input name="delivery" formControlName="delivery" value="{{delivery.courier}}" type="radio" checked/>
                 <span>Курьер по вашему адресу</span>
               </label>
             </div>
@@ -53,11 +49,11 @@
             </div>
             <div class="checkout-right">
               <label>
-                <input name="payment" type="radio" checked/>
+                <input name="payment" type="radio" formControlName="payment" value="{{payment.cash}}" checked/>
                 <span>Наличными</span>
               </label>
               <label>
-                <input name="payment" type="radio" checked/>
+                <input name="payment" type="radio" formControlName="payment" value="{{payment.card}}" checked/>
                 <span>Безналичными</span>
               </label>
             </div>

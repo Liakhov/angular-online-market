@@ -31,6 +31,18 @@ export interface Order {
   date?: Date;
   status?: string;
   address?: string;
+  payment?: Payment;
+  delivery?: Delivery;
+}
+
+export enum Payment {
+  card = 'card',
+  cash = 'cash'
+}
+
+export enum Delivery {
+  courier = 'courier',
+  picksUp = 'picks-up'
 }
 
 export class Position {
@@ -61,9 +73,7 @@ export interface Mail {
 
 export interface MaterialInstance {
   open?(): void;
-
   close?(): void;
-
   destroy?(): void;
 }
 

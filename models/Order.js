@@ -32,6 +32,14 @@ const orderSchema = new Schema({
     },
     address: {
         type: String
+    },
+    delivery: {
+        type: String,
+        default: 'picks-up'
+    },
+    payment: {
+        type: String,
+        default: 'cash'
     }
 });
 module.exports = mongose.model('order', orderSchema);

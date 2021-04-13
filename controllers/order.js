@@ -3,7 +3,7 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.getAll = async function (req, res) {
     try {
-        const order = await Order.find();
+        const order = await Order.find().sort({date: -1});
         res.status(200).json(order);
     } catch (e) {
         errorHandler(res, e)
@@ -30,7 +30,9 @@ module.exports.create = async function (req, res) {
             email: req.body.email,
             comment: req.body.comment,
             list: req.body.list,
-            address: req.body.address
+            address: req.body.address,
+            payment: req.body.payment,
+            delivery: req.body.delivery
         });
 
         await order.save();
@@ -50,7 +52,9 @@ module.exports.update = async function (req, res) {
         email: req.body.email,
         status: req.body.status,
         list: req.body.list,
-        address: req.body.address
+        address: req.body.address,
+        payment: req.body.payment,
+        delivery: req.body.delivery
     };
     try {
         await Order.findOneAndUpdate(

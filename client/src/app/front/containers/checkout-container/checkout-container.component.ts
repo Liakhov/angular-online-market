@@ -18,6 +18,8 @@ import * as reducers from '../../store/reducers';
 })
 export class CheckoutContainerComponent implements AfterViewInit {
   @ViewChild('modal') modalElem: ElementRef;
+  public payment = models.Payment;
+  public delivery = models.Delivery;
   private cart$: Observable<models.Position[]>;
   public modal: models.MaterialInstance;
   public form: FormGroup;
@@ -41,7 +43,9 @@ export class CheckoutContainerComponent implements AfterViewInit {
       email: this.form.value.email,
       tel: this.form.value.telephone,
       list: cart,
-      address: this.form.value.address
+      address: this.form.value.address,
+      delivery: this.form.value.delivery,
+      payment: this.form.value.payment
     };
 
     if (this.form.value.comment) {
@@ -63,7 +67,9 @@ export class CheckoutContainerComponent implements AfterViewInit {
       telephone: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       comment: new FormControl(null),
-      address: new FormControl(null)
+      address: new FormControl(null),
+      delivery: new FormControl(models.Delivery.picksUp, Validators.required),
+      payment: new FormControl(models.Payment.cash, Validators.required)
     });
   }
 

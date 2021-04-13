@@ -9,6 +9,6 @@ import * as moment from 'moment';
 export class DatePipe implements PipeTransform {
 
   transform(item: Date): string {
-    return moment(item).format('DD.MM.YYYY, h:mm a');
+    return moment(item).format('DD-MM-YYYY, HH:mm:ss');
   }
 }
