@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {catchError, mergeMap} from 'rxjs/operators';
 import {EMPTY, of} from 'rxjs';
 
-import * as services from './../../shared/services';
+import * as services from '../services';
 
 @Injectable()
 export class ShopResolver implements Resolve<any> {

@@ -5,12 +5,9 @@ import {Store} from '@ngrx/store';
 
 import {AppState} from '../../store/app.state';
 
-import * as wishAction from '../../front/store/actions/wish.action';
-import * as models from '../interface';
+import * as models from '../../shared/interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class ProductService {
 
@@ -18,7 +15,7 @@ export class ProductService {
   }
 
   public fetch(params: any = {}): Observable<models.Product[]> {
-    return this.http.get<models.Product[]>('/api/position', {
+    return this.http.get<models.Product[]>('/api/admin/position', {
       params: new HttpParams({
         fromObject: params
       })
@@ -26,41 +23,23 @@ export class ProductService {
   }
 
   public getByID(id: string): Observable<models.Product> {
-    return this.http.get<models.Product>(`/api/position/${id}`);
-  }
-
-  public getHomeProductList(): Observable<models.HomeProductList> {
-    return this.http.get<models.HomeProductList>('/api/position/homeProductList');
+    return this.http.get<models.Product>(`/api/admin/position/${id}`);
   }
 
   public create(product): Observable<models.Product> {
     const fd = this.createFormData(product);
 
-    return this.http.post<models.Product>('/api/position', fd);
+    return this.http.post<models.Product>('/api/admin/position', fd);
   }
 
   public update(id, product): Observable<models.Product> {
     const fd = this.createFormData(product);
 
-    return this.http.patch<models.Product>(`/api/position/${id}`, fd);
+    return this.http.patch<models.Product>(`/api/admin/position/${id}`, fd);
   }
 
   public remove(id: string): Observable<models.ToastMessage> {
-    return this.http.delete<models.ToastMessage>(`/api/position/${id}`);
-  }
-
-  public addWishList(product: models.Product): void {
-    const img = product.images[0] || '';
-
-    const orderPosition: models.Position = {
-      _id: product._id,
-      name: product.name,
-      cost: product.cost,
-      image: img,
-      quantity: 1
-    };
-
-    this.store.dispatch(new wishAction.Add(orderPosition));
+    return this.http.delete<models.ToastMessage>(`/api/admin/position/${id}`);
   }
 
   private createFormData(product: models.Product): FormData {

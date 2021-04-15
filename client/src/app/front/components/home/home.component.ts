@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import * as services from '../../../shared/services';
+import * as services from '../../services';
+import * as sharedServices from '../../../shared/services';
 import * as models from '../../../shared/interface';
 
 @Component({
@@ -17,7 +18,7 @@ export class HomeComponent {
   public limit = 4;
 
   constructor(
-    private categoriesService: services.CategoryService,
+    private categoriesService: sharedServices.CategoryService,
     private productService: services.ProductService
   ) {
     this.categories$ = this.categoriesService.fetch();

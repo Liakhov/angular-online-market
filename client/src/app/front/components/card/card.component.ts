@@ -1,11 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 
-import * as services from '../../../shared/services';
+import * as sharedServices from '../../../shared/services';
+import * as services from '../../services';
 import * as models from '../../../shared/interface';
 
 import {AppState} from '../../../store/app.state';
 import * as cartAction from '../../store/actions/cart.action';
+import * as wishAction from '../../store/actions/wish.action';
 
 @Component({
   selector: 'app-card',
@@ -17,7 +19,7 @@ export class CardComponent {
 
   constructor(
     private productService: services.ProductService,
-    private storageService: services.StorageService,
+    private storageService: sharedServices.StorageService,
     private store: Store<AppState>
   ) {
   }
@@ -34,6 +36,16 @@ export class CardComponent {
   }
 
   public addToWishList(product): void {
-    this.productService.addWishList(product);
+    const img = product.images[0] || '';
+
+    const orderPosition: models.Position = {
+      _id: product._id,
+      name: product.name,
+      cost: product.cost,
+      image: img,
+      quantity: 1
+    };
+
+    this.store.dispatch(new wishAction.Add(orderPosition));
   }
 }

@@ -20,6 +20,7 @@ import * as fromResolvers from './resolvers';
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
 import * as effects from './store/effects';
+import * as services from './services';
 
 const routes: Routes = [
   {
@@ -101,7 +102,8 @@ const routes: Routes = [
   providers: [
     fromResolvers.ProductResolver,
     fromResolvers.ShopResolver,
-    fromResolvers.CategoryResolver
+    fromResolvers.CategoryResolver,
+    services.ProductService
   ]
 })
 export class FrontModule {

@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 
 import {AdminContainerComponent} from './containers/admin-container/admin-container.component';
 import * as fromResolvers from './resolvers';
+import * as services from './services';
 
 const routes: Routes = [
   {
@@ -59,7 +60,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    fromResolvers.AdminPanelResolver
+    fromResolvers.AdminPanelResolver,
+    services.ProductService
   ]
 })
 export class AdminModule {

@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {switchMap, take} from 'rxjs/operators';
 
 import * as services from '../../../../shared/services';
+import * as adminService from '../../../services';
 import * as models from '../../../../shared/interface';
 
 @Component({
@@ -25,7 +26,7 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
 
   constructor(
     private router: Router,
-    private productService: services.ProductService,
+    private productService: adminService.ProductService,
     private activeRouter: ActivatedRoute,
     private categoryService: services.CategoryService
   ) {

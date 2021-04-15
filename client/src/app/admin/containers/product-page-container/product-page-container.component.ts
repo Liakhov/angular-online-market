@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 
 import * as models from '../../../shared/interface';
 import * as services from '../../../shared/services';
+import * as adminService from '../../services';
 
 @Component({
   selector: 'app-product-page-container',
@@ -15,7 +16,7 @@ export class ProductPageContainerComponent {
   public cat$: Observable<models.Category[]>;
 
   constructor(
-    private productService: services.ProductService,
+    private productService: adminService.ProductService,
     private categoryService: services.CategoryService
   ) {
     this.product$ = this.productService.fetch();

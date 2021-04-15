@@ -10,6 +10,7 @@ const messageRoutes = require('./routes/message');
 const orderRoutes = require('./routes/order');
 const metaRoutes = require('./routes/meta');
 const searchRoutes = require('./routes/search');
+const positionAdminRoutes = require('./routes/position-admin');
 
 const app = express();
 
@@ -41,6 +42,9 @@ app.use('/api/message', messageRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/meta', metaRoutes);
 app.use('/api/search', searchRoutes);
+
+// Admin routes
+app.use('/api/admin/position', positionAdminRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/dist/angular-online-market'));
