@@ -4,6 +4,7 @@ export interface Product {
   recommend: boolean;
   name: string;
   cost: number;
+  costOld?: number;
   quantity: number;
   category?: string;
   categoryName?: string;

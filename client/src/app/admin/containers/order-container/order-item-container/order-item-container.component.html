@@ -60,13 +60,13 @@
         <b>Email:</b> {{order.email}}
       </div>
       <div class="order-row">
-        <b>Адрес:</b> {{order.address}}
+        <b>Адрес:</b> {{order.address || '-'}}
       </div>
       <div class="order-row">
-        <b>Доставка:</b> {{order.delivery}}
+        <b>Доставка:</b> {{order.delivery === 'picks-up' ? 'Самовывоз' : 'Курьер'}}
       </div>
       <div class="order-row">
-        <b>Оплата:</b> {{order.payment}}
+        <b>Оплата:</b> {{order.payment === 'cash' ? 'Наличные' : 'Безналичный расчет'}}
       </div>
     </div>
   </div>

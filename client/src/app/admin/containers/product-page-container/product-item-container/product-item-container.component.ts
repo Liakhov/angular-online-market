@@ -125,6 +125,7 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
       active: this.form.value.active,
       recommend: this.form.value.recommend,
       cost: this.form.value.cost,
+      costOld: this.form.value.costOld,
       name: this.form.value.name,
       quantity: this.form.value.quantity,
       images: this.files
@@ -158,6 +159,7 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
       recommend: new FormControl(null),
       name: new FormControl(null, Validators.required),
       cost: new FormControl(null, [Validators.required, Validators.min(0)]),
+      costOld: new FormControl(null, Validators.min(0)),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
       category: new FormControl(null),
       description: new FormControl(null)
@@ -170,6 +172,7 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
       recommend: data.recommend,
       name: data.name,
       cost: data.cost,
+      costOld: data.costOld,
       quantity: data.quantity,
       category: data.category,
       description: data.description

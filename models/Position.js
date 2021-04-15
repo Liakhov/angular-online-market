@@ -20,6 +20,9 @@ const positionSchema = new Schema({
         type: Number,
         required: true
     },
+    costOld: {
+        type: Number
+    },
     category: {
         ref: 'category',
         type: Schema.Types.ObjectID

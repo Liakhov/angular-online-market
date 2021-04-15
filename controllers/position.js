@@ -37,6 +37,7 @@ module.exports.create = async function (req, res) {
         const position = await new Position({
             name: req.body.name,
             cost: req.body.cost,
+            costOld: req.body.costOld,
             quantity: req.body.quantity,
             category: req.body.category,
             description: req.body.description,
@@ -72,6 +73,7 @@ module.exports.update = async function (req, res) {
         recommend: req.body.recommend,
         name: req.body.name,
         cost: req.body.cost,
+        costOld: req.body.costOld,
         quantity: req.body.quantity,
         category: req.body.category,
         description: req.body.description,

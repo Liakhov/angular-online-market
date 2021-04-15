@@ -8,6 +8,6 @@
 <div class="wrapper">
   <h2>Рекомендуемые товары</h2>
   <div class="row">
-    <app-card *ngFor="let recommend of (list$ | async).recommended" [product]="recommend"></app-card>
+    <app-card *ngFor="let recommend of (list$ | async)?.recommended" [product]="recommend"></app-card>
   </div>
 </div>
