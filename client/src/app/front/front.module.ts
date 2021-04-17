@@ -16,6 +16,8 @@ import {MenuComponent} from './components/menu/menu.component';
 import {HeaderActionsComponent} from './components/header-actions/header-actions.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {CardComponent} from './components/card/card.component';
+import {TabsComponent} from './components/tabs/tabs.component';
+import {TabComponent} from './components/tab/tab.component';
 import * as fromResolvers from './resolvers';
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
@@ -87,7 +89,9 @@ const routes: Routes = [
     MenuComponent,
     HeaderActionsComponent,
     FooterComponent,
-    CardComponent
+    CardComponent,
+    TabsComponent,
+    TabComponent
   ],
   imports: [
     FormsModule,

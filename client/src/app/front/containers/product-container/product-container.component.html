@@ -59,10 +59,17 @@
       </div>
     </div>
   </div>
-  <div class="description">
-    <h5>Описание</h5>
-    <div [innerHTML]="product.description"></div>
-  </div>
+  <app-tabs>
+    <app-tab tabTitle="Описание" active>
+      <div [innerHTML]="product.description"></div>
+    </app-tab>
+    <app-tab tabTitle="Характеристики">
+      Характеристики
+    </app-tab>
+    <app-tab tabTitle="Отзывы">
+      Отзывы
+    </app-tab>
+  </app-tabs>
 </div>
 <ng-template #loader>
   <app-loader></app-loader>

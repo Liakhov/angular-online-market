@@ -1,0 +1,40 @@
+@import "~src/assets/styles/colors";
+
+ul {
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  cursor: pointer;
+  font-size: 20px;
+  padding: 18px 48px;
+  border-bottom: 2px solid transparent;
+  color: inherit;
+  font-weight: 500;
+  border-radius: 3px 3px 0 0;
+  transition: all .15s;
+
+  &.active {
+    border-bottom-color: $blue-dark;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    padding: 14px 36px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 10px;
+    padding: 6px 14px;
+  }
+}
+
+.tabs-content {
+  display: flex;
+}
