@@ -1,0 +1,9 @@
+@import "~src/assets/styles/colors";
+
+.circle {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: $grey;
+}

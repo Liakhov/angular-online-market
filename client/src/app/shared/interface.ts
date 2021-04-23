@@ -98,3 +98,11 @@ export interface HomeProductList {
   recommended: Array<Position>;
   newItems: Array<Position>;
 }
+
+export interface Brand {
+  _id?: string;
+  name: string;
+  description: string;
+  active: boolean;
+  logo: any;
+}

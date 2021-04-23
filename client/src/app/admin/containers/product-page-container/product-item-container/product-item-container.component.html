@@ -54,6 +54,7 @@
       <h6>Изображения</h6>
       <app-upload-img
         [images]="images"
+        [multiple]="true"
         (files)="onFilesUpload($event)"
         (removeImg)="onRemoveImg($event)"
         (dndImg)="onDndImg($event)">

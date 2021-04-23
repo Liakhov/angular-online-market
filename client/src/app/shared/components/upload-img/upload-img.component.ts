@@ -10,6 +10,7 @@ import * as models from '../../interface';
 })
 export class UploadImgComponent {
   @Input() images = [];
+  @Input() multiple = false;
   @Output() files: EventEmitter<File[]> = new EventEmitter<File[]>();
   @Output() dndImg: EventEmitter<models.DndMeta> = new EventEmitter<models.DndMeta>();
   @Output() removeImg: EventEmitter<number> = new EventEmitter<number>();

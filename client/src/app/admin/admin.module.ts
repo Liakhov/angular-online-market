@@ -37,6 +37,11 @@ const routes: Routes = [
           .then(m => m.ProductPageContainerModule)
       },
       {
+        path: 'brands',
+        loadChildren: () => import('./containers/brand-container/brand-container.module')
+          .then(m => m.BrandContainerModule)
+      },
+      {
         path: 'mail',
         loadChildren: () => import('./containers/mail-container/mail-container.module')
           .then(m => m.MailContainerModule)

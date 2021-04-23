@@ -12,6 +12,6 @@
 
 <div class="thumbnail file-field">
   <img src="assets/img/cloud-computing.svg" class="thumbnail_default" alt="">
-  <input id="file-input" type="file" (change)="onFileUpload($event)" multiple>
+  <input id="file-input" type="file" (change)="onFileUpload($event)" [multiple]="multiple">
   <label for="file-input">Выберите или перетащите файл</label>
 </div>

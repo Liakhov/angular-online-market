@@ -11,7 +11,8 @@ import * as fromComponents from './components';
     fromComponents.UploadImgComponent,
     fromComponents.LoaderComponent,
     fromComponents.ButtonComponent,
-    fromComponents.SearchFormComponent
+    fromComponents.SearchFormComponent,
+    fromComponents.CircleComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,8 @@ import * as fromComponents from './components';
     fromComponents.UploadImgComponent,
     fromComponents.LoaderComponent,
     fromComponents.ButtonComponent,
-    fromComponents.SearchFormComponent
+    fromComponents.SearchFormComponent,
+    fromComponents.CircleComponent
   ]
 })
 export class SharedModule {

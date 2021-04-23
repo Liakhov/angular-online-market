@@ -50,7 +50,7 @@ export class ProductService {
       if (Array.isArray(product[key])) {
         for (const item of product[key]) {
           if (item instanceof File) {
-            fd.append('image', item, item['name']);
+            fd.append('image', item, item.name);
           } else {
             fd.append(`${key}[]`, item);
           }

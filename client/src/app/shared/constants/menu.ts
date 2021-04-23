@@ -16,6 +16,10 @@ export const ADMIN_MENU = [
     name: 'Товары'
   },
   {
+    url: '/admin/brands',
+    name: 'Бренды'
+  },
+  {
     url: '/admin/mail',
     name: 'Подписки'
   },

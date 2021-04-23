@@ -1,3 +1,5 @@
+@import "~src/assets/styles/colors";
+
 form{
   margin: 15px 0 30px;
 }
@@ -34,7 +36,7 @@ form{
     position: absolute;
     right: 5px;
     top: 5px;
-    background: #F44336;
+    background: $red;
     font-size: 14px;
     color: white;
     cursor: pointer;

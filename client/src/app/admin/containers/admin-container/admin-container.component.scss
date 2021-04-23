@@ -1,5 +1,7 @@
+@import "~src/assets/styles/colors";
+
 nav {
-  background: #294057;
+  background: $blue-dark;
 }
 
 .admin-panel {
@@ -42,7 +44,7 @@ nav {
   .sidenav {
     width: 200px;
     padding-top: 15px;
-    background: #294057;
+    background: $blue-dark;
 
     a {
       font-size: 12px;

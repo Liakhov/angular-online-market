@@ -1,6 +1,8 @@
+@import "~src/assets/styles/colors";
+
 .dndPlaceholder{
   list-style: none;
   width: 120px;
   margin: 5px;
-  background-color: #F44336;
+  background-color: $red;
 }

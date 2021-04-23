@@ -1,3 +1,5 @@
+@import "~src/assets/styles/colors";
+
 .cart-prod {
   display: inline-flex;
   flex-direction: column;
@@ -12,7 +14,7 @@
 .prod-title {
   margin-top: 10px;
   margin-bottom: 0;
-  color: #294057;
+  color: $blue-dark;
   font-size: 14px;
   line-height: 16px;
   text-align: left;
@@ -41,7 +43,7 @@
   color: #333333;
 
   &.old-active {
-    color: #f84147;
+    color: $red;
   }
 }
 

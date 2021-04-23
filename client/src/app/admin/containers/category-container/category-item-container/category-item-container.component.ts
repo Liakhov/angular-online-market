@@ -36,13 +36,14 @@ export class CategoryItemContainerComponent implements OnInit {
     } else {
       this.activeRouter.params
         .pipe(
+          take(1),
           switchMap(
             (params: Params) => {
               this.form.disable();
-              if (params['id']) {
+              if (params.id) {
                 this.isNew = false;
-                this.catId = params['id'];
-                return this.categoryService.getByID(params['id']);
+                this.catId = params.id;
+                return this.categoryService.getByID(params.id);
               }
               return of(null);
             }

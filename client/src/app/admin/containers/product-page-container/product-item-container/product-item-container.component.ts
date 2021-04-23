@@ -40,16 +40,18 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
     } else {
       this.activeRouter.params
         .pipe(
+          take(1),
           switchMap(
             (params: Params) => {
               this.isNew = false;
               this.id = params.id;
-              return this.productService.getByID(params['id']);
+              return this.productService.getByID(params.id);
             })
         )
         .subscribe(data => {
           this.patchForm(data);
           this.position = data;
+          this.files = data.images || [];
           this.transformImage();
         });
     }

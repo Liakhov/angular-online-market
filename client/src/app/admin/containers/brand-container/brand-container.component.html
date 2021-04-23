@@ -1,0 +1,33 @@
+<div class="row row-top">
+  <input type="text" [(ngModel)]="search" *ngIf="brands.length != 0">
+
+  <button class="waves-effect btn" routerLink="/admin/brands/add">Добавить</button>
+</div>
+<table class="striped" *ngIf="brands.length; else empty">
+  <thead>
+    <tr>
+      <th>Номер</th>
+      <th>Название</th>
+      <th>Логотип</th>
+      <th>Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brands | filter: search; index as i" routerLink="{{brand._id}}">
+      <td>{{ i + 1 }}</td>
+      <td>{{ brand.name }}</td>
+      <td>
+        <img class="logo" src="{{brand.logo}}" alt="">
+      </td>
+      <td>
+        <app-circle [color]="brand.active ? 'green' : 'red'"></app-circle>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<ng-template #empty>
+  <div class="content center">
+    На данный нет брендов
+  </div>
+</ng-template>

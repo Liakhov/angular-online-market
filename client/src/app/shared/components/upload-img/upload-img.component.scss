@@ -1,3 +1,5 @@
+@import "~src/assets/styles/colors";
+
 .thumbnails{
   display: flex;
   flex-direction: row;
@@ -7,7 +9,7 @@
   list-style: none;
   width: 120px;
   margin: 5px;
-  background-color: #F44336;
+  background-color: $red;
 }
 .dnd-placeholder {
   list-style: none;
@@ -28,7 +30,7 @@
     position: absolute;
     right: 5px;
     top: 5px;
-    background: #F44336;
+    background: $red;
     font-size: 14px;
     color: white;
     cursor: pointer;

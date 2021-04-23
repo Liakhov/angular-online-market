@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+
+  input {
+    width: 35%;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+.logo {
+  width: 20px;
+}
+tbody tr {
+  cursor: pointer;
+}

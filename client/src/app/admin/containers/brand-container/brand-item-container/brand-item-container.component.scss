@@ -1,0 +1,127 @@
+.form-row {
+  margin: 10px auto 30px;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  .name {
+    width: 100%;
+    margin-right: 2%;
+  }
+
+  .category {
+    width: 50%;
+    padding-top: 14px;
+  }
+
+  .cost {
+    width: 20%;
+    margin: 0 1%;
+  }
+
+  .quantity {
+    width: 20%;
+    margin-left: 1%;
+  }
+
+  .checkbox {
+    margin-left: .75rem;
+  }
+}
+
+.description {
+  width: 100%;
+  margin: 50px auto;
+}
+
+h5 {
+  margin-bottom: 20px;
+}
+
+.remove-btn {
+  margin-right: 15px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.form-checkboxes {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 20px;
+  }
+}
+
+.buttons {
+  display: flex;
+}
+
+.row-product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 480px) {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-header {
+    flex-direction: column;
+  }
+  .form-body {
+    flex-wrap: wrap;
+
+    .name {
+      width: 100%;
+    }
+
+    .description {
+      width: 100%;
+    }
+
+    .category {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .form-body {
+    .category {
+      width: 100%;
+    }
+
+    .cost {
+      width: 40%;
+      margin: 0;
+    }
+
+    .quantity {
+      width: 40%;
+    }
+  }
+}
+

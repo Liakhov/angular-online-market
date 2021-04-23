@@ -1,3 +1,5 @@
+@import "~src/assets/styles/colors";
+
 .btns {
   display: flex;
   flex-direction: row;
@@ -14,7 +16,7 @@
   border: none;
   margin-left: auto;
   width: 35px;
-  color: #294057;
+  color: $blue-dark;
 
   span {
     padding-right: 5px;

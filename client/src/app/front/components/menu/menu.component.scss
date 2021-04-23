@@ -1,5 +1,7 @@
+@import "~src/assets/styles/colors";
+
 .menu {
-  background: #294057;
+  background: $blue-dark;
 
   a {
     display: inline-block;
@@ -49,7 +51,7 @@
     z-index: 999;
     left: 0;
     right: 0;
-    background: #294057;
+    background: $blue-dark;
 
     a {
       padding: 10px 15px;
