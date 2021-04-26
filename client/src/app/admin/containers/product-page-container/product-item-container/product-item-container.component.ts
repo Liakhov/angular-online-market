@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {switchMap, take} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 import * as services from '../../../../shared/services';
 import * as adminService from '../../../services';
@@ -14,21 +15,22 @@ import * as models from '../../../../shared/interface';
 })
 export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectCat', {static: true}) selectCat: ElementRef;
+  @ViewChild('selectBrand', {static: true}) selectBrand: ElementRef;
   @ViewChild('inputImage') inputImage: ElementRef;
   public form: FormGroup;
   public isNew: boolean;
   public position;
   public id: string;
-  public select: models.MaterialInstance;
-  public category;
+  public selectMatCategory: models.MaterialInstance;
+  public selectMatBrand: models.MaterialInstance;
+  public additionalInfo$: Observable<models.ProductAdditionalInfo>;
   public images = [];
   public files = [];
 
   constructor(
     private router: Router,
     private productService: adminService.ProductService,
-    private activeRouter: ActivatedRoute,
-    private categoryService: services.CategoryService
+    private activeRouter: ActivatedRoute
   ) {
   }
 
@@ -59,19 +61,23 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.select = services.MaterialService.initSelect(this.selectCat);
+      this.selectMatCategory = services.MaterialService.initSelect(this.selectCat);
+      this.selectMatBrand = services.MaterialService.initSelect(this.selectBrand);
     }, 500);
   }
 
   ngOnDestroy(): void {
-    if (this.select) {
-      this.select.destroy();
+    if (this.selectMatCategory) {
+      this.selectMatCategory.destroy();
+    }
+    if (this.selectMatBrand) {
+      this.selectMatBrand.destroy();
     }
   }
 
   public async fetch(): Promise<void> {
     try {
-      this.category = await this.categoryService.fetch().pipe(take(1)).toPromise();
+      this.additionalInfo$ = await this.productService.getAdditionalInfo();
     } catch (e) {
       services.MaterialService.toast(e.message);
     }
@@ -137,6 +143,9 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
     if (this.form.value.category) {
       product.category = this.form.value.category;
     }
+    if (this.form.value.brand) {
+      product.brand = this.form.value.brand;
+    }
     if (this.form.value.description) {
       product.description = this.form.value.description;
     }
@@ -165,6 +174,7 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
       costOld: new FormControl(null, Validators.min(0)),
       quantity: new FormControl(null, [Validators.required, Validators.min(0)]),
       category: new FormControl(null),
+      brand: new FormControl(null),
       description: new FormControl(null)
     });
   }
@@ -178,7 +188,8 @@ export class ProductItemContainerComponent implements OnInit, AfterViewInit, OnD
       costOld: data.costOld,
       quantity: data.quantity,
       category: data.category,
-      description: data.description
+      description: data.description,
+      brand: data.brand
     });
   }
 }

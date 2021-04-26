@@ -6,16 +6,15 @@ export interface Product {
   cost: number;
   costOld?: number;
   quantity: number;
-  category?: string;
-  categoryName?: string;
+  category?: Pick<Category, '_id' | 'name'>;
   images?: any;
   description?: string;
+  brand?: Pick<Brand, '_id' | 'name'>;
 }
 
 export interface Category {
   _id?: string;
   name: string;
-  categoryName?: string;
   image: string;
   description: string;
   quantity: number;
@@ -105,4 +104,9 @@ export interface Brand {
   description: string;
   active: boolean;
   logo: any;
+}
+
+export interface ProductAdditionalInfo {
+  categories: Category[];
+  brands: Brand[];
 }

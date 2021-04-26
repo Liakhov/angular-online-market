@@ -3,7 +3,9 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.getAll = async function (req, res) {
     try {
-        const order = await Order.find().sort({date: -1});
+        const order = await Order
+            .find()
+            .sort({date: -1});
         res.status(200).json(order);
     } catch (e) {
         errorHandler(res, e)
@@ -11,14 +13,17 @@ module.exports.getAll = async function (req, res) {
 };
 module.exports.getById = async function (req, res) {
     try {
-        const order = await Order.findById(req.params.id);
+        const order = await Order
+            .findById(req.params.id);
         res.status(200).json(order)
     } catch (e) {
         errorHandler(res, e)
     }
 };
 module.exports.create = async function (req, res) {
-    let orderIndex = await Order.findOne({}, {index: 1}).sort({date: -1});
+    let orderIndex = await Order
+        .findOne({}, {index: 1})
+        .sort({date: -1});
     const maxIndex = orderIndex ? orderIndex.index : 0;
 
     try {
@@ -39,7 +44,6 @@ module.exports.create = async function (req, res) {
         res.status(201).json({
             message: "Заказ успешно добавлен"
         })
-
     } catch (e) {
         console.log(e);
     }
@@ -57,15 +61,15 @@ module.exports.update = async function (req, res) {
         delivery: req.body.delivery
     };
     try {
-        await Order.findOneAndUpdate(
-            {_id: req.params.id},
-            {$set: updated},
-            {new: true, useFindAndModify: false}
-        );
+        await Order
+            .findOneAndUpdate(
+                {_id: req.params.id},
+                {$set: updated},
+                {new: true, useFindAndModify: false}
+            );
         res.status(200).json({
             message: 'Заказ обновлен'
         })
-
     } catch (e) {
         errorHandler(res, e)
     }
@@ -73,7 +77,8 @@ module.exports.update = async function (req, res) {
 
 module.exports.remove = async function (req, res) {
     try {
-        await Order.remove({_id: req.params.id});
+        await Order
+            .remove({_id: req.params.id});
         res.status(200).json({
             message: 'Заказ успешно удален'
         })

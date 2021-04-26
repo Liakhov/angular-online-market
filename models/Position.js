@@ -27,9 +27,6 @@ const positionSchema = new Schema({
         ref: 'category',
         type: Schema.Types.ObjectID
     },
-    categoryName: {
-        type: String
-    },
     quantity: {
         type: Number
     },
@@ -38,6 +35,10 @@ const positionSchema = new Schema({
     },
     images: {
         type: Array
+    },
+    brand: {
+        ref: 'brand',
+        type: Schema.Types.ObjectId
     }
 });
 

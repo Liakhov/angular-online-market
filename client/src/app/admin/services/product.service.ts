@@ -42,6 +42,10 @@ export class ProductService {
     return this.http.delete<models.ToastMessage>(`/api/admin/position/${id}`);
   }
 
+  public getAdditionalInfo(): Observable<models.ProductAdditionalInfo> {
+    return this.http.get<models.ProductAdditionalInfo>('/api/admin/position/additionalInfo');
+  }
+
   private createFormData(product: models.Product): FormData {
     const fd = new FormData();
 

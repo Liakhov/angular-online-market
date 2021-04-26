@@ -4,7 +4,8 @@ const Brand = require('../models/Brand');
 
 module.exports.getById = async function (req, res) {
     try {
-        const brand = await Brand.findById(req.params.id);
+        const brand = await Brand
+            .findById(req.params.id);
         res.status(200).json(brand)
     } catch (e) {
         errorHandler(res, e)

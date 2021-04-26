@@ -1,9 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
   <div class="form-body row">
+
     <div class="col m7 s12">
       <label for="name">Название</label>
       <input id="name" type="text" formControlName="name">
     </div>
+
     <div class="col m5 s12">
       <div class="header-actions">
         <div class="form-checkboxes">
@@ -24,15 +27,17 @@
         </div>
       </div>
     </div>
+
   </div>
 
   <div class="form-body row">
+
     <div class="col m7 s12 row-product-item">
       <div class="category">
         <div class="input-field">
           <select id="category" formControlName="category" #selectCat>
             <option value="" disabled selected>Выберите категорию</option>
-            <option *ngFor="let cat of category" [value]="cat._id">{{cat.name}}</option>
+            <option *ngFor="let cat of (additionalInfo$ | async)?.categories" [value]="cat._id">{{cat.name}}</option>
           </select>
           <label for="category">Категория</label>
         </div>
@@ -50,6 +55,7 @@
         <input id="for-quantity" type="number" min="0" formControlName="quantity">
       </div>
     </div>
+
     <div class="col m5 s12">
       <h6>Изображения</h6>
       <app-upload-img
@@ -60,7 +66,28 @@
         (dndImg)="onDndImg($event)">
       </app-upload-img>
     </div>
+
   </div>
+
+  <div class="form-body row">
+
+    <div class="col m7 s12 row-product-item">
+      <div class="category">
+        <div class="input-field">
+          <select id="brand" formControlName="brand" #selectBrand>
+            <option value="" disabled selected>Выберите бренд</option>
+            <option *ngFor="let brand of (additionalInfo$ | async)?.brands" [value]="brand._id">{{brand.name}}</option>
+          </select>
+          <label for="category">Бренд</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col m5 s12">
+    </div>
+
+  </div>
+
   <div class="description">
     <angular-editor formControlName="description"></angular-editor>
   </div>

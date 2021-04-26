@@ -2,6 +2,7 @@ const errorHandler = require('../utils/errorHandler');
 
 const Position = require('../models/Position');
 const Category = require('../models/Category');
+const Brand = require('../models/Brand');
 
 module.exports.create = async function (req, res) {
     try {
@@ -17,10 +18,10 @@ module.exports.create = async function (req, res) {
             quantity: req.body.quantity,
             category: req.body.category,
             description: req.body.description,
+            brand: req.body.brand,
             images: images
         }).save();
         res.status(201).json(position)
-
     } catch (e) {
         errorHandler(res, e)
     }
@@ -28,15 +29,12 @@ module.exports.create = async function (req, res) {
 
 module.exports.getAll = async function (req, res) {
     try {
-        const positions = await Position.find().skip(+req.query.offset).limit(+req.query.limit);
-        const categories = await Category.find({}, {name: 1});
-
-        let result = positions.map(function (item) {
-            let categoryForItemPositin = categories.find(element => ('' + element._id).toString() === ('' + item.category).toString());
-            if (categoryForItemPositin) item.categoryName = categoryForItemPositin.name;
-            return item
-        });
-        res.status(200).json(result)
+        const positions = await Position.find()
+            .populate('brand', 'name')
+            .populate('category', 'name')
+            .skip(+req.query.offset)
+            .limit(+req.query.limit);
+        res.status(200).json(positions)
     } catch (e) {
         errorHandler(res, e)
     }
@@ -44,10 +42,11 @@ module.exports.getAll = async function (req, res) {
 
 module.exports.getById = async function (req, res) {
     try {
-        const position = await Position.findById(req.params.id);
+        const position = await Position
+            .findById(req.params.id);
         res.status(200).json(position)
     } catch (e) {
-        errorHandler(res, e)
+        errorHandler(res, e);
     }
 };
 
@@ -66,15 +65,17 @@ module.exports.update = async function (req, res) {
         quantity: req.body.quantity,
         category: req.body.category,
         description: req.body.description,
-        images: images
+        images: images,
+        brand: req.body.brand
     };
 
     try {
-        const product = await Position.findOneAndUpdate(
-            {_id: req.params.id},
-            {$set: updated},
-            {new: true}
-        );
+        const product = await Position
+            .findOneAndUpdate(
+                {_id: req.params.id},
+                {$set: updated},
+                {new: true}
+            );
         res.status(200).json(product)
     } catch (e) {
         errorHandler(res, e)
@@ -83,11 +84,11 @@ module.exports.update = async function (req, res) {
 
 module.exports.remove = async function (req, res) {
     try {
-        await Position.remove({_id: req.params.id});
+        await Position
+            .remove({_id: req.params.id});
         res.status(200).json({
             message: 'Позиция была удалена'
-        })
-
+        });
     } catch (e) {
         errorHandler(res, e)
     }
@@ -95,11 +96,25 @@ module.exports.remove = async function (req, res) {
 
 module.exports.getAllFromCategory = async function (req, res) {
     try {
-        const position = await Position.find({
-            category: req.params.id
-        });
+        const position = await Position
+            .find({
+                category: req.params.id
+            });
         res.status(200).json(position)
     } catch (e) {
         errorHandler(res, e)
+    }
+};
+
+module.exports.getAdditionalInfo = async (req, res) => {
+    try {
+        const result = {};
+        result.brands = await Brand
+            .find({active: true});
+        result.categories = await Category
+            .find();
+        res.status(200).json(result);
+    } catch (err) {
+        errorHandler(res, err);
     }
 };

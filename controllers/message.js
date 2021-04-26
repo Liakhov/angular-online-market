@@ -3,14 +3,15 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.getAll = async function (req, res) {
     try {
-        const massages = await Message.find();
+        const massages = await Message
+            .find();
         res.status(200).send(massages)
-    }catch (e) {
+    } catch (e) {
         errorHandler(res, e)
     }
-}
+};
 module.exports.send = async function (req, res) {
-    try{
+    try {
         await new Message({
             name: req.body.name,
             email: req.body.email,
@@ -19,18 +20,19 @@ module.exports.send = async function (req, res) {
         res.status(201).json({
             message: "Спасибо за подписку!"
         })
-    }catch (e) {
+    } catch (e) {
         errorHandler(res, e)
     }
-}
+};
 
-module.exports.remove = async function(req, res) {
+module.exports.remove = async function (req, res) {
     try {
-        await Message.remove({_id: req.params.id})
+        await Message
+            .remove({_id: req.params.id});
         res.status(200).json({
             message: 'Сообщение успешно удалено'
         })
-    }catch (e) {
+    } catch (e) {
         errorHandler(res, e)
     }
-}
+};

@@ -8,6 +8,7 @@
   <tr>
     <th>Название</th>
     <th>Категория</th>
+    <th>Бренд</th>
     <th>Количество</th>
     <th>Цена</th>
     <th></th>
@@ -16,7 +17,8 @@
   <tbody class="table-list">
   <tr *ngFor="let item of product$| async | filter: search" routerLink="/admin/product/{{item._id}}">
     <td>{{item.name}}</td>
-    <td>{{item.categoryName}}</td>
+    <td>{{item.category ? item.category.name : '-'}}</td>
+    <td>{{item.brand ? item.brand.name : '-'}}</td>
     <td>{{item.quantity}}</td>
     <td>{{item.cost}}</td>
     <td class="td-icon">

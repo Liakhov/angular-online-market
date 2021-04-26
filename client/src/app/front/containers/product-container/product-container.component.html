@@ -26,6 +26,9 @@
               Товар закончился
           </span>
       </div>
+      <div class="brand" *ngIf="product.brand">
+        Бренд: {{ product.brand.name }}
+      </div>
       <div class="product-trade">
         <div class="product-price">
           {{product.cost}} $

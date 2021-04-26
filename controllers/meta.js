@@ -4,8 +4,10 @@ const errorHandler = require('../utils/errorHandler');
 
 module.exports.fetch = async function (req, res) {
     try {
-        const newOrder = await Order.find({status: 'new'}, {_id: 1});
-        const products = await Position.find({}, {name: 1});
+        const newOrder = await Order
+            .find({status: 'new'}, {_id: 1});
+        const products = await Position
+            .find({}, {name: 1});
         const meta = {
             newOrder,
             products

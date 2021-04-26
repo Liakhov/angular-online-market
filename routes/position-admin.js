@@ -7,6 +7,9 @@ const upload = require('../middleware/upload');
 // localhost:7000/api/admin/position
 router.get('/', controller.getAll);
 
+// localhost:7000/api/admin/additionalInfo
+router.get('/additionalInfo', controller.getAdditionalInfo);
+
 // localhost:7000/api/admin/position
 router.post('/', upload.array('image', 6), controller.create);
 
