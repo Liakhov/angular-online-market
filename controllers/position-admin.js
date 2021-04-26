@@ -29,7 +29,8 @@ module.exports.create = async function (req, res) {
 
 module.exports.getAll = async function (req, res) {
     try {
-        const positions = await Position.find()
+        const positions = await Position
+            .find({...req.query})
             .populate('brand', 'name')
             .populate('category', 'name')
             .skip(+req.query.offset)
@@ -89,18 +90,6 @@ module.exports.remove = async function (req, res) {
         res.status(200).json({
             message: 'Позиция была удалена'
         });
-    } catch (e) {
-        errorHandler(res, e)
-    }
-};
-
-module.exports.getAllFromCategory = async function (req, res) {
-    try {
-        const position = await Position
-            .find({
-                category: req.params.id
-            });
-        res.status(200).json(position)
     } catch (e) {
         errorHandler(res, e)
     }

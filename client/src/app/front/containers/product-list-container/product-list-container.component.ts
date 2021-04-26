@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 import * as models from '../../../shared/interface';
 
 @Component({
-  selector: 'app-shop-container',
-  templateUrl: './shop-container.component.html',
-  styleUrls: ['./shop-container.component.scss']
+  selector: 'app-product-list-container',
+  templateUrl: './product-list-container.component.html',
+  styleUrls: ['./product-list-container.component.scss']
 })
-export class ShopContainerComponent {
+export class ProductListContainerComponent {
   public products$: Observable<models.Product[]>;
 
   constructor(private activeRoute: ActivatedRoute) {

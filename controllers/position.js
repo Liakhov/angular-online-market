@@ -16,22 +16,10 @@ module.exports.getById = async function (req, res) {
 module.exports.getAll = async function (req, res) {
     try {
         const positions = await Position
-            .find({active: true})
+            .find({...req.query, active: true})
             .skip(+req.query.offset)
             .limit(+req.query.limit);
         res.status(200).json(positions)
-    } catch (e) {
-        errorHandler(res, e)
-    }
-};
-
-module.exports.getAllFromCategory = async function (req, res) {
-    try {
-        const position = await Position
-            .find({
-                category: req.params.id
-            });
-        res.status(200).json(position)
     } catch (e) {
         errorHandler(res, e)
     }

@@ -12,7 +12,4 @@ router.get('/homeProductList', controller.getHomeProductList);
 // localhost:7000/api/position/:id
 router.get('/:id', controller.getById);
 
-// localhost:7000/api/position/allpositions/:id
-router.get('/allpositions/:id', controller.getAllFromCategory);
-
 module.exports = router;

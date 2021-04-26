@@ -22,7 +22,4 @@ router.patch('/:id', upload.array('image', 6), controller.update);
 // localhost:7000/api/admin/admin/position/:id
 router.delete('/:id', controller.remove);
 
-// localhost:7000/api/admin/position/allpositions/:id
-router.get('/allpositions/:id', controller.getAllFromCategory);
-
 module.exports = router;

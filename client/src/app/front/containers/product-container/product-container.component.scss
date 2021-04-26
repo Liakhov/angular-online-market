@@ -58,6 +58,12 @@
     color: #797878;
   }
 }
+
+.brand-link {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 768px){
   .product-row{
     flex-direction: column;

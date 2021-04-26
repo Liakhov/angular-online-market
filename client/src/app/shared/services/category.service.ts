@@ -53,8 +53,4 @@ export class CategoryService {
   remove(id: string): Observable<models.ToastMessage> {
     return this.http.delete<models.ToastMessage>(`/api/category/${id}`);
   }
-
-  getAllFromCategory(id: string): Observable<models.Product[]> {
-    return this.http.get<models.Product[]>(`/api/position/allpositions/${id}`);
-  }
 }

@@ -4,7 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {switchMap, take} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
-import * as services from '../../../../shared/services';
+import * as services from '../../../services';
+import * as sharedServices from '../../../../shared/services';
 import * as models from '../../../../shared/interface';
 
 @Component({
@@ -24,7 +25,8 @@ export class CategoryItemContainerComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private categoryService: services.CategoryService,
+    private categoryService: sharedServices.CategoryService,
+    private productService: services.ProductService,
     private activeRouter: ActivatedRoute) {
   }
 
@@ -53,7 +55,7 @@ export class CategoryItemContainerComponent implements OnInit {
             if (category) {
               this.category = category;
               this.patchForm(category);
-              services.MaterialService.resizeTextArea(this.textarea);
+              sharedServices.MaterialService.resizeTextArea(this.textarea);
               if (category.image && category.image !== 'null') {
                 this.imagePreview = category.image;
               }
@@ -64,7 +66,7 @@ export class CategoryItemContainerComponent implements OnInit {
             console.log(error);
           });
     }
-    this.products$ = this.categoryService.getAllFromCategory(this.catId);
+    this.products$ = this.productService.fetch({category: this.catId});
   }
 
   public onFileUpload(event) {
@@ -84,20 +86,20 @@ export class CategoryItemContainerComponent implements OnInit {
         .create(value.name, value.description, this.image)
         .pipe(take(1))
         .toPromise();
-      services.MaterialService.toast(data.message);
+      sharedServices.MaterialService.toast(data.message);
       await this.router.navigate(['/admin/category']);
     } else {
       await this.categoryService
         .update(this.category._id, value.name, value.description, this.image)
         .pipe(take(1))
         .toPromise();
-      services.MaterialService.toast('Изменения сохранены');
+      sharedServices.MaterialService.toast('Изменения сохранены');
     }
   }
 
   public async remove(): Promise<void> {
     const data = await this.categoryService.remove(this.category._id).pipe(take(1)).toPromise();
-    services.MaterialService.toast(data.message);
+    sharedServices.MaterialService.toast(data.message);
     await this.router.navigate(['/admin/category']);
   }
 

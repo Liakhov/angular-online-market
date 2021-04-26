@@ -27,7 +27,8 @@
           </span>
       </div>
       <div class="brand" *ngIf="product.brand">
-        Бренд: {{ product.brand.name }}
+        Бренд:
+        <span class="brand-link" routerLink="/brands/{{ product.brand._id }}">{{ product.brand.name }}</span>
       </div>
       <div class="product-trade">
         <div class="product-price">

@@ -7,8 +7,7 @@ import {EffectsModule} from '@ngrx/effects';
 
 import {HomeContainerComponent} from './containers/home-container/home-container.component';
 import {ProductContainerComponent} from './containers/product-container/product-container.component';
-import {CategoriesContainerComponent} from './containers/categories-container/categories-container.component';
-import {ShopContainerComponent} from './containers/shop-container/shop-container.component';
+import {ProductListContainerComponent} from './containers/product-list-container/product-list-container.component';
 import {HomeComponent} from './components/home/home.component';
 import {HeaderComponent} from './components/header/header.component';
 import {LogoComponent} from './components/logo/logo.component';
@@ -36,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'shop',
-        component: ShopContainerComponent,
+        component: ProductListContainerComponent,
         resolve: {
           products: fromResolvers.ShopResolver
         }
@@ -49,8 +48,15 @@ const routes: Routes = [
         }
       },
       {
-        path: 'category/:id', component: CategoriesContainerComponent, resolve: {
-          category: fromResolvers.CategoryResolver
+        path: 'category/:id', component: ProductListContainerComponent,
+        resolve: {
+          products: fromResolvers.CategoryResolver
+        }
+      },
+      {
+        path: 'brands/:id', component: ProductListContainerComponent,
+        resolve: {
+          products: fromResolvers.BrandsResolver
         }
       },
       {
@@ -81,8 +87,7 @@ const routes: Routes = [
   declarations: [
     HomeContainerComponent,
     ProductContainerComponent,
-    CategoriesContainerComponent,
-    ShopContainerComponent,
+    ProductListContainerComponent,
     HomeComponent,
     HeaderComponent,
     LogoComponent,
@@ -107,6 +112,7 @@ const routes: Routes = [
     fromResolvers.ProductResolver,
     fromResolvers.ShopResolver,
     fromResolvers.CategoryResolver,
+    fromResolvers.BrandsResolver,
     services.ProductService
   ]
 })
