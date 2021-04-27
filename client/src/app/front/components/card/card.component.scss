@@ -6,8 +6,30 @@
   margin-top: 15px;
   margin-bottom: 15px;
 
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+
+  .cart-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+
+    @media screen and (max-width: 480px) {
+      height: 180px;
+    }
+  }
+
   a {
+    display: flex;
+    flex-direction: column;
+    height: 270px;
     text-align: center;
+
+    @media screen and (max-width: 480px) {
+      height: 240px;
+    }
   }
 }
 
@@ -24,10 +46,18 @@
   &:hover {
     color: #B99867;
   }
+
+  @media screen and (max-width: 480px) {
+    text-align: center;
+  }
 }
 
 .prod-thumbnail {
   max-height: 220px;
+
+  @media screen and (max-width: 480px) {
+    height: 180px;
+  }
 }
 
 .card-price-old {
