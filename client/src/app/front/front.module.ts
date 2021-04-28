@@ -17,6 +17,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {CardComponent} from './components/card/card.component';
 import {TabsComponent} from './components/tabs/tabs.component';
 import {TabComponent} from './components/tab/tab.component';
+import {CarouselComponent} from './components/carousel/carousel.component';
 import * as fromResolvers from './resolvers';
 import {PipesModule} from '../shared/pipe.module';
 import {SharedModule} from '../shared/shared.module';
@@ -96,7 +97,8 @@ const routes: Routes = [
     FooterComponent,
     CardComponent,
     TabsComponent,
-    TabComponent
+    TabComponent,
+    CarouselComponent
   ],
   imports: [
     FormsModule,

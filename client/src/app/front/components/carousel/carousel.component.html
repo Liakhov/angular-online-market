@@ -1,0 +1,8 @@
+<div class="carousel" #carousel>
+  <div class="carousel-item" *ngFor="let img of images">
+    <img src="{{img}}" alt="">
+  </div>
+  <div class="carousel-item" *ngIf="!images.length">
+    <img src="/assets/img/nophoto.png" alt="">
+  </div>
+</div>

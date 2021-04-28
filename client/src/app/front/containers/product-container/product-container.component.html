@@ -1,16 +1,11 @@
 <div class="wrapper product" *ngIf="product$ | async as product; else loader">
   <h4>{{ product.name }}</h4>
+
   <div class="product-row">
-    <div>
-      <div class="carousel" #carousel>
-        <div class="carousel-item" *ngFor="let img of product.images">
-          <img src="{{img}}" alt="">
-        </div>
-        <div class="carousel-item" *ngIf="!product.images.length">
-          <img src="/assets/img/nophoto.png" class="no-img" alt="">
-        </div>
-      </div>
-    </div>
+    <app-carousel
+      [images]="product.images"
+    ></app-carousel>
+
     <div>
       <div class="balance">
         <span class="balance-green" *ngIf="product.quantity > 10">
