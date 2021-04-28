@@ -63,9 +63,13 @@
   }
 }
 
-.brand-link {
-  cursor: pointer;
-  font-weight: bold;
+.brand {
+  margin: 0.5rem 0 1rem;
+
+  .brand-link {
+    cursor: pointer;
+    font-weight: bold;
+  }
 }
 
 @media screen and (max-width: 768px) {

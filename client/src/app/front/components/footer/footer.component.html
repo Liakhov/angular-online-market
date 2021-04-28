@@ -1,7 +1,7 @@
 <footer>
   <div class="wrapper row footer">
     <div class="col l3 m6 s12">
-      <h5>Страницы</h5>
+      <h3>Страницы</h3>
       <ul>
         <li><a routerLink="/">Главная</a></li>
         <li><a routerLink="/shop">Магазин</a></li>
@@ -9,7 +9,7 @@
       </ul>
     </div>
     <div class="col l3 m6 s12">
-      <h5>Категории</h5>
+      <h3>Категории</h3>
       <ul>
         <li *ngFor="let cat of categories">
           <a routerLink="/category/{{cat._id}}">{{cat.name}}</a>
@@ -17,7 +17,7 @@
       </ul>
     </div>
     <div class="col l3 m6 s12">
-      <h5>Cоц сети</h5>
+      <h3>Cоц сети</h3>
       <div class="social">
         <a href="#">
           <img src="/assets/img/instagram.svg" alt="">
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="col l3 m6 s12">
-      <h5>Подписаться</h5>
+      <h3>Подписаться</h3>
       <form [formGroup]="form" (submit)="sendMail()">
         <input type="text" placeholder="email@example.com" class="subscribe_input" formControlName="email">
         <app-button

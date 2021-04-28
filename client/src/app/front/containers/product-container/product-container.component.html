@@ -1,5 +1,5 @@
 <div class="wrapper product" *ngIf="product$ | async as product; else loader">
-  <h4>{{ product.name }}</h4>
+  <h1>{{ product.name }}</h1>
 
   <div class="product-row">
     <app-carousel
@@ -49,12 +49,7 @@
       </div>
       <div class="info-block">
         <div class="info-block_header">Гарантия</div>
-        <div class="info-block_body">
-          14 дней
-          <br>
-          Продавец гарантирует упаковку заказанного товара, которая обеспечит целостность и сохранность его товарного
-          вида
-        </div>
+        <div class="info-block_body">12 месяцев</div>
       </div>
     </div>
   </div>

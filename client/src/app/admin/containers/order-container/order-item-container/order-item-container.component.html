@@ -1,7 +1,7 @@
 <div *ngIf="order; else loader" [formGroup]="form">
   <div class="row header-row">
     <div class="col m6 s12 left-col">
-      <h5>Заказ №{{order.index}}</h5>
+      <h1>Заказ №{{order.index}}</h1>
       <div class="input-field">
         <select id="status" formControlName="status" #selectStatus>
           <option *ngFor="let item of orderStatuses" [value]="item.value">{{item.caption}}</option>

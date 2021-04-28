@@ -1,10 +1,10 @@
 <div class="wrapper">
-  <h4>Оформление заказа</h4>
+  <h1>Оформление заказа</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="wrapper">
       <div class="row">
         <div class="col l6 m6 s12">
-          <h5>Контактные данные</h5>
+          <h2>Контактные данные</h2>
           <div>
             <label for="name">Имя</label>
             <input id="name" type="text" formControlName="name">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="col l6 m6 s12">
-          <h5>Выбор способов доставки и оплаты</h5>
+          <h2>Выбор способов доставки и оплаты</h2>
           <div class="checkout">
             <div class="checkout-left">
               Доставка:
@@ -71,7 +71,7 @@
 </div>
 <div id="modal1" class="modal" #modal>
   <div class="modal-content">
-    <h4>Заказ успешно оформлен</h4>
+    <h2>Заказ успешно оформлен</h2>
     <i class="material-icons">done</i>
   </div>
   <div class="modal-footer">

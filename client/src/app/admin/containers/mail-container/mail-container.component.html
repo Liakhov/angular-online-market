@@ -1,27 +1,27 @@
 <table class="mails" *ngIf="mails.length; else empty">
   <thead>
-    <tr>
-      <th>Email</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
+  <tr>
+    <th>Email</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of mails">
-      <td>{{item.email}}</td>
-      <td>{{item.date | date: 'medium'}}</td>
-      <td>
-        <button class="btn waves-effect waves-light" type="button" (click)="edit(item)">
-          <i class="material-icons">edit</i>
-        </button>
-      </td>
-    </tr>
+  <tr *ngFor="let item of mails">
+    <td>{{item.email}}</td>
+    <td>{{item.date | date: 'medium'}}</td>
+    <td>
+      <button class="btn waves-effect waves-light" type="button" (click)="edit(item)">
+        <i class="material-icons">edit</i>
+      </button>
+    </td>
+  </tr>
   </tbody>
 </table>
 <div class="modal" #modal>
   <div class="modal-content">
     <div class="modal-content_header">
-      <h4>Изменить</h4>
+      <h3>Изменить</h3>
       <button class="btn red" (click)="remove()">
         <i class="material-icons">delete</i>
       </button>
@@ -39,6 +39,6 @@
 
 <ng-template #empty>
   <div class="content center">
-      На данный момент нет подписок
+    На данный момент нет подписок
   </div>
 </ng-template>
