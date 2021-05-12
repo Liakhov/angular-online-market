@@ -36,6 +36,10 @@ img {
   max-width: 1366px;
   margin: 0 auto;
   padding: 0 30px;
+
+  @media screen and (max-width: 375px) {
+    padding: 0 15px;
+  }
 }
 
 .flex {
@@ -71,10 +75,10 @@ tr:focus {
 .categories {
   text-align: center;
   margin: 100px 5%;
-}
 
-.categories h4 {
-  margin-bottom: 30px;
+  h4 {
+    margin-bottom: 30px;
+  }
 }
 
 .blue-dark {
@@ -110,6 +114,10 @@ input[type=file]:focus + label {
   border-radius: 0.25rem;
   margin-bottom: 25px;
 
+  @media screen and (max-width: 480px) {
+    margin-bottom: 15px;
+  }
+
   .info-block_header {
     display: flex;
     flex-direction: row;
@@ -127,26 +135,17 @@ input[type=file]:focus + label {
   }
 }
 
-@media screen and (max-width: 375px) {
-  .wrapper {
-    padding: 0 15px;
-  }
-}
-
 // preloader-wrapper
 .loader {
   display: flex;
   justify-content: center;
   padding: 200px 0;
   width: 100%;
-}
 
-@media screen and (max-width: 1024px) {
-  .loader {
+  @media screen and (max-width: 1024px) {
     padding: 80px 0;
   }
 }
-
 
 // admin Panel
 .admin-panel {

@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import * as services from '../../services';
-import * as sharedServices from '../../../shared/services';
 import * as models from '../../../shared/interface';
 
 @Component({
@@ -12,19 +11,9 @@ import * as models from '../../../shared/interface';
 })
 
 export class HomeComponent {
-  public categories$: Observable<models.Category[]>;
-  public products$: Observable<models.Product[]>;
   public list$: Observable<models.HomeProductList>;
-  public limit = 4;
 
-  constructor(
-    private categoriesService: sharedServices.CategoryService,
-    private productService: services.ProductService
-  ) {
-    this.categories$ = this.categoriesService.fetch();
-    this.products$ = this.productService.fetch({
-      limit: this.limit
-    });
+  constructor(private productService: services.ProductService) {
     this.list$ = this.productService.getHomeProductList();
   }
 }

@@ -33,7 +33,7 @@ module.exports.getHomeProductList = async function (req, res) {
         const newItems = await Position
             .find()
             .sort('-date')
-            .limit(10);
+            .limit(4);
         res.status(200).json({
             recommended,
             newItems
