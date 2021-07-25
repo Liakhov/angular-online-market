@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {DndModule} from 'ngx-drag-drop';
@@ -12,7 +12,9 @@ import * as fromComponents from './components';
     fromComponents.LoaderComponent,
     fromComponents.ButtonComponent,
     fromComponents.SearchFormComponent,
-    fromComponents.CircleComponent
+    fromComponents.CircleComponent,
+    fromComponents.BreadcrumbComponent,
+    fromComponents.BreadcrumbItemComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,9 @@ import * as fromComponents from './components';
     fromComponents.LoaderComponent,
     fromComponents.ButtonComponent,
     fromComponents.SearchFormComponent,
-    fromComponents.CircleComponent
+    fromComponents.CircleComponent,
+    fromComponents.BreadcrumbComponent,
+    fromComponents.BreadcrumbItemComponent
   ]
 })
 export class SharedModule {

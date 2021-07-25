@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
 
 import {AdminContainerComponent} from './containers/admin-container/admin-container.component';
 import * as fromResolvers from './resolvers';

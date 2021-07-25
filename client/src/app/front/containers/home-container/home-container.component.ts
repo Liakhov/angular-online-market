@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {select, Store} from '@ngrx/store';
 import {EMPTY, Observable, Subject, Subscription} from 'rxjs';
-import {Store, select} from '@ngrx/store';
 import {catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, take, tap} from 'rxjs/operators';
 
-import * as services from '../../../shared/services';
 import * as models from '../../../shared/interface';
-
-import * as reducers from '../../store/reducers';
+import * as services from '../../../shared/services';
 import * as cartActions from '../../store/actions/cart.action';
 import * as wishActions from '../../store/actions/wish.action';
+import * as reducers from '../../store/reducers';
+import {selectConfigCategories} from '../../store/selectors/config.selectors';
 
 @Component({
   selector: 'app-home-container',
@@ -16,22 +17,22 @@ import * as wishActions from '../../store/actions/wish.action';
   styleUrls: ['./home-container.component.scss']
 })
 export class HomeContainerComponent implements OnInit, OnDestroy {
-  public categories$: Observable<models.Category[]>;
   public cart$: Observable<models.Position[]>;
   public wish$: Observable<models.Position[]>;
   public searchResult = [];
   private search = new Subject();
   private sub: Subscription;
+  public categories$: Observable<models.Category[]>;
 
   constructor(
+    private activeRoute: ActivatedRoute,
     private mailService: services.MailService,
     private store$: Store<reducers.State>,
-    private categoriesService: services.CategoryService,
     private searchService: services.SearchService
   ) {
-    this.categories$ = this.categoriesService.fetch();
     this.cart$ = this.store$.pipe(select(reducers.getCart));
     this.wish$ = this.store$.pipe(select(reducers.getWish));
+    this.categories$ = this.store$.select(selectConfigCategories);
   }
 
   ngOnInit(): void {

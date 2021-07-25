@@ -1,8 +1,11 @@
 import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 
-import * as services from '../../services';
 import * as models from '../../../shared/interface';
+
+import {AppState} from '../../../store/app.state';
+import {selectConfigNewItems, selectConfigRecommended} from '../../store/selectors/config.selectors';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +14,11 @@ import * as models from '../../../shared/interface';
 })
 
 export class HomeComponent {
-  public list$: Observable<models.HomeProductList>;
+  public recommended$: Observable<Array<models.Product>>;
+  public newItems$: Observable<Array<models.Product>>;
 
-  constructor(private productService: services.ProductService) {
-    this.list$ = this.productService.getHomeProductList();
+  constructor(private store$: Store<AppState>) {
+    this.recommended$ = store$.select(selectConfigRecommended);
+    this.newItems$ = store$.select(selectConfigNewItems);
   }
 }

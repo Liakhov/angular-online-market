@@ -1,22 +1,65 @@
-.card {
+.row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px;
-  cursor: pointer;
-  i {
-    font-size: 48px;
-    color: white;
+
+  @media screen and (max-width: 1024px) {
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
-.card-info {
-  font-size: 16px;
-  text-align: right;
-  color: whitesmoke;
-}
-.card-number {
-  display: block;
-  font-size: 32px;
-  line-height: 32px;
+.card {
+  display: flex;
+  width: 25%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  overflow: auto;
+
+  &__icon {
+    font-size: 48px;
+    color: white;
+  }
+
+  &__info {
+    font-size: 16px;
+    text-align: right;
+    color: whitesmoke;
+  }
+
+  &__number {
+    display: block;
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  &_green {
+    background-color: #26a69a;
+  }
+
+  &_blue {
+    background-color: #5c6bc0;
+  }
+
+  &_orange {
+    background-color: #ffa726;
+  }
+
+  &_brown {
+    background-color: #6d4c41;
+  }
+
+  &_padding {
+    padding: 5px 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: calc(50% - 10px);
+    margin: 10px 5px;
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 }

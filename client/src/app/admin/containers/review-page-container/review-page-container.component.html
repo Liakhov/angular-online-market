@@ -1,34 +1,26 @@
-<div class="wrapper row footer">
-  <div class="col l3 m6 s12">
-    <div class="card teal lighten-1" routerLink="/admin/order">
-      <i class="material-icons">shopping_cart</i>
-      <div class="card-info">
-        <span class="card-number">{{(meta$ | async)?.newOrders}}</span>New Orders
-      </div>
+<div class="wrapper row">
+  <div class="card card_green" routerLink="/admin/order">
+    <i class="card__icon material-icons">shopping_cart</i>
+    <div class="card__info">
+      <span class="card__number">{{(meta$ | async)?.newOrders}}</span>New Orders
     </div>
   </div>
-  <div class="col l3 m6 s12">
-    <div class="card indigo lighten-1" routerLink="/admin/product">
-      <i class="material-icons">local_offer</i>
-      <div class="card-info">
-        <span class="card-number">{{(meta$ | async)?.products}}</span>Products
-      </div>
+  <div class="card card_blue" routerLink="/admin/product">
+    <i class="card__icon material-icons">local_offer</i>
+    <div class="card__info">
+      <span class="card__number">{{(meta$ | async)?.products}}</span>Products
     </div>
   </div>
-  <div class="col l3 m6 s12">
-    <div class="card orange lighten-1">
-      <i class="material-icons">people</i>
-      <div class="card-info">
-        <span class="card-number">-</span>Customers
-      </div>
+  <div class="card card_orange">
+    <i class="card__icon material-icons">people</i>
+    <div class="card__info">
+      <span class="card__number">-</span>Customers
     </div>
   </div>
-  <div class="col l3 m6 s12">
-    <div class="card brown darken-1">
-      <i class="material-icons">timeline</i>
-      <div class="card-info">
-        <span class="card-number">-</span>Website Visits
-      </div>
+  <div class="card card_brown">
+    <i class="card__icon material-icons">timeline</i>
+    <div class="card__info">
+      <span class="card__number">-</span>Website Visits
     </div>
   </div>
 </div>

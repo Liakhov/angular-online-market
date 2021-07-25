@@ -1,7 +1,7 @@
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {catchError, mergeMap} from 'rxjs/operators';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {EMPTY, of} from 'rxjs';
+import {catchError, mergeMap} from 'rxjs/operators';
 
 import * as services from '../services';
 

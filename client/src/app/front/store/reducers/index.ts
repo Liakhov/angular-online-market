@@ -1,16 +1,20 @@
-import {ActionReducerMap, combineReducers, ActionReducer, createSelector} from '@ngrx/store';
+import {ActionReducer, ActionReducerMap, combineReducers, createSelector} from '@ngrx/store';
 
+import {Position} from '../../../shared/interface';
 import * as fromCart from './cart.reducer';
+import * as fromConfig from './config.reducer';
 import * as fromWish from './wish.reducer';
 
 export interface State {
   cart: Position[];
   wish: Position[];
+  config: fromConfig.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
   cart: fromCart.reducer,
   wish: fromWish.reducer,
+  config: fromConfig.reducer
 };
 
 const mainReducer: ActionReducer<State> = combineReducers(reducers);

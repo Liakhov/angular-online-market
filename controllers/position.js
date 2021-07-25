@@ -1,6 +1,7 @@
 const errorHandler = require('../utils/errorHandler');
 
 const Position = require('../models/Position');
+const Category = require('../models/Category');
 
 module.exports.getById = async function (req, res) {
     try {
@@ -25,7 +26,7 @@ module.exports.getAll = async function (req, res) {
     }
 };
 
-module.exports.getHomeProductList = async function (req, res) {
+module.exports.getConfig = async function (req, res) {
     try {
         const recommended = await Position
             .find({recommend: true})
@@ -34,9 +35,13 @@ module.exports.getHomeProductList = async function (req, res) {
             .find()
             .sort('-date')
             .limit(4);
+        const categories = await Category
+            .find();
+
         res.status(200).json({
             recommended,
-            newItems
+            newItems,
+            categories
         })
     } catch (e) {
         errorHandler(res, e)

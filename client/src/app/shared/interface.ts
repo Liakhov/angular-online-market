@@ -73,7 +73,9 @@ export interface Mail {
 
 export interface MaterialInstance {
   open?(): void;
+
   close?(): void;
+
   destroy?(): void;
 }
 
@@ -109,4 +111,11 @@ export interface Brand {
 export interface ProductAdditionalInfo {
   categories: Category[];
   brands: Brand[];
+}
+
+
+export interface Config {
+  categories: Category[];
+  newItems: Product[];
+  recommended: Product[];
 }

@@ -1,13 +1,13 @@
 .wrapper{
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   .row {
     text-align: center;
   }
 }
 @media screen and (max-width: 600px) {
   .wrapper {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
