@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from '@ngrx/store';
 import {of} from 'rxjs';
 import {catchError, exhaustMap, map} from 'rxjs/operators';
@@ -11,8 +11,7 @@ import * as actions from '../actions/config.action';
 @Injectable()
 export class ConfigEffects {
 
-  @Effect()
-  loadConfig$ = this.actions$.pipe(
+  loadConfig$ = createEffect(() => this.actions$.pipe(
     ofType(actions.load),
     exhaustMap(() => {
       return this.configService.getConfig().pipe(
@@ -24,7 +23,7 @@ export class ConfigEffects {
         })
       );
     })
-  );
+  ));
 
   constructor(
     private store$: Store<AppState>,
