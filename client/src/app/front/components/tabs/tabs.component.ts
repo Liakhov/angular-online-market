@@ -4,7 +4,7 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import {TabComponent} from '../tab/tab.component';
+import { TabComponent } from '../tab/tab.component';
 
 @Component({
   selector: 'app-tabs',
@@ -14,7 +14,7 @@ import {TabComponent} from '../tab/tab.component';
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
 
-  ngAfterContentInit() {
+  ngAfterContentInit(): void {
     const activeTabs = this.tabs.filter((tab) => tab.active);
 
     if (activeTabs.length === 0) {
@@ -22,7 +22,7 @@ export class TabsComponent implements AfterContentInit {
     }
   }
 
-  selectTab(tab: TabComponent) {
+  public selectTab(tab: TabComponent): void {
     this.tabs.toArray().forEach(tabItem => tabItem.active = false);
     tab.active = true;
   }
